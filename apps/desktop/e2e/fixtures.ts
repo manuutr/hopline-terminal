@@ -82,13 +82,14 @@ export async function launchHopline(opts: { production?: boolean; dir?: string; 
   cspViolations.set(page, violations)
   page.on('console', (m) => void (/Content Security Policy/i.test(m.text()) && violations.push(m.text())))
   if (opts.waitFor !== '') await page.waitForSelector(`text=${opts.waitFor ?? 'Lab (simulator)'}`)
-  // The specs assume the 1440x900 test window. Say so plainly if the OS shrank it (a small CI
-  // display), instead of failing later on wrapped device output or a missed drag target.
-  if (process.env['HOPLINE_SHOW'] !== '1') {
-    const [w, h] = await page.evaluate(() => [innerWidth, innerHeight])
-    expect(w! >= 1400 && h! >= 860, `test window is ${w}x${h}, expected about 1440x900 (was it fitted to a small display?)`).toBe(true)
-  }
+  // Hosted displays can clamp even a hidden Electron window to their native resolution.
+  if (process.env['HOPLINE_SHOW'] !== '1') await sizeWindow(app, page, 1440, 900)
   return { app, page, dir }
+}
+
+/** Wait for persisted settings and shortcut handlers after loading the desktop workspace. */
+export async function waitForWorkspace(page: Page): Promise<void> {
+  await page.waitForFunction(() => performance.getEntriesByName('hopline:ready').length > 0)
 }
 
 /** CSP violations the renderer logged, per window (launchHopline records them). */
@@ -137,31 +138,20 @@ export function keyLabel(combo: string): string {
   return mac ? parts.map((k) => sym[k] ?? k).join('') : parts.join('+')
 }
 
-/**
- * Size the page (innerWidth x innerHeight) to exactly w x h. Use this, not setContentSize: on Windows
- * a frameless window's setContentSize counts the invisible resize borders (asked 1100x700, got
- * 1116x708), and the 900 px minimum would clamp the correction.
- */
-export async function sizeWindow(app: ElectronApplication, page: Page, w: number, h: number): Promise<void> {
-  const size = () => page.evaluate(() => [innerWidth, innerHeight] as [number, number])
-  const set = (sw: number, sh: number) =>
-    app.evaluate(({ BrowserWindow }, s) => {
-      const win = BrowserWindow.getAllWindows()[0]!
-      // The window's minimum (900 px) must not clamp the corrected request below (Windows).
-      const [mw, mh] = win.getMinimumSize()
-      win.setMinimumSize(Math.min(mw!, s.sw), Math.min(mh!, s.sh))
-      win.setContentSize(s.sw, s.sh)
-    }, { sw, sh })
-  const before = await size()
-  if (before[0] === w && before[1] === h) return
-  await set(w, h)
-  await expect.poll(async () => (await size()).join('x')).not.toBe(before.join('x'))
-  // On Windows a frameless window's setContentSize counts the invisible resize borders, so the
-  // page comes out 16x8 px larger than asked. Ask again, less the difference.
-  const [gw, gh] = await size()
-  if (gw !== w || gh !== h) await set(w - (gw - w), h - (gh - h))
-  await expect.poll(async () => (await size()).join('x')).toBe(`${w}x${h}`)
-  await page.waitForTimeout(200)
+/** Size the native window and give Chromium the requested layout viewport on smaller displays. */
+export async function sizeWindow(app: ElectronApplication, page: Page, width: number, height: number): Promise<void> {
+  const nativeWindow = await app.browserWindow(page)
+  try {
+    await nativeWindow.evaluate((win, { width, height }) => {
+      const [minWidth, minHeight] = win.getMinimumSize()
+      win.setMinimumSize(Math.min(minWidth, width), Math.min(minHeight, height))
+      win.setContentSize(width, height)
+    }, { width, height })
+  } finally {
+    await nativeWindow.dispose()
+  }
+  await page.setViewportSize({ width, height })
+  await expect.poll(() => page.evaluate(() => [innerWidth, innerHeight])).toEqual([width, height])
 }
 
 /**

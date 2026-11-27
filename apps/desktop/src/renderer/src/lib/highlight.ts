@@ -73,21 +73,29 @@ function tokens(text: string): string {
 }
 
 function tokenize(text: string): string {
-  return text.replace(TOKEN, (m, ...args) => {
-    const g = args.at(-1) as Record<string, string | undefined>
-    if (g.counter) return paint(m, C.red, true)
-    if (g.mac) return paint(m, C.magenta)
-    if (g.ipv4 || g.ipv6) return paint(m, C.cyan)
-    if (g.stamp) return dim(m)
-    if (g.admin) return dim(m.slice(0, -4)) + paint(m.slice(-4), C.red)
-    if (g.vlan) return paint(m, C.magenta)
-    if (g.iface) return paint(m, C.blue)
-    if (g.bad) return paint(m, C.red)
-    if (g.warn) return paint(m, C.yellow)
-    if (g.good) return paint(m, C.green)
-    if (g.quiet) return dim(m)
-    return m
-  })
+  // RegExp.exec supplies the named groups directly, avoiding replace's per-match argument list.
+  let result = ''
+  let offset = 0
+  for (let match = TOKEN.exec(text); match; match = TOKEN.exec(text)) {
+    result += text.slice(offset, match.index) + paintToken(match[0], match.groups!)
+    offset = TOKEN.lastIndex
+  }
+  return result + text.slice(offset)
+}
+
+function paintToken(token: string, groups: Record<string, string | undefined>): string {
+  if (groups.counter) return paint(token, C.red, true)
+  if (groups.mac) return paint(token, C.magenta)
+  if (groups.ipv4 || groups.ipv6) return paint(token, C.cyan)
+  if (groups.stamp) return dim(token)
+  if (groups.admin) return dim(token.slice(0, -4)) + paint(token.slice(-4), C.red)
+  if (groups.vlan) return paint(token, C.magenta)
+  if (groups.iface) return paint(token, C.blue)
+  if (groups.bad) return paint(token, C.red)
+  if (groups.warn) return paint(token, C.yellow)
+  if (groups.good) return paint(token, C.green)
+  if (groups.quiet) return dim(token)
+  return token
 }
 
 // ---------------------------------------------------------------- line rules

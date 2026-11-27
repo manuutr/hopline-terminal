@@ -5,7 +5,7 @@
  */
 import { join } from 'node:path'
 import type { ElectronApplication, Locator, Page } from '@playwright/test'
-import { expect } from '../fixtures'
+import { expect, sizeWindow } from '../fixtures'
 
 export const OUT = process.env['HOPLINE_SHOTS_OUT'] ?? join(__dirname, '../../../../docs/design/screens')
 export const NARROW = [
@@ -14,8 +14,7 @@ export const NARROW = [
 ] as const
 
 export async function sizeTo(app: ElectronApplication, page: Page, w: number, h: number): Promise<void> {
-  await app.evaluate(({ BrowserWindow }, s) => BrowserWindow.getAllWindows()[0]!.setContentSize(s.w, s.h), { w, h })
-  await expect.poll(() => page.evaluate(() => `${innerWidth}x${innerHeight}`)).toBe(`${w}x${h}`)
+  await sizeWindow(app, page, w, h)
   await page.waitForTimeout(250)
 }
 

@@ -15,7 +15,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { ElectronApplication, Page } from '@playwright/test'
 import { makeEosDevice, makeIosDevice, startSim } from '../../../../packages/simulator/src/index.ts'
-import { treeRow, expect, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
+import { expect, showSessions, sizeWindow, stubDialogs, test, treeRow, type Hopline } from '../fixtures'
 
 const OUT = process.env['HOPLINE_SHOTS_OUT'] ?? join(__dirname, '../../../../docs/design/screens')
 mkdirSync(OUT, { recursive: true })
@@ -34,11 +34,7 @@ type H = {
 }
 
 async function size(app: ElectronApplication, page: Page): Promise<void> {
-  await app.evaluate(({ BrowserWindow }) => {
-    const w = BrowserWindow.getAllWindows()[0]!
-    w.setContentSize(1440, 900)
-  })
-  await expect.poll(() => page.evaluate(() => `${innerWidth}x${innerHeight}`)).toBe('1440x900')
+  await sizeWindow(app, page, 1440, 900)
 }
 
 async function setTheme(page: Page, theme: 'dark' | 'light'): Promise<void> {

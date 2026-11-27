@@ -12,12 +12,12 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { Page } from '@playwright/test'
 import { makeEosDevice, startSim } from '../../../../packages/simulator/src/index.ts'
-import { treeRow, expect, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
+import { MOD, expect, showSessions, stubDialogs, test, treeRow, type Hopline } from '../fixtures'
 import { assertFits, NARROW, sizeTo, snapNarrow } from './narrow'
 
 const openAi = async (page: Page) => {
   const composer = page.getByRole('region', { name: /assistant/i }).or(page.locator('[data-ai-panel]'))
-  if (!(await composer.first().isVisible().catch(() => false))) await page.keyboard.press('Control+Shift+I')
+  if (!(await composer.first().isVisible().catch(() => false))) await page.keyboard.press(`${MOD}+I`)
   await page.waitForTimeout(300)
 }
 
