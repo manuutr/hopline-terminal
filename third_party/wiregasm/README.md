@@ -8,7 +8,7 @@ The JavaScript wrapper and types come from the published `@goodtools/wiregasm@2.
 
 ## Build the decoder from source
 
-The Hopline release includes a decoder source archive with build scripts, patches and upstream library sources. Extract it and open its top-level directory. With Docker, Make, Node 22 or later and npm installed, run the following. [Decoder source archive](https://github.com/manuutr/hopline-terminal/releases/download/v1.2.0/wiregasm-wireshark-4.6.10-source.tar.gz)
+The Hopline release includes a decoder source archive with build scripts, patches and upstream library sources. Extract it and open its top-level directory. With Docker, Make, Node 22 or later and npm installed, run the following. [Decoder source archive](https://github.com/manuutr/hopline-terminal/releases/download/v1.2.1/wiregasm-wireshark-4.6.10-source.tar.gz)
 
 ```sh
 npm ci

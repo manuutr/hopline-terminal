@@ -6,44 +6,47 @@ Download the build for your OS from the [GitHub Releases page](https://github.co
 
 | OS | File | Notes |
 | --- | --- | --- |
-| Windows 10/11 (x64; Arm runs it under emulation) | `Hopline-<version>-win-x64.exe` | Per-user NSIS installer. You can change the install folder. |
-| Linux x86-64 | `Hopline-<version>-linux-x86_64.AppImage` or `Hopline-<version>-linux-amd64.deb` | Run the AppImage directly or install the Debian package. |
-| macOS | [Build from source](../../README.md#build-it-yourself) | The 1.2.0 release has Windows and Linux downloads. |
+| Windows 10/11 (x64; Arm runs it under emulation) | `Hopline-Terminal-<version>-win-x64.exe` | Per-user NSIS installer. You can change the install folder. |
+| Linux x86-64 | `Hopline-Terminal-<version>-linux-x86_64.AppImage` or `Hopline-Terminal-<version>-linux-amd64.deb` | Run the AppImage directly or install the Debian package. |
+| macOS | `Hopline-Terminal-<version>-mac-arm64.dmg` (Apple Silicon) or `Hopline-Terminal-<version>-mac-x64.dmg` (Intel) | Open the disk image and drag Hopline Terminal to Applications. |
 
 ### Check the download
 
 ```sh
-# Linux and macOS, in the folder with the files
-sha256sum -c SHA256SUMS.txt --ignore-missing      # macOS: shasum -a 256 -c SHA256SUMS.txt --ignore-missing
+# Linux, with the installer and checksum manifest in the same folder
+sha256sum -c SHA256SUMS.txt --ignore-missing
+
+# macOS, with the DMG and its matching .sha256 file in the same folder
+shasum -a 256 -c Hopline-Terminal-*.dmg.sha256
 
 # With a GPG-signed release
 gpg --import hopline-release-key.asc
 gpg --verify SHA256SUMS.txt.asc SHA256SUMS.txt
 ```
 
-On Windows, in PowerShell: `Get-FileHash .\Hopline-<version>-win-x64.exe -Algorithm SHA256`, and compare it with the line in `SHA256SUMS.txt`.
+On Windows, in PowerShell: `Get-FileHash .\Hopline-Terminal-<version>-win-x64.exe -Algorithm SHA256`, and compare it with the line in `SHA256SUMS.txt`.
 
-### Unsigned builds
+### Signing and first launch
 
-Code signing turns on when the project's signing credentials exist ([docs/SIGNING.md](../SIGNING.md)). Until then the builds are unsigned, and the OS warns on first launch. Check the checksum first.
+Check the checksum before opening the installer.
 
 - **Windows** displays an unknown publisher for an unsigned installer. If your organization requires signed software, use its approved build and distribution process.
-- **macOS** source builds are ad-hoc signed by default. For distribution, follow the Developer ID signing and notarization instructions. [macOS signing](../SIGNING.md#macos-developer-id-hardened-runtime-notarization)
+- **macOS** apps in this release are ad-hoc signed and have no Apple notarization. Gatekeeper may block the first launch. [macOS signing](../SIGNING.md#macos-developer-id-hardened-runtime-notarization)
 - **Linux AppImage:** make it executable, then run it.
 
   ```sh
-  chmod +x Hopline-<version>-linux-x86_64.AppImage
-  ./Hopline-<version>-linux-x86_64.AppImage
+  chmod +x Hopline-Terminal-<version>-linux-x86_64.AppImage
+  ./Hopline-Terminal-<version>-linux-x86_64.AppImage
   ```
 
   AppImages need FUSE 2 (`libfuse2` on Debian and Ubuntu, `fuse-libs` on Fedora). Without it, run it with `--appimage-extract-and-run`.
-- **deb / rpm:** `sudo apt install ./Hopline-<version>-linux-amd64.deb` or `sudo dnf install ./Hopline-<version>-linux-x86_64.rpm`.
+- **deb / rpm:** `sudo apt install ./Hopline-Terminal-<version>-linux-amd64.deb` or `sudo dnf install ./Hopline-Terminal-<version>-linux-x86_64.rpm`.
 
 ### Updates
 
 In **Settings › Updates & privacy**, choose **Check now** or enable scheduled checks. After you review the first-run choices, an eligible installed build schedules its first automatic check after about 30 seconds and repeats every six hours. Stable and beta use separate feeds.
 
-The 1.2.0 Windows and Linux packages notify you when a newer release is available. Download and verify its installer, then replace your installed copy. On signed Windows builds with a configured publisher, and signed Developer ID macOS builds, Hopline Terminal can download the update in the background and install it on quit. An explicit restart waits until you close any live device sessions.
+The 1.2.1 packages notify you when a newer release is available. Download and verify its installer, then replace your installed copy. On signed Windows builds with a configured publisher, and signed Developer ID macOS builds, Hopline Terminal can download the update in the background and install it on quit. An explicit restart waits until you close any live device sessions.
 
 The public packages check GitHub Releases anonymously. If you previously installed a private build, install the public package once to switch feeds. [Release downloads](https://github.com/manuutr/hopline-terminal/releases) · [Update feed configuration](../SIGNING.md#update-feed)
 
