@@ -5,8 +5,7 @@
  */
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-// @ts-expect-error js-yaml ships no types (dev-only)
-import yaml from 'js-yaml'
+import { load } from 'js-yaml'
 import { describe, expect, it } from 'vitest'
 import { lookup, parseWithTemplate, toNtcCell } from '../src'
 import { BUNDLED } from '../src/index.generated'
@@ -38,7 +37,7 @@ describe('ntc-templates corpus', () => {
     const entry = lookup(viaHopline(c.ntc), command)
     expect(entry?.template, `index routes "${command}"`).toBe(`${c.ntc}_${c.dir}.textfsm`)
     const raw = readFileSync(join(FIX, c.ntc, c.dir, c.raw), 'utf8')
-    const expected = (yaml.load(readFileSync(join(FIX, c.ntc, c.dir, c.raw.replace(/\.raw$/, '.yml')), 'utf8')) as { parsed_sample: Record<string, unknown>[] | null }).parsed_sample ?? []
+    const expected = (load(readFileSync(join(FIX, c.ntc, c.dir, c.raw.replace(/\.raw$/, '.yml')), 'utf8')) as { parsed_sample: Record<string, unknown>[] | null }).parsed_sample ?? []
     const { headers, rows } = parseWithTemplate(entry!.template, raw)
     const got = rows.map((r) => Object.fromEntries(headers.map((h, i) => [h.toLowerCase(), toNtcCell(r[i]!)])))
     expect(got.length).toBe(expected.length)
