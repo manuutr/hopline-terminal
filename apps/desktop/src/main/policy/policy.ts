@@ -284,7 +284,7 @@ export class PolicyService {
     const allowed = this.locks.allowedProviders
     const label = provider === 'ollama' ? 'Ollama' : `${providerName(provider)} (cloud)`
     if (allowed && !allowed.includes(provider)) return `${label} is not allowed by the team policy (allowed: ${allowed.length ? allowed.join(', ') : 'none'}).`
-    if (isAccount(provider) && this.locks.egressLogRequired) return 'Team policy requires the complete network request. An account client only exposes the masked prompt Hopline hands to it.'
+    if (isAccount(provider) && this.locks.egressLogRequired) return 'Team policy requires the complete network request. An account client only exposes the masked prompt Hopline Terminal hands to it.'
     if (provider === 'ollama' && endpoint !== undefined && this.locks.allowedOllamaEndpoints) {
       const u = parseEndpoint(endpoint)
       const origin = u ? `${u.protocol}//${u.host}` : ''

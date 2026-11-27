@@ -1,6 +1,6 @@
 # Connections
 
-Every connection runs in the **session host**, a separate process with flow control. If it crashes, Hopline restarts it with backoff and reconnects your tabs. A tab shows its state with a small dot; a dropped session shows a Disconnected strip with **Reconnect**.
+Every connection runs in the **session host**, a separate process with flow control. If it crashes, Hopline Terminal restarts it with backoff and reconnects your tabs. A tab shows its state with a small dot; a dropped session shows a Disconnected strip with **Reconnect**.
 
 Create a session with **New session…** (`Mod+N`), from the session tree's context menu, or connect once with **Quick connect** (`Mod+O`, see [Sessions](sessions.md#quick-connect)). The dialog's **Protocol** field picks SSH, Telnet, raw TCP or a serial console.
 
@@ -8,7 +8,7 @@ Create a session with **New session…** (`Mod+N`), from the session tree's cont
 
 Common fields: **Name**, **Folder**, **Host**, **Port**, **Platform**, **Credentials** (a profile, or "Ask for password on connect"), **Tags**, **Color**, **Notes** and **Log session output to a file**.
 
-**Platform** defaults to **Auto-detect**. On first connect Hopline reads the SSH server identification, the login banner and the prompt. Only if those are not decisive does it run the platform's version command once (twice at most), as an audited read marked "auto-detect", and only at an idle prompt. The result is saved with the version ("Detected Cisco IOS-XE 17.9.4a · Change"). A device that stays unidentified shows **Platform unknown — AI commands blocked · Set platform** in the status bar, the assistant panel and the tab, and every command Hopline would send for you is refused until you set the platform.
+**Platform** defaults to **Auto-detect**. On first connect Hopline Terminal reads the SSH server identification, the login banner and the prompt. Only if those are not decisive does it run the platform's version command once (twice at most), as an audited read marked "auto-detect", and only at an idle prompt. The result is saved with the version ("Detected Cisco IOS-XE 17.9.4a · Change"). A device that stays unidentified shows **Platform unknown — AI commands blocked · Set platform** in the status bar, the assistant panel and the tab, and every command Hopline Terminal would send for you is refused until you set the platform.
 
 Supported platforms: Cisco IOS, IOS-XE, NX-OS, IOS-XR, ASA, FTD, Catalyst 9800, AireOS and Small Business; Arista EOS; Juniper Junos; Palo Alto PAN-OS; Fortinet FortiOS; Aruba AOS-CX; Huawei VRP.
 
@@ -39,7 +39,7 @@ A credential profile (see [Sessions › Credentials](sessions.md#credential-prof
 
 ### Host keys
 
-Hopline trusts a host's key the first time it connects (trust on first use) and remembers it. If the key changes later, Hopline stops before anything is sent and shows the trusted and the offered fingerprints. **Don't connect** has the focus; **Replace key and connect** trusts the new key.
+Hopline Terminal trusts a host's key the first time it connects (trust on first use) and remembers it. If the key changes later, Hopline Terminal stops before anything is sent and shows the trusted and the offered fingerprints. **Don't connect** has the focus; **Replace key and connect** trusts the new key.
 
 ![The host key changed warning](img/host-key-prompt.png)
 
@@ -60,8 +60,8 @@ You sign in to a Telnet device at its own prompt. That is also why Telnet sessio
 Choose **Serial console** as the protocol, then the **Serial port** (with **Rescan serial ports**), **Baud rate**, **Data bits**, **Parity**, **Stop bits** and **Flow control**. The default is 9600 8N1 with no flow control, which suits Cisco and most other console ports.
 
 - **Send break** (command palette) sends a BREAK, for ROMMON and password recovery. The status bar shows BREAK while it is sent.
-- The status bar shows the port's **DTR** and **RTS** lines. Click one, or use **Toggle DTR** / **Toggle RTS** in the palette, to turn it on or off. It shows what the port really has: if the adapter refuses a change, the line stays as it was and Hopline says why.
-- On Linux your user must be in the serial group: `sudo usermod -aG dialout $USER` (Debian, Ubuntu, Fedora) or `sudo usermod -aG uucp $USER` (Arch), then log out and back in. Hopline says so when a port is refused.
+- The status bar shows the port's **DTR** and **RTS** lines. Click one, or use **Toggle DTR** / **Toggle RTS** in the palette, to turn it on or off. It shows what the port really has: if the adapter refuses a change, the line stays as it was and Hopline Terminal says why.
+- On Linux your user must be in the serial group: `sudo usermod -aG dialout $USER` (Debian, Ubuntu, Fedora) or `sudo usermod -aG uucp $USER` (Arch), then log out and back in. Hopline Terminal says so when a port is refused.
 - On macOS use `/dev/cu.*`, not `/dev/tty.*`.
 
 Quick connect takes serial URLs too: `serial:///dev/ttyUSB0?baud=115200`.
@@ -71,7 +71,7 @@ Quick connect takes serial URLs too: `serial:///dev/ttyUSB0?baud=115200`.
 SSH sessions can forward ports, like `ssh -L`, `-R` and `-D`:
 
 - **Local (-L):** a port on this machine reaches an address on the device's side.
-- **Remote (-R):** a port on the server reaches an address on this side. The server must allow it; Hopline says so when it refuses.
+- **Remote (-R):** a port on the server reaches an address on this side. The server must allow it; Hopline Terminal says so when it refuses.
 - **Dynamic (-D):** a SOCKS5 proxy on this machine.
 
 Save forwards on the session (Edit session › SSH › Saved port forwards), or add one live from the tab menu › **Port forwarding…**. Each forward shows its status (listening, open and total connections, bytes, errors such as "port 8080 is already in use") and can be started and stopped live. A listening local forward has **Open**, which opens it in your browser.
@@ -89,18 +89,18 @@ Every start, stop and failure is in the audit log (source `forward`).
 
 ## Files: SFTP and SCP
 
-Select **Files** in the status bar of a connected SSH session, or press `Mod+J`. To open the panel automatically and keep typing in the terminal, enable **Settings › Connections › Open Files on SSH connect**. SFTP runs as another channel on the tab's own connection, through the same jump chain, with no second login. If the device refuses a second channel, Hopline opens a second connection with the same credentials and says so.
+Select **Files** in the status bar of a connected SSH session, or press `Mod+J`. To open the panel automatically and keep typing in the terminal, enable **Settings › Connections › Open Files on SSH connect**. SFTP runs as another channel on the tab's own connection, through the same jump chain, with no second login. If the device refuses a second channel, Hopline Terminal opens a second connection with the same credentials and says so.
 
 ![The files panel](img/files-panel.png)
 
 - **Follow folder** appears in the SFTP toolbar when the SSH shell reports its working directory with OSC 7. Turn it on to follow directory changes in that tab. Browsing to another folder yourself switches it off. On devices with no directory reports, use the breadcrumbs.
 - **Browse:** breadcrumbs, sorting, hidden files, permissions, new folder, rename (F2) and delete (with an in-app confirmation). Arrows move, Enter opens a folder or downloads a file, Backspace goes up, Space selects. Esc returns to the terminal; a second Esc closes the panel.
-- **Preview file** opens the selected UTF-8 text file up to 256 KiB. Press F3 in the SFTP list to open it. Hopline masks recognised secrets before showing the text and reads it directly from the SSH connection. Download larger or binary files.
+- **Preview file** opens the selected UTF-8 text file up to 256 KiB. Press F3 in the SFTP list to open it. Hopline Terminal masks recognised secrets before showing the text and reads it directly from the SSH connection. Download larger or binary files.
 - **Upload** from the file picker or by dropping files from the desktop onto the list. **Download** to a folder you choose once (Change at any time), or drag a finished download out to the desktop.
 - **The transfer queue** shows progress, speed and time left, with cancel and retry. An SFTP retry resumes where it stopped.
 - **If a file exists:** ask (Keep both, Skip, Replace, or Resume a shorter copy), or always keep both, skip or replace. The ask dialog focuses Skip.
-- **Checksums:** every finished transfer shows the MD5 and SHA-256 computed while streaming, and the device's own verify command to copy, such as `verify /md5 flash:x <md5>` on IOS. Hopline never runs it for you.
+- **Checksums:** every finished transfer shows the MD5 and SHA-256 computed while streaming, and the device's own verify command to copy, such as `verify /md5 flash:x <md5>` on IOS. Hopline Terminal never runs it for you.
 
-**SCP for devices without SFTP** (IOS with `ip scp server enable`, NX-OS, EOS, Junos). Hopline detects the refused SFTP subsystem and offers **Preview**, **Download** and upload by full path, with presets for common filesystem roots. On IOS, IOS XE and Catalyst 9800, **Browse device directory** uses the read-only `dir` command on a separate SSH channel. Pick a folder to navigate or a file to preview. When the device or team policy prevents directory listing, enter the file path directly. Common device errors are explained: SCP server off, privilege, no space, no such file, permission. On devices whose SCP server parses the path itself (IOS, NX-OS, FortiOS), a path that would need quoting is refused. SCP to a Windows OpenSSH server whose shell is `cmd.exe` is not supported.
+**SCP for devices without SFTP** (IOS with `ip scp server enable`, NX-OS, EOS, Junos). Hopline Terminal detects the refused SFTP subsystem and offers **Preview**, **Download** and upload by full path, with presets for common filesystem roots. On IOS, IOS XE and Catalyst 9800, **Browse device directory** uses the read-only `dir` command on a separate SSH channel. Pick a folder to navigate or a file to preview. When the device or team policy prevents directory listing, enter the file path directly. Common device errors are explained: SCP server off, privilege, no space, no such file, permission. On devices whose SCP server parses the path itself (IOS, NX-OS, FortiOS), a path that would need quoting is refused. SCP to a Windows OpenSSH server whose shell is `cmd.exe` is not supported.
 
-Uploads are refused while [read-only mode](safety-and-audit.md#read-only-mode) is on. Local files are touched only by Hopline's main process, in folders you chose: names from the device are sanitised, nothing is written through a symlink, and nothing you did not agree to replace is overwritten. Every transfer, folder change, rename and delete is in the audit log (source `transfer`), with the remote path, size and both checksums.
+Uploads are refused while [read-only mode](safety-and-audit.md#read-only-mode) is on. Local files are touched only by Hopline Terminal's main process, in folders you chose: names from the device are sanitised, nothing is written through a symlink, and nothing you did not agree to replace is overwritten. Every transfer, folder change, rename and delete is in the audit log (source `transfer`), with the remote path, size and both checksums.

@@ -30,8 +30,8 @@ The tables below are generated from the settings registry (`apps/desktop/src/sha
 
 | Setting | What it does | Default | Key and deep link |
 | --- | --- | --- | --- |
-| **Approvals waiting** | A desktop notification when the assistant waits for your approval and Hopline is not the focused window. | On | `notifyApprovals`<br>`hopline://settings/notifications/notifyApprovals` |
-| **Unexpected disconnects** | A desktop notification when a session drops without you closing it and Hopline is not the focused window. | On | `notifyDisconnects`<br>`hopline://settings/notifications/notifyDisconnects` |
+| **Approvals waiting** | A desktop notification when the assistant waits for your approval and Hopline Terminal is not the focused window. | On | `notifyApprovals`<br>`hopline://settings/notifications/notifyApprovals` |
+| **Unexpected disconnects** | A desktop notification when a session drops without you closing it and Hopline Terminal is not the focused window. | On | `notifyDisconnects`<br>`hopline://settings/notifications/notifyDisconnects` |
 
 ### Assistant
 
@@ -70,7 +70,7 @@ The tables below are generated from the settings registry (`apps/desktop/src/sha
 
 | Setting | What it does | Default | Key and deep link |
 | --- | --- | --- | --- |
-| **Theme** | Colors for terminal output. | Hopline (follows the app theme) | `termTheme`<br>`hopline://settings/terminal/termTheme` |
+| **Theme** | Colors for terminal output. | Hopline Terminal (follows the app theme) | `termTheme`<br>`hopline://settings/terminal/termTheme` |
 | **Smooth caret movement** | Ease the blinking bar cursor between cells. | — | `termSmoothCaret`<br>`hopline://settings/terminal/termSmoothCaret` |
 | **Font ligatures** | Join operator pairs such as arrows in the terminal font. | — | `termLigatures`<br>`hopline://settings/terminal/termLigatures` |
 | **Font** | Any installed monospace font. Empty uses the bundled JetBrains Mono. | Bundled JetBrains Mono | `termFontFamily`<br>`hopline://settings/terminal/termFontFamily` |
@@ -88,7 +88,7 @@ The tables below are generated from the settings registry (`apps/desktop/src/sha
 | --- | --- | --- | --- |
 | **Terminal palettes** | Browse built-in and saved terminal palettes, filter by dark or light, and preview device output before saving. | — | `themeLibrary`<br>`hopline://settings/themes/themeLibrary` |
 | **Theme generator** | Build a terminal theme from a base and an accent colour (OKLCH). Lightness is tuned until every colour passes WCAG AA. | — | `themeGenerator`<br>`hopline://settings/themes/themeGenerator` |
-| **Import and export** | Preview a Hopline, iTerm2, MobaXterm (.ini) or Royal TS (.rtcp or .termcolors) palette. | — | `themeImport`<br>`hopline://settings/themes/themeImport` |
+| **Import and export** | Preview a Hopline Terminal, iTerm2, MobaXterm (.ini) or Royal TS (.rtcp or .termcolors) palette. | — | `themeImport`<br>`hopline://settings/themes/themeImport` |
 | **Font preview** | Choose the font in Terminal. This preview checks its glyphs. | — | `fontPreview`<br>`hopline://settings/themes/fontPreview` |
 
 ### Keyboard

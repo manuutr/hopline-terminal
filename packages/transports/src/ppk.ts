@@ -173,7 +173,7 @@ function parseKdf(headers: Map<string, string>): Kdf {
   const parallelism = int('Argon2-Parallelism')
   const saltHex = headers.get('Argon2-Salt') ?? ''
   const L = PPK_ARGON2_LIMITS
-  const over = (what: string) => new PpkError(`Unsupported PPK key derivation: ${what} is over Hopline's limit`)
+  const over = (what: string) => new PpkError(`Unsupported PPK key derivation: ${what} is over Hopline Terminal's limit`)
   if (parallelism < 1) throw new PpkError('Unsupported PPK key derivation: invalid Argon2-Parallelism')
   if (passes < 1) throw new PpkError('Unsupported PPK key derivation: invalid Argon2-Passes')
   // Argon2 needs at least 8 KiB per lane.

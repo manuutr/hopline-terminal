@@ -1,8 +1,8 @@
 {
   "name": "@hopline/desktop",
   "private": true,
-  "version": "1.2.0",
-  "description": "Hopline: SSH/Telnet/Serial client for network engineers with a safety-first AI agent",
+  "version": "1.2.1",
+  "description": "Hopline Terminal: SSH/Telnet/Serial client for network engineers with a safety-first AI agent",
   "desktopName": "hopline.desktop",
   "main": "./out/main/index.js",
   "scripts": {

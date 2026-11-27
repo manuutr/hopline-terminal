@@ -73,7 +73,7 @@ async function findClient(id: AccountProvider): Promise<string> {
       try { await access(file, constants.X_OK); return file } catch { /* Try the next installed location. */ }
     }
   }
-  throw new Error(`Install ${ACCOUNTS[id].client} and make its executable available to Hopline.`)
+  throw new Error(`Install ${ACCOUNTS[id].client} and make its executable available to Hopline Terminal.`)
 }
 
 function environment(id: AccountProvider, profile: string): NodeJS.ProcessEnv {
@@ -244,7 +244,7 @@ export class AccountClients {
       id, logsWire: false, capabilities: { tools: false, maxContext: 32_000 },
       turn: (req: TurnRequest): Promise<TurnResult> => this.exclusive(id, async () => {
         req.signal.throwIfAborted()
-        if (this.closed) throw new Error('Hopline is closing.')
+        if (this.closed) throw new Error('Hopline Terminal is closing.')
         if (this.disconnecting.has(id) || !this.settings.get().connectedAccounts?.[id]) throw new Error('Sign in to the provider in Assistant settings.')
         const abort = new AbortController()
         const active = this.running.get(id) ?? new Set<AbortController>()

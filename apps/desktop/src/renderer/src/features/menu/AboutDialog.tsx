@@ -32,7 +32,7 @@ export function AboutDialog(): React.JSX.Element {
     <Dialog
       open={open}
       onOpenChange={(o) => !o && close()}
-      title="About Hopline"
+      title="About Hopline Terminal"
       description="SSH, Telnet and serial client for network engineers."
       className="w-[min(420px,92vw)]"
       footer={

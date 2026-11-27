@@ -50,18 +50,18 @@ export async function sealFile(payload: unknown, passphrase: string, params: Scr
 
 /** Parse and sanity-check the header without the passphrase (file picker preview). */
 export function readHeader(file: Buffer): { header: FileHeader; line: Buffer; body: Buffer } {
-  if (file.length > MAX_FILE_BYTES) throw new Error('This file is too large to be a Hopline export')
+  if (file.length > MAX_FILE_BYTES) throw new Error('This file is too large to be a Hopline Terminal export')
   const nl = file.indexOf(0x0a)
-  if (nl < 0 || nl > 4096) throw new Error('Not a Hopline export file')
+  if (nl < 0 || nl > 4096) throw new Error('Not a Hopline Terminal export file')
   const line = file.subarray(0, nl + 1)
   let h: FileHeader
   try {
     h = JSON.parse(line.toString('utf8')) as FileHeader
   } catch {
-    throw new Error('Not a Hopline export file')
+    throw new Error('Not a Hopline Terminal export file')
   }
-  if (h?.format !== FORMAT) throw new Error('Not a Hopline export file')
-  if (h.version !== VERSION) throw new Error(`This export was made by a newer Hopline (format v${h.version})`)
+  if (h?.format !== FORMAT) throw new Error('Not a Hopline Terminal export file')
+  if (h.version !== VERSION) throw new Error(`This export was made by a newer Hopline Terminal (format v${h.version})`)
   if (h.kdf?.name !== 'scrypt' || typeof h.salt !== 'string' || typeof h.iv !== 'string') throw new Error('Unsupported export encryption')
   checkFileParams({ N: h.kdf.N, r: h.kdf.r, p: h.kdf.p })
   const body = file.subarray(nl + 1)

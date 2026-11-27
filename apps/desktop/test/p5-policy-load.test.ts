@@ -83,7 +83,7 @@ describe('policy file contents (L7)', () => {
   })
 })
 
-describe('an invalid policy blocks every command Hopline sends (L7)', () => {
+describe('an invalid policy blocks every command Hopline Terminal sends (L7)', () => {
   const rules = parsePolicy('{', '/etc/hopline/policy.json').locks.blockedCommands
   it('snippets, send-to-many and backups (analyze, client.exec) refuse reads too', () => {
     expect(analyze('iosxe', ['show version'], { policy: rules })).toMatchObject({ kind: 'blocked', reason: expect.stringMatching(/policy file is invalid/) })

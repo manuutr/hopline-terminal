@@ -432,7 +432,7 @@ export class Changes {
     if (this.open.get(o.c.proposalId) !== o || (o.phase !== 'awaiting' && o.phase !== 'unknown')) return
     if (o.busy) return this.schedule(o, 5_000)
     const tab = this.d.term.get(o.c.tab.tabId)
-    if (!tab) return this.finish(o, 'unknown', `The confirm timer expired after the session closed, so Hopline could not check the device. ${STATE_UNKNOWN}: it should have rolled the change back by itself.`, null)
+    if (!tab) return this.finish(o, 'unknown', `The confirm timer expired after the session closed, so Hopline Terminal could not check the device. ${STATE_UNKNOWN}: it should have rolled the change back by itself.`, null)
     o.busy = true
     let s: { state: NetState; why: string }
     try {
@@ -453,7 +453,7 @@ export class Changes {
     }
     o.misses++
     const wait = Math.min(EXPIRY_RETRY_MAX_MS, 15_000 * 2 ** (o.misses - 1))
-    const message = `${STATE_UNKNOWN}: the confirm timer is due, but Hopline could not read the change's state on the device (${s.why}). It checks again in ${Math.round(wait / 1000)} s. ${LOCK_HINT}`
+    const message = `${STATE_UNKNOWN}: the confirm timer is due, but Hopline Terminal could not read the change's state on the device (${s.why}). It checks again in ${Math.round(wait / 1000)} s. ${LOCK_HINT}`
     if (o.phase !== 'unknown') this.note(o.c, o.c.commands[0] ?? '(change)', 'unknown', message, null)
     o.phase = 'unknown'
     this.update(o, { message })
@@ -489,7 +489,7 @@ export class Changes {
   async act(proposalId: string, action: 'confirm' | 'rollback'): Promise<void> {
     const o = this.open.get(proposalId)
     if (!o || (o.phase !== 'awaiting' && o.phase !== 'unknown')) throw new Error('This change is no longer waiting for a decision')
-    if (o.busy) throw new Error('Hopline is still working on this change')
+    if (o.busy) throw new Error('Hopline Terminal is still working on this change')
     // L1: taken before the first await, so a second click (or the expiry check) cannot run alongside.
     o.busy = true
     const was = o.phase
@@ -502,11 +502,11 @@ export class Changes {
       this.note(c, `(${verb})`, 'refused', reason, approver)
       throw new Error(shown)
     }
-    if (action === 'rollback' && !canRollBack(c)) refuse('this change has no rollback plan and no device safety net', 'This change has no rollback plan and no device safety net: there is nothing Hopline can roll back with')
+    if (action === 'rollback' && !canRollBack(c)) refuse('this change has no rollback plan and no device safety net', 'This change has no rollback plan and no device safety net: there is nothing Hopline Terminal can roll back with')
     if (this.d.settings.get().aiReadOnly)
       refuse(
         `read-only mode is on, so the ${verb} was not sent${c.net?.spec.timer ? '; the device rolls back by itself when its timer expires' : ''}`,
-        `Read-only mode is on: Hopline sends nothing but show commands, so it cannot ${verb} this change.${c.net?.spec.timer ? ' The device rolls back by itself when its timer expires.' : ''}`
+        `Read-only mode is on: Hopline Terminal sends nothing but show commands, so it cannot ${verb} this change.${c.net?.spec.timer ? ' The device rolls back by itself when its timer expires.' : ''}`
       )
     if (!this.d.term.get(c.tab.tabId)) refuse(`the session is closed, so the ${verb} was not sent`, 'The session is closed')
     let now: Awaited<ReturnType<TabControl['prompt']>>
@@ -530,7 +530,7 @@ export class Changes {
       if (check) {
         const s = await this.netState(o)
         if (s.state === 'rolled-back') return this.finish(o, 'expired', `The confirm timer had already expired: the device rolled the change back by itself (checked with "${check.command}"). Nothing was sent.`, null)
-        if (s.state !== 'pending') return this.stillUnknown(o, approver, `Not ${action === 'confirm' ? 'confirmed' : 'rolled back'}: Hopline could not verify the change's state on the device (${s.why}), so it sent nothing. ${STATE_UNKNOWN}.`)
+        if (s.state !== 'pending') return this.stillUnknown(o, approver, `Not ${action === 'confirm' ? 'confirmed' : 'rolled back'}: Hopline Terminal could not verify the change's state on the device (${s.why}), so it sent nothing. ${STATE_UNKNOWN}.`)
       }
       let failure: string | undefined
       const lines = action === 'confirm' ? (net?.spec.confirm(net.name) ?? []) : net ? net.spec.rollback(net.name, o.snapshot) : null
@@ -559,18 +559,18 @@ export class Changes {
           return this.finish(o, 'expired', `The device timer expired before the confirm took: the device rolled the change back by itself, and it is NOT in effect (checked with "${check.command}").`, approver)
         if (s.state === 'pending') return this.reopen(o, `${failure ?? `The ${verb} was sent`}, but the device still waits for confirmation: the change is live until its timer expires.`, 'awaiting')
         // Lines were sent and the result cannot be read: nothing more is sent for this change.
-        return this.finish(o, 'unknown', `${failure ? `${failure}. ` : `The ${verb} was sent, but `}Hopline could not verify the result (${s.why || `the device shows it ${s.state}`}). ${STATE_UNKNOWN}.`, approver)
+        return this.finish(o, 'unknown', `${failure ? `${failure}. ` : `The ${verb} was sent, but `}Hopline Terminal could not verify the result (${s.why || `the device shows it ${s.state}`}). ${STATE_UNKNOWN}.`, approver)
       }
       // Without a read the phase it had stays (an `unknown` change does not become "applied").
       if (failure) return this.reopen(o, failure, was)
       if (net?.spec.cleanup) for (const line of net.spec.cleanup(net.name)) await this.netLine(c, line, approver)
       if (was === 'unknown' && action === 'confirm')
-        return this.finish(o, 'unknown', `Closed by ${approver} without a device check: Hopline never saw whether the change reached the device. ${STATE_UNKNOWN}.`, approver)
+        return this.finish(o, 'unknown', `Closed by ${approver} without a device check: Hopline Terminal never saw whether the change reached the device. ${STATE_UNKNOWN}.`, approver)
       // No read checks a checkpoint, archive or rollback-lines undo: say what ran, not what the device holds (L10).
       const done =
         action === 'confirm'
           ? `Confirmed by ${approver}: the change is kept.`
-          : `Rolled back by ${approver}: ${net ? `"${(lines ?? []).join('", "')}" (${c.info.label}) ran` : 'the rollback lines ran'} without a device error. Hopline did not read the configuration back.`
+          : `Rolled back by ${approver}: ${net ? `"${(lines ?? []).join('", "')}" (${c.info.label}) ran` : 'the rollback lines ran'} without a device error. Hopline Terminal did not read the configuration back.`
       return this.finish(o, action === 'confirm' ? 'confirmed' : 'rolled-back', done, approver)
     } catch (e) {
       if (!(e instanceof StateUnknown)) this.reopen(o, e instanceof Error ? e.message : String(e), was)
@@ -655,7 +655,7 @@ export class Changes {
       case 'expired':
         return { text: 'Nobody confirmed in time: the device rolled the change back by itself. The change is NOT in effect.' }
       case 'unknown':
-        return { text: 'Hopline could not verify the state of the change on the device: state unknown. Tell the user to check the device; do not say whether the change is in effect.', isError: true }
+        return { text: 'Hopline Terminal could not verify the state of the change on the device: state unknown. Tell the user to check the device; do not say whether the change is in effect.', isError: true }
       case 'cancelled':
         return { text: 'Run cancelled. The change is still waiting for the user\'s decision on the card.', isError: true }
       default:

@@ -425,7 +425,7 @@ test('capture: settings, session and credential dialogs, password prompt, vault'
     await page.waitForTimeout(5000) // let the "Master password set" toast leave
     await showSessions(page)
     await page.getByText('core-sw1', { exact: true }).first().dblclick()
-    const dlg = page.getByRole('dialog', { name: 'Unlock Hopline' })
+    const dlg = page.getByRole('dialog', { name: 'Unlock Hopline Terminal' })
     await expect(dlg).toBeVisible()
     await snap(page, '17-vault-unlock')
     await dlg.getByLabel('Master password').fill('nope')

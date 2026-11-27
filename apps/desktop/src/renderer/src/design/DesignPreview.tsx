@@ -30,7 +30,7 @@ export function DesignPreview(): React.JSX.Element {
       <div className="mx-auto max-w-4xl space-y-10 p-10">
         <header className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Hopline design system</h1>
+            <h1 className="text-xl font-semibold tracking-tight">Hopline Terminal design system</h1>
             <p className="text-sm text-fg-muted">Tokens and primitives. Every screen is built from these.</p>
           </div>
           <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">

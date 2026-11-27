@@ -201,8 +201,8 @@ jobs:
             Linux) check "linux-unpacked/$m/better-sqlite3/prebuilds/linux-x64.node" ;;
             Windows) check "win-unpacked/$m/better-sqlite3/prebuilds/win32-x64.node" ;;
             macOS)
-              check "mac-arm64/Hopline.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-arm64.node" \
-                    "mac/Hopline.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-x64.node" ;;
+              check "mac-arm64/Hopline Terminal.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-arm64.node" \
+                    "mac/Hopline Terminal.app/Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/darwin-x64.node" ;;
           esac
       - name: Fuses flipped, native modules load (--smoke), signed Windows builds verify updates
         shell: bash
@@ -222,9 +222,9 @@ jobs:
                   || { echo "::error::Signed Windows build without publisherName in app-update.yml (set AZURE_SIGN_PUBLISHER or SIGNPATH_PUBLISHER)"; exit 1; }
               fi ;;
             macOS)
-              node scripts/check-fuses.mjs release/mac-arm64/Hopline.app darwin
-              node scripts/check-fuses.mjs release/mac/Hopline.app darwin
-              release/mac-arm64/Hopline.app/Contents/MacOS/Hopline --smoke ;;
+              node scripts/check-fuses.mjs "release/mac-arm64/Hopline Terminal.app" darwin
+              node scripts/check-fuses.mjs "release/mac/Hopline Terminal.app" darwin
+              "release/mac-arm64/Hopline Terminal.app/Contents/MacOS/Hopline Terminal" --smoke ;;
           esac
       - name: Verify the signed Windows app and installer
         if: runner.os == 'Windows' && env.HOPLINE_WIN_SIGNED == '1'
@@ -233,7 +233,7 @@ jobs:
           EXPECTED_PUBLISHER: ${{ secrets.AZURE_CLIENT_ID && secrets.AZURE_SIGN_PUBLISHER || secrets.SIGNPATH_PUBLISHER }}
         run: |
           $release = 'apps/desktop/release'
-          $installers = @(Get-ChildItem "$release/Hopline-*-win-x64.exe" -File)
+          $installers = @(Get-ChildItem "$release/Hopline-Terminal-*-win-x64.exe" -File)
           if ($installers.Count -ne 1) { throw 'Expected exactly one Windows installer' }
           foreach ($file in @("$release/win-unpacked/hopline.exe", $installers[0].FullName)) {
             $signature = Get-AuthenticodeSignature -LiteralPath $file

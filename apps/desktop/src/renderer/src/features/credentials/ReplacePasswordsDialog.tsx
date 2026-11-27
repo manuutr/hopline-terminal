@@ -34,7 +34,7 @@ export function ReplacePasswordsDialog({ close }: { close(): void }): React.JSX.
   }
   return (
     <Dialog open onOpenChange={(open) => { if (!open && !busy) close() }} title="Update saved passwords"
-      description="After a password changes on a device or identity provider, update the profiles Hopline uses for its next sign-in."
+      description="After a password changes on a device or identity provider, update the profiles Hopline Terminal uses for its next sign-in."
       footer={<><Button onClick={close} disabled={busy}>Cancel</Button><Button variant="primary" disabled={!valid || busy} onClick={() => void apply()}>Update {chosen.length} {chosen.length === 1 ? 'profile' : 'profiles'}</Button></>}>
       <fieldset disabled={busy} className="min-w-0 space-y-3">
         <div className="flex items-center justify-between text-sm">
@@ -58,7 +58,7 @@ export function ReplacePasswordsDialog({ close }: { close(): void }): React.JSX.
         {mismatch && <p className="text-xs text-warn">The passwords do not match.</p>}
         {chosen.length > 200 && <p className="text-xs text-warn">Choose up to 200 profiles at a time.</p>}
         {vault?.locked && <p className="text-xs text-warn">Unlock the vault to update passwords.</p>}
-        {vault?.mode === 'session' && <p className="text-xs text-warn">This vault keeps passwords until Hopline exits.</p>}
+        {vault?.mode === 'session' && <p className="text-xs text-warn">This vault keeps passwords until Hopline Terminal exits.</p>}
         {error && <p role="alert" className="text-xs text-danger">{error}</p>}
       </fieldset>
     </Dialog>

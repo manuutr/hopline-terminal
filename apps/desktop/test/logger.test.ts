@@ -64,7 +64,7 @@ describe('log hardening (review #1, #2)', () => {
     expect(resolveLogPath('/home/u', '.bashrc', ctx, d)).toBe(['', 'home', 'u', '_bashrc.log'].join(sep))
     expect(resolveLogPath('/home/u', '.ssh/authorized_keys', ctx, d)).toBe(['', 'home', 'u', '_ssh', 'authorized_keys.log'].join(sep))
   })
-  it('does not append to a file Hopline did not create', async () => {
+  it('does not append to a file Hopline Terminal did not create', async () => {
     const dir = tmp()
     writeFileSync(join(dir, 'notes.log'), 'my own notes\n')
     const l = new SessionLogger({ dir, template: 'notes.log', timestamps: false, rotateDaily: false }, ctx, () => d)

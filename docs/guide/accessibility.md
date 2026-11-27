@@ -1,6 +1,6 @@
 # Accessibility
 
-Hopline aims at WCAG 2.2 AA. This page is the short version; [docs/ACCESSIBILITY.md](../ACCESSIBILITY.md) has the details, how each part is tested, and the known gaps.
+Hopline Terminal aims at WCAG 2.2 AA. This page is the short version; [docs/ACCESSIBILITY.md](../ACCESSIBILITY.md) has the details, how each part is tested, and the known gaps.
 
 ## Screen readers
 
@@ -12,7 +12,7 @@ Hopline aims at WCAG 2.2 AA. This page is the short version; [docs/ACCESSIBILITY
 - what you type is not echoed again (your reader already does);
 - background tabs stay silent.
 
-When the OS reports a screen reader (NVDA, JAWS, Narrator, VoiceOver, Orca), Hopline offers the mode once. It never turns it on by itself.
+When the OS reports a screen reader (NVDA, JAWS, Narrator, VoiceOver, Orca), Hopline Terminal offers the mode once. It never turns it on by itself.
 
 **The accessible buffer view** (`Mod+Alt+B`, or **Open terminal text** in the palette) shows the tab's scrollback as plain text in a read-only text area, which a screen reader can read by line, word and character:
 

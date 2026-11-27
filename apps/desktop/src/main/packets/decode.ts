@@ -10,7 +10,7 @@ export function decode(bytes: Buffer, request: { filter: string }, signal: Abort
 export function decode(bytes: Buffer, request: { frame: number }, signal: AbortSignal): Promise<string>
 export function decode(bytes: Buffer, request: DecodeRequest, signal: AbortSignal): Promise<Trace['data'] | string> {
   signal.throwIfAborted()
-  const child = utilityProcess.fork(join(__dirname, 'packet-decoder.js'), [], { serviceName: 'Hopline Packet Decoder', stdio: 'ignore', env: hostEnv() })
+  const child = utilityProcess.fork(join(__dirname, 'packet-decoder.js'), [], { serviceName: 'Hopline Terminal Packet Decoder', stdio: 'ignore', env: hostEnv() })
   return new Promise<Trace['data'] | string>((resolve, reject) => {
     const abort = () => reject(new Error('Packet operation cancelled.'))
     const timeout = setTimeout(() => reject(new Error('Packet analysis timed out. Try a smaller capture.')), 120_000)

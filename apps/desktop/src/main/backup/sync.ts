@@ -33,7 +33,7 @@ export async function readSyncFile(f: string): Promise<{ buf: Buffer; mtimeMs: n
   })
   if (!st) return null
   if (!st.isFile()) throw new Error(`${f} is not a regular file: folder sync will not read or replace it`)
-  if (st.size > MAX_FILE_BYTES) throw new Error(`${f} is too large to be a Hopline sync file`)
+  if (st.size > MAX_FILE_BYTES) throw new Error(`${f} is too large to be a Hopline Terminal sync file`)
   const fh = await open(f, constants.O_RDONLY | NOFOLLOW | NONBLOCK).catch((e: unknown) => {
     if (missing(e)) return null
     throw e
@@ -51,7 +51,7 @@ export async function readSyncFile(f: string): Promise<{ buf: Buffer; mtimeMs: n
       n += bytesRead
       if (n === buf.length) break
     }
-    if (n > MAX_FILE_BYTES) throw new Error(`${f} is too large to be a Hopline sync file`)
+    if (n > MAX_FILE_BYTES) throw new Error(`${f} is too large to be a Hopline Terminal sync file`)
     return { buf: buf.subarray(0, n), mtimeMs: s2.mtimeMs }
   } finally {
     await fh.close()

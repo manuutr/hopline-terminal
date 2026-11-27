@@ -118,7 +118,7 @@ export function reservedReason(combo: string, mac = isMac): string | null {
   if (p.alt && !p.ctrl && !p.meta && letter) return `Alt+${p.key} is word motion on the device CLI (Esc-${p.key})`
   const mod = mac ? p.meta && !p.ctrl && !p.alt && !p.shift : p.ctrl && p.shift && !p.alt && !p.meta
   if (mod && (p.key === 'C' || p.key === 'V')) return `${p.key === 'C' ? 'Copy' : 'Paste'} in the terminal`
-  if (mac && mod && p.key === 'Q') return '⌘Q quits Hopline'
+  if (mac && mod && p.key === 'Q') return '⌘Q quits Hopline Terminal'
   return null
 }
 

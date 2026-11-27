@@ -328,11 +328,11 @@ const pickers: Pickers = {
     return r.canceled ? null : (r.filePaths[0] ?? null)
   },
   saveExport: async (name) => {
-    const r = await dialog.showSaveDialog({ title: 'Export Hopline data', defaultPath: join(app.getPath('documents'), name), filters: [{ name: 'Hopline export', extensions: ['hopline'] }] })
+    const r = await dialog.showSaveDialog({ title: 'Export Hopline Terminal data', defaultPath: join(app.getPath('documents'), name), filters: [{ name: 'Hopline Terminal export', extensions: ['hopline'] }] })
     return r.canceled ? null : (r.filePath ?? null)
   },
   openExport: async () => {
-    const r = await dialog.showOpenDialog({ title: 'Import Hopline data', filters: [{ name: 'Hopline export', extensions: ['hopline'] }], properties: ['openFile'] })
+    const r = await dialog.showOpenDialog({ title: 'Import Hopline Terminal data', filters: [{ name: 'Hopline Terminal export', extensions: ['hopline'] }], properties: ['openFile'] })
     return r.canceled ? null : (r.filePaths[0] ?? null)
   },
   pickDir: async () => {
@@ -575,7 +575,7 @@ if (primary) void app.whenReady().then(async () => {
       return r.canceled ? null : (r.filePaths[0] ?? null)
     },
     saveTheme: async (name) => {
-      const r = await dialog.showSaveDialog({ title: 'Export theme', defaultPath: join(app.getPath('documents'), name), filters: [{ name: 'Hopline theme', extensions: ['json'] }] })
+      const r = await dialog.showSaveDialog({ title: 'Export theme', defaultPath: join(app.getPath('documents'), name), filters: [{ name: 'Hopline Terminal theme', extensions: ['json'] }] })
       return r.canceled ? null : (r.filePath ?? null)
     }
   })

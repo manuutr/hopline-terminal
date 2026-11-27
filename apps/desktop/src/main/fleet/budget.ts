@@ -206,7 +206,7 @@ export function meteredProvider(inner: LlmProvider, meter: TokenMeter, account: 
       }
       if (meter.closing(account)) {
         if (!opts || !meter.takeGrace(account)) throw new BudgetExceeded(what)
-        req = { ...req, system: `${req.system}\n\n[Hopline: ${opts.closingNote}]` }
+        req = { ...req, system: `${req.system}\n\n[Hopline Terminal: ${opts.closingNote}]` }
       }
       const r = await inner.turn(req)
       const output = r.usage?.outputTokens ?? Math.ceil(JSON.stringify(r.message.parts).length / 4)

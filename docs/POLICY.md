@@ -1,12 +1,12 @@
 # Team policy file
 
-A team policy lets an administrator fix the safety settings of every Hopline install on a machine: read-only mode, extra blocked commands, which model providers may be used, fleet limits, budgets and the "what left this machine" log. Users cannot turn these off. Settings a policy fixes are shown as **Managed by policy** in the app.
+A team policy lets an administrator fix the safety settings of every Hopline Terminal install on a machine: read-only mode, extra blocked commands, which model providers may be used, fleet limits, budgets and the "what left this machine" log. Users cannot turn these off. Settings a policy fixes are shown as **Managed by policy** in the app.
 
-The policy is enforced in Hopline's main process (and the session host for blocked commands), not in the window, so a modified window or a crafted IPC call cannot get around it.
+The policy is enforced in Hopline Terminal's main process (and the session host for blocked commands), not in the window, so a modified window or a crafted IPC call cannot get around it.
 
-## Where Hopline looks
+## Where Hopline Terminal looks
 
-The policy is read once when Hopline starts. Restart Hopline after changing it.
+The policy is read once when Hopline Terminal starts. Restart Hopline Terminal after changing it.
 
 1. **The admin location for the OS.** When a file exists here, it is the policy, whatever the environment says.
 
@@ -16,8 +16,8 @@ The policy is read once when Hopline starts. Restart Hopline after changing it.
    | macOS | `/Library/Application Support/Hopline/policy.json` |
    | Windows | `<ProgramData>\Hopline\policy.json`, where `<ProgramData>` is the machine's Common AppData folder read from the registry (HKLM), usually `C:\ProgramData\Hopline\policy.json`. The `ProgramData` environment variable is ignored, since a user can change it. |
 
-   Make the file writable only by administrators (root / Administrators). Hopline only reads it. A symlink placed there is followed; a symlink whose target is missing counts as an invalid policy (it fails closed), not as no policy.
-2. **`HOPLINE_POLICY`**, an environment variable holding a file path. Use it when the admin location is not practical (a managed environment, a test lab). If the variable is set but the file is missing or unreadable, Hopline **fails closed** (below).
+   Make the file writable only by administrators (root / Administrators). Hopline Terminal only reads it. A symlink placed there is followed; a symlink whose target is missing counts as an invalid policy (it fails closed), not as no policy.
+2. **`HOPLINE_POLICY`**, an environment variable holding a file path. Use it when the admin location is not practical (a managed environment, a test lab). If the variable is set but the file is missing or unreadable, Hopline Terminal **fails closed** (below).
 3. Otherwise there is no policy and every setting is the user's.
 
 The format is JSON (UTF-8, at most 256 KB). A UTF-8 byte-order mark (Notepad) and UTF-16 with a byte-order mark (PowerShell 5 `Out-File`) are accepted too. YAML is not accepted: one format means one parser and no ambiguity about types.
@@ -27,12 +27,12 @@ The format is JSON (UTF-8, at most 256 KB). A UTF-8 byte-order mark (Notepad) an
 If the file cannot be read, is not valid JSON or text, has an unknown key (a typo such as `readonly` is an error, not ignored), the same key twice in one object, a `__proto__`, `constructor` or `prototype` key, or a value out of range:
 
 - read-only mode is on and cannot be turned off;
-- Hopline sends no command at all: the assistant, snippets, send-to-many, multi-device runs, config backups and auto-detect are refused (`blocked by team policy (the policy file is invalid …)`), because the broken file may have meant to block some of them. What a user types into the terminal is not affected;
+- Hopline Terminal sends no command at all: the assistant, snippets, send-to-many, multi-device runs, config backups and auto-detect are refused (`blocked by team policy (the policy file is invalid …)`), because the broken file may have meant to block some of them. What a user types into the terminal is not affected;
 - the assistant and fleet investigations are off (no request is sent to any model; Ollama discovery is refused too);
 - update checks stop and crash reports cannot be turned on: nothing leaves the machine on its own, in case the file was meant for an air-gapped network;
 - a red banner across the window names the file and the first problem found.
 
-Fix the file and restart Hopline.
+Fix the file and restart Hopline Terminal.
 
 ## Keys
 
@@ -51,14 +51,14 @@ All keys except `version` are optional. Anything not set stays the user's choice
 | `fleet.maxTokenBudget` | integer 20,000–4,000,000 | Upper limit for a fleet run's token budget. |
 | `maxRunTokenBudget` | integer 5,000–4,000,000 | Upper limit for the per-question token budget in the assistant panel. A user's lower setting is kept. |
 | `requireEgressLog` | boolean | `true`: the "what left this machine" log is always on, and a request that cannot be recorded is **not sent**. ChatGPT and Copilot sign-in are disabled because these local clients construct the final network request. |
-| `disableUpdates` | boolean | `true`: Hopline never checks for updates; "Check now" is off too. Use it when updates are rolled out by your own software distribution. The update check is the only thing Hopline sends on its own (D8). |
+| `disableUpdates` | boolean | `true`: Hopline Terminal never checks for updates; "Check now" is off too. Use it when updates are rolled out by your own software distribution. The update check is the only thing Hopline Terminal sends on its own (D8). |
 | `updateChannel` | `"stable"` or `"beta"` | Fixes the update channel. |
 | `disableCrashReports` | boolean | `true`: crash reports cannot be turned on. A policy can never turn them on for a user: they are always the user's opt-in. |
 | `crashReportDsn` | Sentry DSN | Where crash reports go when a user opts in, e.g. your self-hosted GlitchTip (`https://<public key>@glitchtip.example.net/3`). A DSN with a secret key is refused. |
 
 ### Blocked commands
 
-Blocked commands add to Hopline's built-in deny-list; they never allow something the guard refuses. They apply to everything Hopline sends for the user: the assistant (tool calls and suggest-mode clicks), fleet workers, snippets, send-to-many and multi-device runs, config backups and the auto-detect probe (checked against every platform the probe could be for). What a user types into the terminal themselves is not affected.
+Blocked commands add to Hopline Terminal's built-in deny-list; they never allow something the guard refuses. They apply to everything Hopline Terminal sends for the user: the assistant (tool calls and suggest-mode clicks), fleet workers, snippets, send-to-many and multi-device runs, config backups and the auto-detect probe (checked against every platform the probe could be for). What a user types into the terminal themselves is not affected.
 
 A pattern is a command prefix, matched word by word, case-insensitively:
 
@@ -66,7 +66,7 @@ A pattern is a command prefix, matched word by word, case-insensitively:
 - A pattern only matches whole words: `"show ip"` does not block `show ipv6 route`.
 - `"all"` patterns apply to every platform; platform patterns are added to them.
 
-**Configuration dumps.** A device can print its configuration with more than one command. When a pattern blocks a whole configuration dump (`show running-config`, `sh run`, `show configuration`, or a shorter prefix such as `show`), Hopline blocks every command in that platform's dump group too, so a model cannot read the configuration another way. A narrower pattern (`show running-config interface`) is not widened.
+**Configuration dumps.** A device can print its configuration with more than one command. When a pattern blocks a whole configuration dump (`show running-config`, `sh run`, `show configuration`, or a shorter prefix such as `show`), Hopline Terminal blocks every command in that platform's dump group too, so a model cannot read the configuration another way. A narrower pattern (`show running-config interface`) is not widened.
 
 | Platform | Dump group |
 | --- | --- |
@@ -135,7 +135,7 @@ Cloud allowed, with budgets and a few extra blocked commands:
 }
 ```
 
-No AI at all, Hopline as a plain SSH client:
+No AI at all, Hopline Terminal as a plain SSH client:
 
 ```json
 { "version": 1, "name": "Restricted jump host", "readOnly": true, "allowedProviders": [] }
@@ -147,4 +147,4 @@ With the log on, direct API and Ollama requests are recorded before sending: the
 
 ## Checking a policy
 
-Start Hopline with the file in place (or with `HOPLINE_POLICY=/path/to/policy.json`). Settings › Assistant › Permissions and limits shows the policy's name and file; a mistake shows the red banner with the reason.
+Start Hopline Terminal with the file in place (or with `HOPLINE_POLICY=/path/to/policy.json`). Settings › Assistant › Permissions and limits shows the policy's name and file; a mistake shows the red banner with the reason.

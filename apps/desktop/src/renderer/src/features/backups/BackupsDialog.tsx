@@ -429,7 +429,7 @@ function HistoryView(): React.JSX.Element {
               </div>
               <div className="shrink-0 border-t border-line px-2.5 py-2 text-2xs leading-relaxed text-fg-subtle">
                 <ShieldCheck className="mr-1 inline size-3 align-[-2px] text-ok" />
-                Secrets redacted{redactions ? ` (${redactions})` : ''}. A change inside a secret shows as unchanged. Hopline never pushes a config back to a device.
+                Secrets redacted{redactions ? ` (${redactions})` : ''}. A change inside a secret shows as unchanged. Hopline Terminal never pushes a config back to a device.
               </div>
             </div>
           )}
@@ -506,7 +506,7 @@ function SchedulesView(): React.JSX.Element {
         <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             <h3 className="text-sm font-semibold">Schedules</h3>
-            <p className="text-xs text-fg-muted">Run while Hopline is open. A session without an open tab is reached over a background connection with its stored credentials; one that needs a typed sign-in is backed up when it next connects. A run missed while the app was closed runs once at the next start.</p>
+            <p className="text-xs text-fg-muted">Run while Hopline Terminal is open. A session without an open tab is reached over a background connection with its stored credentials; one that needs a typed sign-in is backed up when it next connects. A run missed while the app was closed runs once at the next start.</p>
           </div>
           <Button variant="secondary" onClick={add}>
             <Plus /> Add schedule

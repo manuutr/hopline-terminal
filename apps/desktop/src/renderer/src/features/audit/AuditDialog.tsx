@@ -57,7 +57,7 @@ export function AuditDialog(): React.JSX.Element {
       open={open}
       onOpenChange={(o) => !o && useUi.getState().set({ auditOpen: false })}
       title="AI audit log"
-      description="Every command Hopline sent or tried to send for you, including blocked, refused and rejected ones. Append-only."
+      description="Every command Hopline Terminal sent or tried to send for you, including blocked, refused and rejected ones. Append-only."
       className="w-[min(1100px,96vw)]"
       footer={
         <>

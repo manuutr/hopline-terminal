@@ -124,7 +124,7 @@ describe('desktop notifications: approvals waiting and unexpected disconnects on
     const { n, shown, revealed } = make()
     expect(n.approval('p1', 'core-sw1', 3, false)).toBe(true)
     expect(n.approval('p1', 'core-sw1', 3, false)).toBe(false)
-    expect(shown[0]).toEqual({ kind: 'approval', title: 'Approval waiting · core-sw1', body: 'A change of 3 lines waits for your approval in Hopline.' })
+    expect(shown[0]).toEqual({ kind: 'approval', title: 'Approval waiting · core-sw1', body: 'A change of 3 lines waits for your approval in Hopline Terminal.' })
     expect(n.approval('p2', 'core-sw1', 1, true)).toBe(true)
     expect(shown[1]!.body).toMatch(/^A disruptive change/)
     expect(revealed()).toBe(2)
@@ -141,7 +141,7 @@ describe('desktop notifications: approvals waiting and unexpected disconnects on
     expect(n.disconnect('s1', 'core-sw1', 'again', false)).toBe(true)
   })
 
-  it('opt-out per kind, and nothing while a Hopline window has focus', () => {
+  it('opt-out per kind, and nothing while a Hopline Terminal window has focus', () => {
     expect(make({ approvals: false }).n.approval('p', 'x', 1, false)).toBe(false)
     expect(make({ disconnects: false }).n.disconnect('s', 'x', '', false)).toBe(false)
     const f = make({ focused: true })

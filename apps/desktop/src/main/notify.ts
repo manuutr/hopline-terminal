@@ -49,7 +49,7 @@ export class Notifier {
     this.seen.add(proposalId)
     if (this.seen.size > 500) this.seen = new Set([...this.seen].slice(-100))
     const what = disruptive ? 'A disruptive change' : lines === 1 ? 'A change of 1 line' : `A change of ${lines} lines`
-    this.d.show({ kind: 'approval', title: `Approval waiting · ${sessionName}`, body: `${what} waits for your approval in Hopline.` }, () => this.d.reveal())
+    this.d.show({ kind: 'approval', title: `Approval waiting · ${sessionName}`, body: `${what} waits for your approval in Hopline Terminal.` }, () => this.d.reveal())
     return true
   }
 

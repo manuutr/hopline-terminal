@@ -152,8 +152,8 @@ const EXEC: Entry[] = [
   // Checkpoints are the NX-OS safety net (cli-model safety-net.ts): Hopline takes and deletes its
   // own. The agent may not, or a later proposal could replace an open change's checkpoint (Phase 5
   // review L4).
-  B('checkpoint [<checkpoint>] ...', 'Create a configuration rollback checkpoint', { reason: 'checkpoints are the safety net Hopline manages; the agent cannot take or delete them' }),
-  B('no checkpoint ...', 'Delete a checkpoint', { reason: 'checkpoints are the safety net Hopline manages; the agent cannot take or delete them' }),
+  B('checkpoint [<checkpoint>] ...', 'Create a configuration rollback checkpoint', { reason: 'checkpoints are the safety net Hopline Terminal manages; the agent cannot take or delete them' }),
+  B('no checkpoint ...', 'Delete a checkpoint', { reason: 'checkpoints are the safety net Hopline Terminal manages; the agent cannot take or delete them' }),
   B('checkpoint file ...', undefined, { reason: 'writes a checkpoint file to bootflash' }),
   C('debug ...', undefined, { reason: 'debugging can load the CPU' }),
   B('debug all ...', 'Enable all debugging', { reason: '"debug all" can halt the device' }),
@@ -236,8 +236,8 @@ const CONFIG: Entry[] = [
   C('policy-map ...'),
   C('class-map ...'),
   C('port-channel ...'),
-  B('checkpoint ...', undefined, { reason: 'checkpoints are the safety net Hopline manages; the agent cannot take or delete them' }),
-  B('no checkpoint ...', undefined, { reason: 'checkpoints are the safety net Hopline manages; the agent cannot take or delete them' }),
+  B('checkpoint ...', undefined, { reason: 'checkpoints are the safety net Hopline Terminal manages; the agent cannot take or delete them' }),
+  B('no checkpoint ...', undefined, { reason: 'checkpoints are the safety net Hopline Terminal manages; the agent cannot take or delete them' }),
   B('boot ...', undefined, { reason: 'boot variables change what runs on the next reload' }),
   B('cli ...', undefined, { reason: 'CLI aliases and variables can shadow commands' }),
   B('event ...', undefined, { reason: 'EEM applets run CLI as a privileged user' }),

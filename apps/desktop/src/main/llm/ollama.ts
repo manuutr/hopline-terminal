@@ -77,7 +77,7 @@ async function request(endpoint: string, path: string, body: unknown, signal: Ab
   }
   if (res.type === 'opaqueredirect' || (res.status >= 300 && res.status < 400)) {
     void res.body?.cancel().catch(() => {})
-    throw new OllamaError('other', `The Ollama server answered with a redirect (${res.status ? `HTTP ${res.status}` : 'HTTP 3xx'}), which Hopline does not follow. Enter the server's own address.`, 'http_error')
+    throw new OllamaError('other', `The Ollama server answered with a redirect (${res.status ? `HTTP ${res.status}` : 'HTTP 3xx'}), which Hopline Terminal does not follow. Enter the server's own address.`, 'http_error')
   }
   if (!res.ok) {
     const text = await res.text().catch(() => '')

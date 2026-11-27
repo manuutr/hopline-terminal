@@ -133,7 +133,7 @@ export class ResultBuilder {
       const chain = hops.map((h) => h.label).join(' → ')
       if (s.protocol !== 'ssh') {
         addNote(s, `Jump host in source: ${chain} (not supported for ${s.protocol})`)
-        this.warn(item, `Jump host ${chain} ignored: Hopline only chains SSH sessions`)
+        this.warn(item, `Jump host ${chain} ignored: Hopline Terminal only chains SSH sessions`)
         continue
       }
       const refs: string[] = []

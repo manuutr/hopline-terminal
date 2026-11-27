@@ -495,10 +495,10 @@ export function resolve(platform: PlatformId, mode: ModeId, line: string, opts: 
       const reason = !known
         ? `pipe "| ${word}" is ${r.status}: ${r.reason}`
         : afterRegex
-        ? `${model.profile.label} starts a new pipe at every "|", so "| ${prev} …|${word}" is not regex alternation; filter for each pattern separately, or ask Hopline to filter the output locally`
+        ? `${model.profile.label} starts a new pipe at every "|", so "| ${prev} …|${word}" is not regex alternation; filter for each pattern separately, or ask Hopline Terminal to filter the output locally`
         : reads.length
-        ? `${model.profile.label} has no "| ${word}" read-only filter; use ${reads.map((w) => `| ${w}`).join(', ')}, or ask Hopline to filter the output locally`
-        : `${model.profile.label} has no read-only output filters ("| ${word}"); run the command without a pipe and ask Hopline to filter the output locally`
+        ? `${model.profile.label} has no "| ${word}" read-only filter; use ${reads.map((w) => `| ${w}`).join(', ')}, or ask Hopline Terminal to filter the output locally`
+        : `${model.profile.label} has no read-only output filters ("| ${word}"); run the command without a pipe and ask Hopline Terminal to filter the output locally`
       return { ...r, risk: 'blocked' as Risk, reason }
     }
     return r

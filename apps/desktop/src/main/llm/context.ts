@@ -97,7 +97,7 @@ export function fitContext(system: string, messages: ChatMessage[], tools: ToolS
     out = messages.slice(cut).map((m) => ({ ...m, parts: [...m.parts] }))
     // A cut-off run's question can share its message with the results of calls now left out.
     out[0] = { ...out[0]!, parts: out[0]!.parts.filter((p) => p.type !== 'tool_result') }
-    const note: Part = { type: 'text', text: `[Hopline: ${dropped} earlier message${dropped === 1 ? ' was' : 's were'} left out to fit this model's context window.]` }
+    const note: Part = { type: 'text', text: `[Hopline Terminal: ${dropped} earlier message${dropped === 1 ? ' was' : 's were'} left out to fit this model's context window.]` }
     out[0] = { ...out[0]!, parts: [note, ...out[0]!.parts] }
   } else out = messages.map((m) => ({ ...m, parts: [...m.parts] }))
 

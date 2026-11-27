@@ -28,7 +28,7 @@ let signedCache: boolean | null = null
 function macSigned(): boolean {
   if (signedCache !== null) return signedCache
   try {
-    // .../Hopline.app/Contents/MacOS/Hopline → .../Hopline.app
+    // .../Hopline Terminal.app/Contents/MacOS/Hopline Terminal → .../Hopline Terminal.app
     const bundle = dirname(dirname(dirname(app.getPath('exe'))))
     const out = execFileSync('/usr/bin/codesign', ['-dv', '--verbose=2', bundle], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], timeout: 5000 })
     signedCache = /Authority=Developer ID Application/.test(out)

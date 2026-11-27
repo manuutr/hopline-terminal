@@ -24,4 +24,4 @@ call npm run dist:win -w @hopline/desktop || exit /b 3
 start "" /b /wait apps\desktop\release\win-unpacked\hopline.exe --smoke || exit /b 4
 node.exe apps\desktop\scripts\check-fuses.mjs apps\desktop\release\win-unpacked\hopline.exe win32 || exit /b 5
 echo Verified installer:
-dir /b /s "apps\desktop\release\Hopline-*-win-x64.exe"
+dir /b /s "apps\desktop\release\Hopline-Terminal-*-win-x64.exe"

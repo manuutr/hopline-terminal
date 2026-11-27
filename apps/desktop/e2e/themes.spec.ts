@@ -54,7 +54,7 @@ test('theme generator: AA report, save, use for the terminal; import an iTerm2 f
   await dlg.getByRole('button', { name: 'Import…' }).click()
   const draft = dlg.locator('[data-import-draft]')
   await expect(draft).toBeVisible()
-  await expect(draft).toContainText(/taken from Hopline dark: cursorAccent, selectionBackground, brightWhite/)
+  await expect(draft).toContainText(/taken from Hopline Terminal dark: cursorAccent, selectionBackground, brightWhite/)
   await expect(draft.locator('[data-contrast-report]')).toContainText(/pairs/)
   await draft.getByRole('button', { name: 'Keep' }).click()
   await expect(draft).toBeHidden()
@@ -139,7 +139,7 @@ test('terminal palettes: compare twenty presets, navigate by keyboard, cancel or
 
   await page.keyboard.press(`${MOD}+Comma`)
   await dlg.getByRole('tab', { name: 'Themes and fonts' }).click()
-  await expect(choices.getByRole('radio', { name: 'Hopline', exact: true })).toBeChecked()
+  await expect(choices.getByRole('radio', { name: 'Hopline Terminal', exact: true })).toBeChecked()
   await choices.getByRole('radio', { name: 'Cobalt', exact: true }).check()
   if (process.env['HOPLINE_SHOTS']) await page.screenshot({ animations: 'disabled', path: join(process.env['HOPLINE_SHOTS'], 'terminal-palettes.png') })
   await sizeWindow(app, page, 900, 640)

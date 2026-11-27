@@ -171,18 +171,18 @@ export async function execute(tab: ExecTarget, platform: AnyPlatform, rawCommand
   if (tab.lock) return fail('another agent command is already running on this session')
   const unsent = tab.unsent?.()
   if (unsent != null)
-    return fail(`the device's input line may still hold "${unsent.slice(0, 80)}", which Hopline typed but could not confirm erased (typed, not sent); clear the line (Ctrl-U or Ctrl-C) in the terminal before Hopline types here again`)
+    return fail(`the device's input line may still hold "${unsent.slice(0, 80)}", which Hopline Terminal typed but could not confirm erased (typed, not sent); clear the line (Ctrl-U or Ctrl-C) in the terminal before Hopline Terminal types here again`)
   const running = stillRunning.get(tab)
   if (running !== undefined) {
     // Interrupted earlier without a prompt coming back: only a prompt on the screen clears it.
     if (promptState(tab.tail, platform).mode === 'unknown')
       return fail(
-        `the previous command ("${running.slice(0, 80)}") may still be running on the device: Hopline interrupted it and no prompt came back. Stop it in the terminal (${interruptKeys(platform).map((k) => KEY_NAMES[k] ?? 'the break key').join(', then ')}) and wait for the prompt; nothing was typed`
+        `the previous command ("${running.slice(0, 80)}") may still be running on the device: Hopline Terminal interrupted it and no prompt came back. Stop it in the terminal (${interruptKeys(platform).map((k) => KEY_NAMES[k] ?? 'the break key').join(', then ')}) and wait for the prompt; nothing was typed`
       )
     stillRunning.delete(tab)
   }
   if (tab.echoes?.() === false)
-    return fail('this session does not echo typed characters, so Hopline cannot check a command before pressing Enter; nothing was typed. If it does echo, type a letter at the prompt (and erase it) so Hopline sees the echo, or reconnect')
+    return fail('this session does not echo typed characters, so Hopline Terminal cannot check a command before pressing Enter; nothing was typed. If it does echo, type a letter at the prompt (and erase it) so Hopline Terminal sees the echo, or reconnect')
   const quietMs = Math.max(0, opts.quietMs ?? DEFAULT_QUIET_MS)
   // The device must be quiet first: a prompt in the middle of output still arriving is not idle.
   if (!(await waitQuiet(tab, quietMs, Math.max(Math.min(opts.timeoutMs, 5000), quietMs + 100), opts.signal))) return fail('the device is still sending output; not interrupting')
@@ -290,7 +290,7 @@ export async function execute(tab: ExecTarget, platform: AnyPlatform, rawCommand
           // eslint-disable-next-line no-control-regex
           const what = typed ? command : clearRaw.replace(/[\x00-\x1f\x7f]/g, '') || '(the line-clear key)'
           tab.markUnsent?.(what)
-          errorText = `${msg}; typed, not sent: Enter was not pressed, but Hopline could not confirm the line is empty again, so "${what.slice(0, 80)}" may still be on the device's input line. Clear it (Ctrl-U or Ctrl-C) before pressing Enter; Hopline types nothing on this session until you do`
+          errorText = `${msg}; typed, not sent: Enter was not pressed, but Hopline Terminal could not confirm the line is empty again, so "${what.slice(0, 80)}" may still be on the device's input line. Clear it (Ctrl-U or Ctrl-C) before pressing Enter; Hopline Terminal types nothing on this session until you do`
         }
         raw = ''
         runFrom = -1
@@ -328,7 +328,7 @@ export async function execute(tab: ExecTarget, platform: AnyPlatform, rawCommand
         // No key brought the prompt back. The user gets the input back (to stop it themselves);
         // Hopline types nothing here until a prompt shows again.
         stillRunning.set(tab, command)
-        errorText = `${msg}; Hopline sent ${keys.map((x) => KEY_NAMES[x] ?? 'the break key').join(', then ')} and no prompt came back, so the command may still be running on the device. Stop it in the terminal; Hopline runs nothing on this session until the prompt is back`
+        errorText = `${msg}; Hopline Terminal sent ${keys.map((x) => KEY_NAMES[x] ?? 'the break key').join(', then ')} and no prompt came back, so the command may still be running on the device. Stop it in the terminal; Hopline Terminal runs nothing on this session until the prompt is back`
         finish(why)
       }
       next()
@@ -377,7 +377,7 @@ export async function execute(tab: ExecTarget, platform: AnyPlatform, rawCommand
     const echoProblem = (v: EchoVerdict): string => {
       const secs = `${Math.round(echoMs / 100) / 10}s`
       if (v.state === 'mismatch') {
-        if (v.why === 'unsupported') return `the device redrew the line in a way Hopline cannot follow (${v.detail}), so the echo of "${shown}" could not be checked`
+        if (v.why === 'unsupported') return `the device redrew the line in a way Hopline Terminal cannot follow (${v.detail}), so the echo of "${shown}" could not be checked`
         if (v.why === 'extra') return `the device echoed "${v.shown}", which is more than "${shown}" (text already on the line?)`
         return `the device echoed "${v.shown}" instead of "${shown}" (a lost or changed character, or a key already on the line)`
       }

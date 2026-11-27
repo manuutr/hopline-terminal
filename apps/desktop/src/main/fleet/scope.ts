@@ -71,7 +71,7 @@ function subtree(folderId: string, folders: Pick<Folder, 'id' | 'parentId'>[]): 
  */
 export function exclusion(s: Session, repo: Pick<ScopeRepo, 'getCredential'>): string | null {
   if (s.ephemeral) return 'a quick-connect session can\'t be used in a fleet run: save it first'
-  if (s.platform === 'auto') return 'the platform is not known yet: connect once so Hopline can detect it, or set it in the session'
+  if (s.platform === 'auto') return 'the platform is not known yet: connect once so Hopline Terminal can detect it, or set it in the session'
   if (s.protocol === 'serial') return 'serial ports are not used in fleet runs'
   if (s.protocol !== 'ssh') return 'telnet sign-in is typed at the device, which a background connection can\'t do'
   const cred = s.credentialId ? repo.getCredential(s.credentialId) : undefined
