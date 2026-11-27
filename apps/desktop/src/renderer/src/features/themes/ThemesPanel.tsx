@@ -204,7 +204,7 @@ export function ThemesPanel({ form, up }: { form: Settings; up: Up }): React.JSX
     }
   }
   const remove = async (t: CustomTheme) => {
-    if (!(await askConfirm(`Delete ${t.label}?`, form.termTheme === t.id ? 'The terminal uses it now and goes back to the Hopline theme.' : 'Export it first to keep a copy.', 'Delete'))) return
+    if (!(await askConfirm(`Delete ${t.label}?`, form.termTheme === t.id ? 'The terminal uses it now and goes back to the Hopline Terminal theme.' : 'Export it first to keep a copy.', 'Delete'))) return
     // A deleted theme falls back to the Hopline theme (terminalTheme), even if this form is cancelled.
     if (form.termTheme === t.id) up('termTheme', 'auto')
     try {
@@ -221,7 +221,7 @@ export function ThemesPanel({ form, up }: { form: Settings; up: Up }): React.JSX
         <PaletteBrowser form={form} custom={themes} onSelect={(id) => up('termTheme', id)} />
       </Section>
       <Section title="Your themes">
-        <Row k="themeImport" label="Import and export" hint="Preview a Hopline, iTerm2, MobaXterm (.ini) or Royal TS (.rtcp or .termcolors) palette.">
+        <Row k="themeImport" label="Import and export" hint="Preview a Hopline Terminal, iTerm2, MobaXterm (.ini) or Royal TS (.rtcp or .termcolors) palette.">
           <div>
             <Button onClick={() => void importFile()}>Import…</Button>
           </div>

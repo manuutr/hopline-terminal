@@ -131,7 +131,7 @@ export function AppShell(): React.JSX.Element {
         <Divider label="Resize session sidebar" group={group} before="sidebar" after="main" horizontal collapsible={left} panel={left} className={cn(handle, !sidebarOpen && 'bg-transparent')} />
         <Panel id="main" minSize={360} style={{ overflow: 'hidden' }}>
           <section aria-label="Terminals" className="flex h-full flex-col">
-            <h1 className="sr-only">Hopline</h1>
+            <h1 className="sr-only">Hopline Terminal</h1>
             <LiveRegion />
             <ButtonBar />
             <div className="min-h-0 flex-1">

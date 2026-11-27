@@ -262,7 +262,7 @@ describe('H2/L2/L3: a timer net is never reported confirmed unless the device sh
     expect(await show(env, 'junos', 'show configuration system')).not.toMatch(/L2/)
   })
 
-  it("L3: another admin's plain commit confirmed the change: Hopline says state unknown, not rolled back or confirmed", async () => {
+  it("L3: another admin's plain commit confirmed the change: Hopline Terminal says state unknown, not rolled back or confirmed", async () => {
     const env = await setup(JUNOS.platform, JUNOS.device, JUNOS.name, [[junosChange('L3')]], { onEvent: approveAll, tabs: 2 })
     env.agent.start({ tabId: 'tab-1', prompt: 'go' })
     await awaitingOf(env)
@@ -283,7 +283,7 @@ describe('H2/L2/L3: a timer net is never reported confirmed unless the device sh
 })
 
 describe('H3: a commit that did not report back is never "nothing was changed"', { timeout: 60_000 }, () => {
-  it('Junos: the commit confirmed ran on the device but timed out for Hopline: the change stays open, pending, with its undo', async () => {
+  it('Junos: the commit confirmed ran on the device but timed out for Hopline Terminal: the change stays open, pending, with its undo', async () => {
     const env = await setup(JUNOS.platform, JUNOS.device, JUNOS.name, [[junosChange('H3a')]], { onEvent: approveAll })
     env.fault.fn = (c, run) => (/^commit confirmed/.test(c) ? run().then(timeout) : undefined)
     env.agent.start({ tabId: 'tab-1', prompt: 'go' })
@@ -304,7 +304,7 @@ describe('H3: a commit that did not report back is never "nothing was changed"',
     expect(await show(env, 'junos', 'show configuration system')).not.toMatch(/H3a/)
   })
 
-  it('EOS: the commit timer ran but timed out for Hopline: the discard cannot reach the committed session; the change stays open', async () => {
+  it('EOS: the commit timer ran but timed out for Hopline Terminal: the discard cannot reach the committed session; the change stays open', async () => {
     const env = await setup('eos', makeEosDevice, 'dist-eos1', [[{ name: 'propose_config_change', input: { commands: ['interface Ethernet1', 'description h3-eos'], rationale: 'x', rollback: ['interface Ethernet1', 'no description'], verify: [{ command: 'show interfaces description', expect: 'h3-eos' }] } }]], { onEvent: approveAll })
     env.fault.fn = (c, run) => (/^commit timer/.test(c) ? run().then(timeout) : undefined)
     env.agent.start({ tabId: 'tab-1', prompt: 'go' })
@@ -383,7 +383,7 @@ describe('L1: confirm and roll back cannot run at the same time', { timeout: 60_
     const [id] = proposalIds(env)
     const [c, r] = await Promise.allSettled([env.agent.changeAction(id!, 'confirm'), env.agent.changeAction(id!, 'rollback')])
     expect(c.status).toBe('fulfilled')
-    expect(r).toMatchObject({ status: 'rejected', reason: expect.objectContaining({ message: 'Hopline is still working on this change' }) })
+    expect(r).toMatchObject({ status: 'rejected', reason: expect.objectContaining({ message: 'Hopline Terminal is still working on this change' }) })
     expect(lastChange(env, id)).toMatchObject({ phase: 'confirmed' })
     const out = rows(env).filter((x) => ['confirmed', 'rolled-back', 'error'].includes(x.decision))
     expect(out.map((x) => x.decision)).toEqual(['confirmed'])
@@ -393,8 +393,8 @@ describe('L1: confirm and roll back cannot run at the same time', { timeout: 60_
 
 describe('L4: a later proposal cannot touch an open change\'s safety net', { timeout: 60_000 }, () => {
   it.each([
-    ['nxos', NXOS, ['do no checkpoint hopline-0a1b2c3d'], /checkpoints are the safety net Hopline manages/],
-    ['nxos', NXOS, ['do checkpoint hopline-0a1b2c3d'], /checkpoints are the safety net Hopline manages/],
+    ['nxos', NXOS, ['do no checkpoint hopline-0a1b2c3d'], /checkpoints are the safety net Hopline Terminal manages/],
+    ['nxos', NXOS, ['do checkpoint hopline-0a1b2c3d'], /checkpoints are the safety net Hopline Terminal manages/],
     ['iosxe', { platform: 'iosxe' as const, device: makeIosDevice, name: 'core-sw1' }, ['archive', 'path flash:evil'], /archive configuration is the safety net/]
   ] as const)('%s: %j is blocked before any card', async (_p, k, commands, why) => {
     const env = await setup(k.platform, k.device, k.name, [[{ name: 'propose_config_change', input: { commands, rationale: 'x', rollback: ['no description'], verify: [{ command: 'show version', expect: 'x' }] } }]], { onEvent: approveAll })

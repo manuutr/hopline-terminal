@@ -31,7 +31,7 @@ describe('R1: exec commands keep the exec shape', () => {
   })
 })
 
-describe('R2: an exec command Hopline does not know whole is refused, not wrapped', () => {
+describe('R2: an exec command Hopline Terminal does not know whole is refused, not wrapped', () => {
   it.each([
     ['eos', 'clear ip bgp neighbor 10.0.0.1'],
     ['ios', 'sh bg ip ospf adj'],

@@ -11,7 +11,7 @@ test.beforeAll(async () => {
 test.afterAll(() => sim.close())
 
 async function unlockWith(page: Page, pw: string) {
-  const dlg = page.getByRole('dialog', { name: 'Unlock Hopline' })
+  const dlg = page.getByRole('dialog', { name: 'Unlock Hopline Terminal' })
   await expect(dlg).toBeVisible()
   await dlg.getByLabel('Master password').fill(pw)
   await dlg.getByLabel('Master password').press('Enter')

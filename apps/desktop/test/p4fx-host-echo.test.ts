@@ -159,7 +159,7 @@ describe('HostTab unsent-text flag (E3 abandon not verified)', () => {
     tab.markUnsent('display version')
     expect(tab.unsent()).toBe('display version')
     await tick(400)
-    expect(port.text()).toMatch(/may still hold "display version", typed by Hopline but not sent/)
+    expect(port.text()).toMatch(/may still hold "display version", typed by Hopline Terminal but not sent/)
     port.fromRenderer({ t: 'w', d: 'x' })
     expect(tab.unsent()).toBe('display version')
     port.fromRenderer({ t: 'w', d: '\x15' })

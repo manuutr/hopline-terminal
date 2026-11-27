@@ -49,7 +49,7 @@ function StepRow({ e }: { e: Extract<Entry, { kind: 'step' }> }): React.JSX.Elem
         <span className="flex min-w-0 flex-1 items-baseline gap-1.5">
           <span className={cn('truncate font-mono text-xs', e.filter && 'max-w-[70%] shrink-0', e.status === 'blocked' ? 'text-fg-subtle line-through' : 'text-fg')}>{e.command}</span>
           {e.filter && (
-            <span data-testid="step-filter" className="min-w-0 truncate text-2xs text-fg-subtle" title={e.filterNote ? `Filtered in Hopline: ${e.filterNote}` : 'Filtered in Hopline, not on the device'}>
+            <span data-testid="step-filter" className="min-w-0 truncate text-2xs text-fg-subtle" title={e.filterNote ? `Filtered in Hopline Terminal: ${e.filterNote}` : 'Filtered in Hopline Terminal, not on the device'}>
               · {e.filter}
             </span>
           )}
@@ -62,7 +62,7 @@ function StepRow({ e }: { e: Extract<Entry, { kind: 'step' }> }): React.JSX.Elem
       {open && (
         <div className="mb-1 ml-[22px] mr-1.5 animate-fade-in space-y-1">
           {e.reason && e.status !== 'ok' && <div className="text-xs text-fg-muted">{e.reason}</div>}
-          {e.filterNote && <div className="text-2xs text-fg-subtle">Filtered in Hopline: {e.filterNote}</div>}
+          {e.filterNote && <div className="text-2xs text-fg-subtle">Filtered in Hopline Terminal: {e.filterNote}</div>}
           {e.preview && (
             <pre tabIndex={0} aria-label="Preview" className="selectable max-h-64 overflow-auto rounded bg-term px-2.5 py-2 font-mono text-[11.5px] leading-[1.45] text-fg-muted">{e.preview}</pre>
           )}
@@ -107,7 +107,7 @@ function IntroCard(): React.JSX.Element {
         <li>
           Type <code className="font-mono text-fg">@ai</code> in the terminal, or select output and choose Explain.
         </li>
-        <li>Long output is filtered in Hopline (tail, grep, count), the same on every vendor.</li>
+        <li>Long output is filtered in Hopline Terminal (tail, grep, count), the same on every vendor.</li>
       </ul>
     </div>
   )

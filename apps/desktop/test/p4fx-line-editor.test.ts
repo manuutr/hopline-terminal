@@ -75,7 +75,7 @@ describe('E2: legitimate echoes pass', () => {
     expect(st('show version', 'show version extra')).toBe('mismatch')
     expect(echoVerdict('show version', '', { prompt: P })).toEqual({ state: 'pending', why: 'empty' })
   })
-  it('cursor movement Hopline cannot follow is a mismatch, never ok', () => {
+  it('cursor movement Hopline Terminal cannot follow is a mismatch, never ok', () => {
     expect(echoVerdict('show version', 'show\x1b[5Hversion', { prompt: P })).toMatchObject({ state: 'mismatch', why: 'unsupported' })
     expect(st('show version', '\b \bshow version')).toBe('mismatch')
     expect(st('show version', 'show\x1bMversion')).toBe('mismatch')

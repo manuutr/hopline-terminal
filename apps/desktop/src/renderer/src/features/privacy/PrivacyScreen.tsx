@@ -53,7 +53,7 @@ export function PrivacyChoices({ value, onChange }: { value: PrivacyChoice; onCh
         Checks every six hours. GitHub sees your IP address and which version you download.
       </ChoiceRow>
       <ChoiceRow title="AI requests">
-        When you ask, Hopline masks recognized secrets, hostnames and interface descriptions. Other addresses and free-form text can reach your provider. Inspect logged requests in <span className="text-fg">What left this machine</span>.
+        When you ask, Hopline Terminal masks recognized secrets, hostnames and interface descriptions. Other addresses and free-form text can reach your provider. Inspect logged requests in <span className="text-fg">What left this machine</span>.
       </ChoiceRow>
       <ChoiceRow
         title="Crash reports"
@@ -111,7 +111,7 @@ export function PrivacyStep({ onDone, submitLabel = 'Continue', value: controlle
   }
   return (
     <div className="space-y-3">
-      <p className="text-sm text-fg-muted">Hopline has no account and no analytics. Three things can leave this machine:</p>
+      <p className="text-sm text-fg-muted">Hopline Terminal has no account and no analytics. Three things can leave this machine:</p>
       <PrivacyChoices value={value} onChange={setValue} />
       <div className="flex items-center gap-3">
         {/* What Continue agrees to, in one line: "Continue" without reading is still an informed choice (review P2). */}

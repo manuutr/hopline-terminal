@@ -1,12 +1,12 @@
 # Team policy
 
-An administrator can fix Hopline's safety settings for every user of a machine with a JSON policy file. Users cannot turn these settings off; Settings shows them as **Managed by policy**, with the policy's name and an optional message. The full reference is [docs/POLICY.md](../POLICY.md).
+An administrator can fix Hopline Terminal's safety settings for every user of a machine with a JSON policy file. Users cannot turn these settings off; Settings shows them as **Managed by policy**, with the policy's name and an optional message. The full reference is [docs/POLICY.md](../POLICY.md).
 
-The policy is enforced in Hopline's main process and, for blocked commands, again in the session host. A modified window or a crafted IPC call cannot get around it.
+The policy is enforced in Hopline Terminal's main process and, for blocked commands, again in the session host. A modified window or a crafted IPC call cannot get around it.
 
-## Where Hopline looks
+## Where Hopline Terminal looks
 
-The file is read once at start; restart Hopline after changing it.
+The file is read once at start; restart Hopline Terminal after changing it.
 
 | OS | Path |
 | --- | --- |
@@ -32,7 +32,7 @@ A file at the admin location always wins. Otherwise the `HOPLINE_POLICY` environ
 | `disableUpdates`, `updateChannel` | Turn update checks off, or fix the channel |
 | `disableCrashReports`, `crashReportDsn` | Forbid crash reports, or send them to your own server. A policy can never turn crash reports on for a user |
 
-Blocked commands apply to everything Hopline sends for the user (the assistant, suggest mode, fleet workers, snippets, send to many, multi-device runs, config backups and the auto-detect probe), never to what the user types. Blocking one command that prints the configuration blocks the platform's other ways of printing it too (`show running-config`, `show startup-config`, `show configuration` …).
+Blocked commands apply to everything Hopline Terminal sends for the user (the assistant, suggest mode, fleet workers, snippets, send to many, multi-device runs, config backups and the auto-detect probe), never to what the user types. Blocking one command that prints the configuration blocks the platform's other ways of printing it too (`show running-config`, `show startup-config`, `show configuration` …).
 
 ## Example
 
@@ -52,6 +52,6 @@ More examples, including an air-gapped setup and "no AI at all", are in [docs/PO
 
 ## Fails closed
 
-If the file can't be read, isn't valid JSON, has an unknown or duplicate key, or a value out of range, Hopline treats the whole policy as hostile: read-only mode is locked on, every command Hopline would send for you is refused (what you type is unaffected), the assistant and fleet are off, update checks stop, crash reports can't be turned on, and a red banner names the file and the first problem. Fix the file and restart.
+If the file can't be read, isn't valid JSON, has an unknown or duplicate key, or a value out of range, Hopline Terminal treats the whole policy as hostile: read-only mode is locked on, every command Hopline Terminal would send for you is refused (what you type is unaffected), the assistant and fleet are off, update checks stop, crash reports can't be turned on, and a red banner names the file and the first problem. Fix the file and restart.
 
-To check a policy, start Hopline with it in place (or with `HOPLINE_POLICY=/path/to/policy.json`) and open Settings › Assistant › Permissions and limits.
+To check a policy, start Hopline Terminal with it in place (or with `HOPLINE_POLICY=/path/to/policy.json`) and open Settings › Assistant › Permissions and limits.

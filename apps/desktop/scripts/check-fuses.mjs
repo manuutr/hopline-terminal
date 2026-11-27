@@ -1,5 +1,5 @@
 // Reads the fuses of a packaged Hopline binary and fails unless they match scripts/fuses.cjs.
-//   node scripts/check-fuses.mjs <path to hopline / hopline.exe / Hopline.app> <linux|win32|darwin>
+//   node scripts/check-fuses.mjs <path to hopline / hopline.exe / Hopline Terminal.app> <linux|win32|darwin>
 // Used by the release workflow after packaging, and by RELEASING.md for local builds.
 import { createRequire } from 'node:module'
 import { getCurrentFuseWire, FuseV1Options } from '@electron/fuses'

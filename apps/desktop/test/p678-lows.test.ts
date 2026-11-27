@@ -67,7 +67,7 @@ describe('L1: "Restart and install" closes the door before it counts', () => {
 
   it('the session host refuses to open a tab or a background connection while an install starts', async () => {
     const src = (await import('node:fs')).readFileSync(join(__dirname, '../src/main/host/client.ts'), 'utf8')
-    const opens = src.match(/if \(this\.installingUpdate\) throw new Error\('Hopline is restarting to install an update'\)/g) ?? []
+    const opens = src.match(/if \(this\.installingUpdate\) throw new Error\('Hopline Terminal is restarting to install an update'\)/g) ?? []
     expect(opens).toHaveLength(2)
   })
 })

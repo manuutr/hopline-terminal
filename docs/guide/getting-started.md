@@ -43,7 +43,7 @@ Code signing turns on when the project's signing credentials exist ([docs/SIGNIN
 
 In **Settings › Updates & privacy**, choose **Check now** or enable scheduled checks. After you review the first-run choices, an eligible installed build schedules its first automatic check after about 30 seconds and repeats every six hours. Stable and beta use separate feeds.
 
-The 1.2.0 Windows and Linux packages notify you when a newer release is available. Download and verify its installer, then replace your installed copy. On signed Windows builds with a configured publisher, and signed Developer ID macOS builds, Hopline can download the update in the background and install it on quit. An explicit restart waits until you close any live device sessions.
+The 1.2.0 Windows and Linux packages notify you when a newer release is available. Download and verify its installer, then replace your installed copy. On signed Windows builds with a configured publisher, and signed Developer ID macOS builds, Hopline Terminal can download the update in the background and install it on quit. An explicit restart waits until you close any live device sessions.
 
 The public packages check GitHub Releases anonymously. If you previously installed a private build, install the public package once to switch feeds. [Release downloads](https://github.com/manuutr/hopline-terminal/releases) · [Update feed configuration](../SIGNING.md#update-feed)
 
@@ -76,7 +76,7 @@ A host at the data center (`10.100.0.10`) cannot reach the branch server (`10.20
 1. The example uses two saved firewalls in one folder. Right-click their folder in **Sessions** and choose **Run on this folder…**. On your own network, select the firewalls involved and use the client and server addresses from your incident.
 2. Enter `show vpn flow`, leave **Translate per platform** enabled, then choose **Preview** and **Run on 2**. Select each firewall in the results. The Palo Alto reports an active tunnel to the branch. On the FortiGate, `get vpn ipsec tunnel summary` reports one active selector out of one.
 3. Choose **New run**, enter `show routing route`, preview and run it. The FortiGate receives `get router info routing-table all`. Open **Table**, choose **All 2**, and enter the server address `10.20.0.50` in **Destination IPv4**. The Palo Alto forwards through `tunnel.1`. The server is on the branch LAN attached to FortiGate `port3` in VRF 10.
-4. Replace the destination with the client address, `10.100.0.10`. Hopline shows the longest active match in each captured routing context. The specific client route through `vlan100` is in VRF 20. A reply from the server enters VRF 10 and selects the default through `port1`. Verify the intended return next hop with the routing owner.
+4. Replace the destination with the client address, `10.100.0.10`. Hopline Terminal shows the longest active match in each captured routing context. The specific client route through `vlan100` is in VRF 20. A reply from the server enters VRF 10 and selects the default through `port1`. Verify the intended return next hop with the routing owner.
 5. To keep evidence for a case or a colleague, filter the table and choose **CSV** or **TSV**. Paste the rows into your incident notes. They include the device, platform and routing context. Each device's **Output** view holds the original command output.
 
 ![Three matching paths for 10.100.0.10. Only the FortiGate in VRF 10 uses the default route, through port1.](img/branch-route-lookup.png)
@@ -85,14 +85,14 @@ The screenshots use two local SSH fixtures with reconstructed routing tables and
 
 ## Connect a model
 
-Open **Ask assistant** in the launcher or press `Mod+I`. You can type a workspace question before opening a device. If you haven’t connected a model yet, Hopline keeps your question while you complete **Connect a model**. Inside a terminal, type `@ai` followed by a question to ask about that device.
+Open **Ask assistant** in the launcher or press `Mod+I`. You can type a workspace question before opening a device. If you haven’t connected a model yet, Hopline Terminal keeps your question while you complete **Connect a model**. Inside a terminal, type `@ai` followed by a question to ask about that device.
 
 ![The Connect a model form](img/ai-setup.png)
 
-- **Anthropic** (cloud): paste an API key. Hopline makes one minimal request and shows "Connected to Claude Opus 5.5", or says exactly what is wrong (invalid key, no credits, no access to the model, rate limit, network or proxy, vault locked). The key is saved in the vault only after it works, and the window only ever sees that a key exists and its last four characters. You can also set `ANTHROPIC_API_KEY` in the environment.
-- **OpenAI or Google Gemini.** Select the provider, paste its API key, and enter a model ID your account can use. **Connect** makes a small function-calling request containing no device data. Hopline remembers each provider’s model and stores each key separately. You can also set `OPENAI_API_KEY` or `GEMINI_API_KEY` before launching Hopline. [Subscription options](ai-assistant.md#using-an-existing-subscription)
+- **Anthropic** (cloud): paste an API key. Hopline Terminal makes one minimal request and shows "Connected to Claude Opus 5.5", or says exactly what is wrong (invalid key, no credits, no access to the model, rate limit, network or proxy, vault locked). The key is saved in the vault only after it works, and the window only ever sees that a key exists and its last four characters. You can also set `ANTHROPIC_API_KEY` in the environment.
+- **OpenAI or Google Gemini.** Select the provider, paste its API key, and enter a model ID your account can use. **Connect** makes a small function-calling request containing no device data. Hopline Terminal remembers each provider’s model and stores each key separately. You can also set `OPENAI_API_KEY` or `GEMINI_API_KEY` before launching Hopline Terminal. [Subscription options](ai-assistant.md#using-an-existing-subscription)
 - **ChatGPT or GitHub Copilot.** Install the official client linked in setup, select **Sign in**, and enter the device code on the provider’s verification page. Then choose **Use** to ask a question with your subscription. [Account setup and disconnect](ai-assistant.md#using-an-existing-subscription)
-- **Ollama** (local or your own server): enter the server address (default `http://127.0.0.1:11434`). Hopline lists the models it reports, with tool support and context size, and makes a test call. A server that is not on this machine gets a warning, and a remote server over plain `http` needs an explicit acknowledgement for that address.
+- **Ollama** (local or your own server): enter the server address (default `http://127.0.0.1:11434`). Hopline Terminal lists the models it reports, with tool support and context size, and makes a test call. A server that is not on this machine gets a warning, and a remote server over plain `http` needs an explicit acknowledgement for that address.
 
 Read-only mode is on by default: the assistant can investigate but cannot change anything until you turn it off. See [AI assistant](ai-assistant.md).
 

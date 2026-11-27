@@ -124,7 +124,7 @@ export class SessionHostClient implements TabControl {
   start(): void {
     this.generation++
     this.key = newKey()
-    const proc = utilityProcess.fork(join(__dirname, 'session-host.js'), [], { serviceName: 'Hopline Session Host', stdio: 'inherit', env: hostEnv() })
+    const proc = utilityProcess.fork(join(__dirname, 'session-host.js'), [], { serviceName: 'Hopline Terminal Session Host', stdio: 'inherit', env: hostEnv() })
     this.proc = proc
     this.ready = new Promise((resolve) => {
       const onReady = (m: HostToMain) => {
@@ -375,7 +375,7 @@ export class SessionHostClient implements TabControl {
     const session = this.repo.getSession(sessionId) ?? this.ephemeral.get(sessionId)
     if (!session) throw new Error('unknown session')
     // Review L1: once "Restart and install" is accepted, no new connection may start under the installer.
-    if (this.installingUpdate) throw new Error('Hopline is restarting to install an update')
+    if (this.installingUpdate) throw new Error('Hopline Terminal is restarting to install an update')
     this.remember(session)
     const tab: OpenTab = { tabId, session, cols, rows, password, wc, generation: 0 }
     this.tabs.set(tabId, tab)
@@ -389,7 +389,7 @@ export class SessionHostClient implements TabControl {
   async openBackground(sessionId: string, signal?: AbortSignal): Promise<AgentTab> {
     const session = this.repo.getSession(sessionId)
     if (!session) throw new Error('unknown session')
-    if (this.installingUpdate) throw new Error('Hopline is restarting to install an update')
+    if (this.installingUpdate) throw new Error('Hopline Terminal is restarting to install an update')
     const tabId = `bg-${Date.now().toString(36)}-${++bgSeq}`
     const tab: OpenTab = { tabId, session, cols: 200, rows: 50, wc: null, generation: 0 }
     this.tabs.set(tabId, tab)

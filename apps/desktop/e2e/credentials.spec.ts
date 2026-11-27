@@ -133,7 +133,7 @@ test('export with secrets, then import into a fresh profile and connect with the
       await stubDialogs(other.app, { open: file })
       await openSettingsTab(other.page, 'Sync & export')
       await other.page.getByRole('button', { name: 'Import…' }).click()
-      const ask = other.page.getByRole('dialog', { name: 'Import Hopline data' })
+      const ask = other.page.getByRole('dialog', { name: 'Import Hopline Terminal data' })
       await ask.getByLabel('Passphrase').fill('wrong-passphrase')
       await ask.getByRole('button', { name: 'Continue' }).click()
       await expect(ask.getByRole('alert')).toContainText('Wrong passphrase')

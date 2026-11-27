@@ -8,7 +8,7 @@ import { CustomThemeSchema } from '../src/main/ux'
 const fixture = readFileSync(join(__dirname, '..', 'e2e', 'fixtures', 'Harbor Night.itermcolors'), 'utf8')
 
 describe('iTerm2 .itermcolors import', () => {
-  it('reads the colours, names the theme after the file and fills what is missing from Hopline', () => {
+  it('reads the colours, names the theme after the file and fills what is missing from Hopline Terminal', () => {
     const d = parseThemeFile('/home/x/Harbor Night.itermcolors', fixture)
     expect(d.theme.label).toBe('Harbor Night')
     expect(d.theme.id).toBe('custom-harbor-night')
@@ -51,7 +51,7 @@ describe('iTerm2 .itermcolors import', () => {
   })
 })
 
-describe('Hopline theme JSON', () => {
+describe('Hopline Terminal theme JSON', () => {
   it('round-trips the export format (hoplineTheme: 1)', () => {
     const g = generateTheme({ base: '#1e3a5f', accent: '#5ec9b6', mode: 'dark' })
     const exported = JSON.stringify({ hoplineTheme: 1, id: 'custom-harbor', label: 'Harbor', mode: 'dark', term: g.term, ui: g.ui, source: { base: '#1e3a5f', accent: '#5ec9b6' } })
@@ -69,7 +69,7 @@ describe('Hopline theme JSON', () => {
     expect(d.theme.label).toBe('t')
     expect(() => parseThemeFile('t.json', JSON.stringify({ term: { ...g.term, red: 'red' } }))).toThrow(/"red"/)
     expect(() => parseThemeFile('t.json', 'nope')).toThrow(/not valid JSON/)
-    expect(() => parseThemeFile('t.json', '[1]')).toThrow(/not a Hopline theme/)
+    expect(() => parseThemeFile('t.json', '[1]')).toThrow(/not a Hopline Terminal theme/)
   })
 
   it('theme ids are prefixed and unique', () => {

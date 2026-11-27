@@ -22,7 +22,7 @@ Use one of the two options. If both sets of secrets exist, Azure is used.
 
 ### Option A: SignPath Foundation (recommended for an OSS project)
 
-1. Apply at <https://signpath.org/apply>. The project must be public with an OSI license; Hopline is Apache-2.0 (D2). The Foundation reviews the project, its open-source distribution and its build process. Publishing the installers alone does not establish eligibility. [Foundation conditions](https://signpath.org/terms)
+1. Apply at <https://signpath.org/apply>. The project must be public with an OSI license; Hopline Terminal is Apache-2.0 (D2). The Foundation reviews the project, its open-source distribution and its build process. Publishing the installers alone does not establish eligibility. [Foundation conditions](https://signpath.org/terms)
 2. In SignPath, create:
    - a project (slug, e.g. `hopline`);
    - a signing policy (e.g. `release-signing`);
@@ -96,7 +96,7 @@ With a certificate, the build uses the hardened runtime with `apps/desktop/build
 
 **Entitlements.**
 - `allow-jit` is for V8.
-- The network-client, network-server (local port forwards), serial and USB entitlements only take effect inside the App Sandbox. Hopline does not enable the sandbox: it reads `~/.ssh`, writes logs anywhere and opens serial ports. They are listed so that a future Mac App Store build keeps working.
+- The network-client, network-server (local port forwards), serial and USB entitlements only take effect inside the App Sandbox. Hopline Terminal does not enable the sandbox: it reads `~/.ssh`, writes logs anywhere and opens serial ports. They are listed so that a future Mac App Store build keeps working.
 - Native modules are signed with the same Developer ID, so library validation stays on.
 
 **Unsigned builds.**
@@ -105,7 +105,7 @@ With a certificate, the build uses the hardened runtime with `apps/desktop/build
 
 ## Linux: GPG
 
-1. Create a release key, for example `gpg --quick-gen-key "Hopline releases <you@example.org>" ed25519 sign 2y`.
+1. Create a release key, for example `gpg --quick-gen-key "Hopline Terminal releases <you@example.org>" ed25519 sign 2y`.
 2. Export it: `gpg --armor --export-secret-keys <fingerprint>`.
 3. Set these secrets:
 
@@ -135,13 +135,13 @@ sha256sum -c SHA256SUMS.txt --ignore-missing
 1. Create a Sentry project (platform "Node.js") or a GlitchTip project and copy its DSN (`https://<public key>@<host>/<project id>`).
 2. Set it as the `HOPLINE_SENTRY_DSN` secret. The build bakes it in through `electron.vite.config.ts`.
 
-Reports stay **off** until a user turns them on, and they are scrubbed before they leave (`src/main/crash/scrub.ts`). The DSN's public key is not a secret: anyone can read it from the app. Sentry's "Allowed domains" and rate limits are the protection against abuse. Turn on **Data scrubbing** and **IP address scrubbing** in the Sentry project too. That is defence in depth, since Hopline already sends neither.
+Reports stay **off** until a user turns them on, and they are scrubbed before they leave (`src/main/crash/scrub.ts`). The DSN's public key is not a secret: anyone can read it from the app. Sentry's "Allowed domains" and rate limits are the protection against abuse. Turn on **Data scrubbing** and **IP address scrubbing** in the Sentry project too. That is defence in depth, since Hopline Terminal already sends neither.
 
 A user (Settings › Updates & privacy) or a team policy (`crashReportDsn`) can point reports elsewhere, for example to a self-hosted GlitchTip. A policy can also forbid crash reports (`disableCrashReports`).
 
 ### Native crash dumps (local files)
 
-**A native dump is a copy of a Hopline process's memory.** It cannot be scrubbed: it can hold terminal output, commands, host names, a typed password, a decrypted credential or the vault's data key. So (Phase 6–8 review, M2):
+**A native dump is a copy of a Hopline Terminal process's memory.** It cannot be scrubbed: it can hold terminal output, commands, host names, a typed password, a decrypted credential or the vault's data key. So (Phase 6–8 review, M2):
 - Crashpad only starts once the user has turned crash reports on (it is never started for a user who has not opted in), and it never uploads anything itself (`uploadToServer: false`). Each dump is sent only from Settings › Updates & privacy, after its own confirmation that names the destination.
 - Dumps live in the app's own profile (`userData/Crashpad`); that folder is created owner-only (0700) and dump files are made 0600 on macOS and Linux. On Windows it is under the user's own `%APPDATA%`.
 - **Turning crash reports off deletes every dump**, and so does a team policy with `disableCrashReports`. Crashpad cannot be stopped once it runs, so dumps written later in that run are deleted at quit or at the next start.
@@ -151,7 +151,7 @@ A user (Settings › Updates & privacy) or a team policy (`crashReportDsn`) can 
 
 ## Which builds install updates
 
-Auto-install happens only where the downloaded update's signature is checked before it runs (Phase 6–8 review, M1). Everything else is **notify-only**: Hopline says a new version exists and links to its release page, and never downloads or installs it.
+Auto-install happens only where the downloaded update's signature is checked before it runs (Phase 6–8 review, M1). Everything else is **notify-only**: Hopline Terminal says a new version exists and links to its release page, and never downloads or installs it.
 
 | Build | Updates |
 | --- | --- |

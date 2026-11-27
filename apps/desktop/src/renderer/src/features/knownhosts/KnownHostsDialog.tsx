@@ -46,7 +46,7 @@ export function KnownHostsDialog(): React.JSX.Element {
       const r = await window.hopline.knownHosts.importOpenSsh()
       const extra = [r.alreadyKnown && `${r.alreadyKnown} already known`, r.hashed && `${r.hashed} hashed (skipped)`, r.skipped && `${r.skipped} other lines skipped`].filter(Boolean)
       if (r.conflicts.length)
-        toast.warning(`Imported ${r.added} keys; ${r.conflicts.length} host(s) differ from what Hopline trusts`, {
+        toast.warning(`Imported ${r.added} keys; ${r.conflicts.length} host(s) differ from what Hopline Terminal trusts`, {
           description: `Left unchanged: ${r.conflicts.slice(0, 5).map((c) => `${c.host}:${c.port}`).join(', ')}${r.conflicts.length > 5 ? '…' : ''}`
         })
       else toast.success(`Imported ${r.added} host keys`, { description: extra.join(' · ') || r.file })
@@ -61,7 +61,7 @@ export function KnownHostsDialog(): React.JSX.Element {
       open={open}
       onOpenChange={setOpen}
       title="Known hosts"
-      description="SSH host keys Hopline trusts. A device presenting any other key is stopped with a warning. Forget a host to trust its key again on the next connection."
+      description="SSH host keys Hopline Terminal trusts. A device presenting any other key is stopped with a warning. Forget a host to trust its key again on the next connection."
       className="w-[min(760px,94vw)]"
       footer={
         <Button onClick={() => void importSsh()}>

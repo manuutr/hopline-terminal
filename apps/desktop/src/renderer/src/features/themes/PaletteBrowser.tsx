@@ -56,7 +56,7 @@ export function PaletteBrowser({ form, custom, onSelect }: { form: Settings; cus
                 <span aria-hidden="true" style={{ backgroundColor: color.background }} className="flex shrink-0 items-center gap-0.5 rounded-sm border border-line-strong px-1 py-1">
                   {(['red', 'green', 'blue'] as const).map((k) => <span key={k} className="h-2 w-1.5 rounded-[1px]" style={{ backgroundColor: color[k] }} />)}
                 </span>
-                <span className="min-w-0 flex-1 truncate" title={t.label}>{t.colors ? t.label : 'Hopline'}</span>
+                <span className="min-w-0 flex-1 truncate" title={t.label}>{t.colors ? t.label : 'Hopline Terminal'}</span>
                 {checked && <Check aria-hidden className="size-3.5 shrink-0 text-accent" />}
               </label>
             )
@@ -64,7 +64,7 @@ export function PaletteBrowser({ form, custom, onSelect }: { form: Settings; cus
         </div>
         <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
-            <span className="break-words text-sm font-medium text-fg">{selected.colors ? selected.label : 'Hopline'}</span>
+            <span className="break-words text-sm font-medium text-fg">{selected.colors ? selected.label : 'Hopline Terminal'}</span>
             <span className="text-xs text-fg-muted">{mode}</span>
           </div>
           <div key={selected.id} className="animate-workspace-in"><ThemePreview term={term} font={form} label={selected.label} /></div>

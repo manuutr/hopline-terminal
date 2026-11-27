@@ -76,7 +76,7 @@ function matches(cand: Candidate, pat: string[]): boolean {
  * cannot come from a policy file (patterns are printable ASCII).
  */
 export const POLICY_INVALID_RULE = '\u0000policy-invalid'
-const INVALID_REFUSAL = 'blocked by team policy (the policy file is invalid, so Hopline sends no commands; ask your administrator to fix it)'
+const INVALID_REFUSAL = 'blocked by team policy (the policy file is invalid, so Hopline Terminal sends no commands; ask your administrator to fix it)'
 
 /**
  * Commands that print the whole configuration (or a saved copy, a diff or a candidate of it), per

@@ -13,11 +13,11 @@ Menu items display your current shortcuts. Checkmarks show the active tab and se
 | Right-click | Actions |
 | --- | --- |
 | Terminal | Copy selected output, paste, find text, clear scrollback, explain a selection, split or close a pane. **Paste to device…** previews even a single line before sending. |
-| Tab | Rename, duplicate or reconnect the tab. Close other tabs or tabs to its right. Hopline asks before closing live sessions. |
+| Tab | Rename, duplicate or reconnect the tab. Close other tabs or tabs to its right. Hopline Terminal asks before closing live sessions. |
 | Saved session | Connect, open in a split, edit or duplicate the session, change overrides, back up its configuration or delete it. |
 
 **File → Open recent** lists up to ten recently connected saved sessions. **Clear recent** clears that list and keeps the saved sessions. The Window menu lists open tabs. On macOS the Dock menu also offers recent sessions, and packaged Windows builds show them in the taskbar jump list.
 
 **Help → Workspace tour** walks through the session list, terminal, assistant and packet attachment button. You can exit with Escape and replay the tour at any time.
 
-**Help → About Hopline** shows the app and runtime versions and can copy them for a bug report. On macOS, About is in the Hopline application menu.
+**Help → About Hopline Terminal** shows the app and runtime versions and can copy them for a bug report. On macOS, About is in the Hopline Terminal application menu.

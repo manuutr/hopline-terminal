@@ -43,7 +43,7 @@ const sep = (only?: MenuOnly): MenuNode => (only ? { type: 'separator', only } :
 export const MENU: readonly MenuTop[] = [
   {
     id: 'app',
-    label: 'Hopline',
+    label: 'Hopline Terminal',
     only: 'mac',
     items: [
       cmd('app.about'),
@@ -53,11 +53,11 @@ export const MENU: readonly MenuTop[] = [
       sep(),
       { type: 'role', role: 'services', label: 'Services' },
       sep(),
-      { type: 'role', role: 'hide', label: 'Hide Hopline' },
+      { type: 'role', role: 'hide', label: 'Hide Hopline Terminal' },
       { type: 'role', role: 'hideOthers', label: 'Hide others' },
       { type: 'role', role: 'unhide', label: 'Show all' },
       sep(),
-      { type: 'role', role: 'quit', label: 'Quit Hopline' }
+      { type: 'role', role: 'quit', label: 'Quit Hopline Terminal' }
     ]
   },
   {

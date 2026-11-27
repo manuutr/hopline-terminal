@@ -1,10 +1,10 @@
-# Releasing Hopline
+# Releasing Hopline Terminal
 
 ## Versioning
 
 Git tags use `vX.Y.Z`. The GitHub release title is the version alone, for example `1.1.0`.
 
-- Hopline 1.0.0 is the first stable release. Use a patch for compatible fixes, a minor version for compatible features and a major version for breaking changes. The 0.x tags preserve the development milestones.
+- Hopline Terminal 1.0.0 is the first stable release. Use a patch for compatible fixes, a minor version for compatible features and a major version for breaking changes. The 0.x tags preserve the development milestones.
 - Work in progress carries the version in the desktop manifest, which Settings displays.
 - Every package in the monorepo shares one version.
 
@@ -29,7 +29,7 @@ Git tags use `vX.Y.Z`. The GitHub release title is the version alone, for exampl
    As @manuutr, review the files and their checksums in the draft, then choose **Publish release**. A workflow rerun cannot replace an existing release. If an upload was interrupted, inspect the draft and add the missing verified assets before publishing.
 
    Local builds, when CI is not available:
-   - Linux: `npm run dist:linux -w @hopline/desktop` produces `apps/desktop/release/Hopline-<version>-linux-x86_64.AppImage` plus `latest-linux.yml`. `dist:linux:all` adds deb and rpm (needs `rpmbuild`).
+   - Linux: `npm run dist:linux -w @hopline/desktop` produces `apps/desktop/release/Hopline-Terminal-<version>-linux-x86_64.AppImage` plus `latest-linux.yml`. `dist:linux:all` adds deb and rpm (needs `rpmbuild`).
    - Windows: `npm run dist:win -w @hopline/desktop` (on Windows, or `scripts/win-local-build.cmd`).
    - macOS: `npm run dist:mac -w @hopline/desktop` (on macOS: arm64 and x64).
 6. Start the next cycle: `npm version 1.3.0-dev.0 --workspaces --include-workspace-root --no-git-tag-version`.
@@ -51,11 +51,11 @@ electron-updater offers an update to the share of installs given by `stagingPerc
 
 - **Stable** reads `latest*.yml`.
 - **Beta** reads `beta*.yml`. A version like `0.8.0-beta.1` is published as a prerelease. For a stable local release, provide the stable feeds under their beta filenames as well. electron-builder writes only the current channel for the GitHub provider.
-- Hopline never downgrades. A user switching from beta to stable waits until stable passes their version.
+- Hopline Terminal never downgrades. A user switching from beta to stable waits until stable passes their version.
 
 ## Updates never restart a session
 
-- Downloaded updates install when Hopline quits.
+- Downloaded updates install when Hopline Terminal quits.
 - The status bar says "Update ready — restart when you're done". "Restart and install" in Settings is refused in main while any session is open.
 - Only builds that verify the update before it runs install it themselves: signed Windows builds (with a publisher name in `app-update.yml`) and signed macOS builds. Every Linux package (AppImage, deb, rpm) and unsigned Windows and macOS builds are told about a new version and link to the release page. docs/SIGNING.md › "Which builds install updates".
 
@@ -76,12 +76,12 @@ electron-updater offers an update to the share of installs given by `stagingPerc
 - Packaged builds flip Electron fuses in electron-builder's `afterPack` hook (`apps/desktop/scripts/fuses.cjs`), before signing:
   - off: `RunAsNode` (`ELECTRON_RUN_AS_NODE`), `EnableNodeOptionsEnvironmentVariable` (`NODE_OPTIONS`), `EnableNodeCliInspectArguments` (`--inspect`);
   - on: `OnlyLoadAppFromAsar`, `EnableCookieEncryption`, and `EnableEmbeddedAsarIntegrityValidation` on Windows and macOS (Electron does not check asar integrity on Linux).
-- Check a build's fuses: `node apps/desktop/scripts/check-fuses.mjs <binary> <linux|win32|darwin>`. The binary is `release/linux-unpacked/hopline`, `release/win-unpacked/hopline.exe` or `release/mac*/Hopline.app`. For the AppImage itself: `./Hopline-*.AppImage --appimage-extract` and check `squashfs-root/hopline`.
+- Check a build's fuses: `node apps/desktop/scripts/check-fuses.mjs <binary> <linux|win32|darwin>`. The binary is `release/linux-unpacked/hopline`, `release/win-unpacked/hopline.exe` or `release/mac*/Hopline Terminal.app`. For the AppImage itself: `./Hopline-*.AppImage --appimage-extract` and check `squashfs-root/hopline`.
 - `ELECTRON_RUN_AS_NODE` no longer works on a packaged build, so the native-module smoke test is a hidden flag: `hopline --smoke` (on Linux without a display: `xvfb-run hopline --smoke`). It checks that the development simulator is absent, loads better-sqlite3, serialport and ssh2, and decodes one UDP frame with the bundled packet decoder. Each check prints a `smoke ok` line. It runs before the single-instance lock, the protocol registration and `ready`, with userData pointed at a throwaway folder, so it touches no user data and never opens a window or a connection. The release workflow runs both checks on every OS.
 
 ## Fallback: local builds when GitHub Actions can't run
 
-Hopline used this process for v0.5.0 and the first stable release, v1.0.0, while hosted runners were unavailable. It produces native Windows and Linux packages. A macOS package requires a macOS runner.
+Hopline Terminal used this process for v0.5.0 and the first stable release, v1.0.0, while hosted runners were unavailable. It produces native Windows and Linux packages. A macOS package requires a macOS runner.
 
 1. Linux (WSL): `npm run build && npm run dist:linux -w @hopline/desktop` produces `apps/desktop/release/*.AppImage`.
 2. Windows (from WSL, with Node and git installed on the Windows side):

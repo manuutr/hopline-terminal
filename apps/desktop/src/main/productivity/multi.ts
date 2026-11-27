@@ -81,7 +81,7 @@ export class MultiService {
       }
       const open = tabId ?? this.d.host.tabsOf(s.id).find((t) => this.d.host.ownedBy(t.tabId, owner))?.tabId
       const t: ResolvedTarget = { key: s.id, sessionId: s.id, name: s.name, host: s.host, platform: s.platform, ...(open ? { tabId: open } : {}) }
-      if (s.platform === 'auto') t.excluded = 'the platform is not known yet: connect once so Hopline can detect it, or set it in the session'
+      if (s.platform === 'auto') t.excluded = 'the platform is not known yet: connect once so Hopline Terminal can detect it, or set it in the session'
       else if (!open && s.protocol === 'serial') t.excluded = 'serial ports are only used from an open tab'
       // Telnet has no protocol-level sign-in: the login is typed at the device, which a background connection can't do.
       else if (!open && (s.protocol === 'telnet' || s.protocol === 'raw')) t.excluded = 'telnet sign-in is typed at the device: open a tab for it first'

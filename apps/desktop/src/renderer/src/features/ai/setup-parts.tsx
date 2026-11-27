@@ -75,7 +75,7 @@ export function ollamaOptions(models: OllamaModel[], current: string): SelectOpt
 }
 
 export const TOOL_NOTE =
-  'With tool calling (Qwen 3, Llama 3.1 and later, Mistral Small 3, Command R; prefer 7B or larger) the assistant runs read-only commands itself. A model without it runs in suggest mode: it proposes commands and you click to run each one. ctx is the model\'s context; Hopline uses at most 32k.'
+  'With tool calling (Qwen 3, Llama 3.1 and later, Mistral Small 3, Command R; prefer 7B or larger) the assistant runs read-only commands itself. A model without it runs in suggest mode: it proposes commands and you click to run each one. ctx is the model\'s context; Hopline Terminal uses at most 32k.'
 
 /** Discover models on an Ollama server; re-run with `refresh`. */
 export function useOllamaModels(endpoint: string, enabled: boolean): { result: OllamaModelsResult | null; loading: boolean; refresh: () => void } {

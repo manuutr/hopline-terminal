@@ -30,7 +30,7 @@ export interface TermThemeDef {
  * Third-party palettes are their published, permissively licensed color values.
  */
 export const TERM_THEMES: TermThemeDef[] = [
-  { id: 'auto', label: 'Hopline (follows app theme)', colors: null },
+  { id: 'auto', label: 'Hopline Terminal (follows app theme)', colors: null },
   {
     id: 'moba-classic',
     label: 'MobaXterm style',

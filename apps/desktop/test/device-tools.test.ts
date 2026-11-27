@@ -99,7 +99,7 @@ describe('DeviceTools against the simulator', () => {
     const t = await tools()
     const r = await t.show('show running-config', { filter: { grep: 'snmp-server community' } })
     expect(t.sent).toEqual(['show running-config'])
-    expect(r.text).toMatch(/^\[Hopline filter /)
+    expect(r.text).toMatch(/^\[Hopline Terminal filter /)
     expect(r.text).toMatch(/<redacted>/)
     expect(r.text).not.toMatch(/n3tw0rkRO/)
     expect(t.rows()[0]!.reason).toMatch(/local filter: grep/)
@@ -126,14 +126,14 @@ describe('DeviceTools against the simulator', () => {
     const t = await tools({}, (c) => ({ ...c, exec: async () => ({ status: 'ok', output: huge, durationMs: 1, bytes: huge.length }) }))
     const r = await t.show('show version')
     expect(r.text.length).toBeLessThan(MAX_TOOL_CHARS + 260)
-    expect(r.text).toMatch(/<\/device_output id="[0-9a-f]{12}">\n\[Hopline: output truncated: 500 more characters/)
+    expect(r.text).toMatch(/<\/device_output id="[0-9a-f]{12}">\n\[Hopline Terminal: output truncated: 500 more characters/)
     t.client.end()
   })
 
   it('adds TextFSM rows to a complete read', async () => {
     const t = await tools()
     const r = await t.show('show ip interface brief')
-    expect(r.text).toMatch(/\[Hopline parsed this output with TextFSM template/)
+    expect(r.text).toMatch(/\[Hopline Terminal parsed this output with TextFSM template/)
     t.client.end()
   })
 

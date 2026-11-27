@@ -1,10 +1,10 @@
-<h1><img src="docs/media/hopline-wordmark.svg" alt="Hopline" width="100%"></h1>
+<h1><img src="docs/media/hopline-wordmark.svg" alt="Hopline Terminal" width="100%"></h1>
 
 **A desktop workbench for network engineers.** Connect to routers, switches and firewalls over SSH, Telnet or serial. Compare the same check across vendors, inspect a packet capture offline, or ask an optional assistant to gather evidence. Each finding stays with the device, command or frame that produced it.
 
 [Download Hopline 1.2.0](https://github.com/manuutr/hopline-terminal/releases/tag/v1.2.0) · [Try an example](#try-an-example) · [Build it yourself](#build-it-yourself) · [Operator guide](docs/guide/) · [Contribute](CONTRIBUTING.md)
 
-[![Hopline workspace showing the saved border switch, its live IOS XE terminal, and a local assistant checking two BGP peers](docs/examples/circuit-rollback/01-investigation.png)](docs/examples/circuit-rollback/README.md)
+[![Hopline Terminal workspace showing the saved border switch, its live IOS XE terminal, and a local assistant checking two BGP peers](docs/examples/circuit-rollback/01-investigation.png)](docs/examples/circuit-rollback/README.md)
 
 *One BGP peer is idle and its uplink is administratively down. Follow the circuit investigation by opening the screenshot.*
 
@@ -66,12 +66,12 @@ For development, clone the default branch and use `npm run dev` after `npm ci`. 
 
 ## What reaches the model
 
-Hopline replaces recognized device identities and interface descriptions with temporary aliases. For example, `Gi0/1  up  up  Acme payroll uplink` can reach the model as `Gi0/1  up  up  label-3-a194ef`. Interface IDs, route prefixes and link state stay useful for diagnosis. Other addresses and unfamiliar output can still identify a network. Choose an on-device model for investigations that must stay on the machine. With request logging enabled, **What left this machine** shows the provider payload. [Privacy guide](docs/guide/privacy.md#assistant-requests)
+Hopline Terminal replaces recognized device identities and interface descriptions with temporary aliases. For example, `Gi0/1  up  up  Acme payroll uplink` can reach the model as `Gi0/1  up  up  label-3-a194ef`. Interface IDs, route prefixes and link state stay useful for diagnosis. Other addresses and unfamiliar output can still identify a network. Choose an on-device model for investigations that must stay on the machine. With request logging enabled, **What left this machine** shows the provider payload. [Privacy guide](docs/guide/privacy.md#assistant-requests)
 
 ## Contribute
 
 A synthetic command transcript with the original columns and spacing makes a good first contribution. Include the platform, command and rows that show the problem. Report vulnerabilities through the private channel in the security policy. [How to contribute](CONTRIBUTING.md) · [Share a CLI fixture](https://github.com/manuutr/hopline-terminal/issues/new?template=cli-output.yml) · [Security policy](SECURITY.md)
 
-Hopline’s own code uses Apache 2.0. The bundled Wiregasm decoder uses GPL-2.0-or-later. [Decoder source, license and build instructions](third_party/wiregasm/README.md)
+Hopline Terminal’s own code uses Apache 2.0. The bundled Wiregasm decoder uses GPL-2.0-or-later. [Decoder source, license and build instructions](third_party/wiregasm/README.md)
 
 [Documentation index](docs/README.md) · [Architecture](docs/contributing/architecture.md) · [Release notes](CHANGELOG.md) · [Roadmap](docs/ROADMAP.md) · [Apache 2.0 license](LICENSE)

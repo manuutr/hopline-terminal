@@ -127,7 +127,7 @@ const fieldOnly = () => {
 
 export const MENU_ACTIONS: Action[] = [
   // ------------------------------------------------------------ app and window (main does these)
-  { id: 'app.about', title: 'About Hopline', category: 'App', keywords: 'version license electron', run: () => useAbout.setState({ open: true }) },
+  { id: 'app.about', title: 'About Hopline Terminal', category: 'App', keywords: 'version license electron', run: () => useAbout.setState({ open: true }) },
   {
     id: 'app.checkUpdates',
     title: 'Check for updates…',
@@ -138,7 +138,7 @@ export const MENU_ACTIONS: Action[] = [
       void window.hopline.updates.check().then((update) => usePrivacy.setState({ update }))
     }
   },
-  { id: 'app.quit', title: 'Quit Hopline', category: 'App', keywords: 'quit exit close', run: main('app.quit') },
+  { id: 'app.quit', title: 'Quit Hopline Terminal', category: 'App', keywords: 'quit exit close', run: main('app.quit') },
   { id: 'window.minimize', title: 'Minimize window', category: 'View', palette: false, run: main('window.minimize') },
   { id: 'window.zoom', title: 'Maximize or restore the window', category: 'View', keywords: 'maximize restore', run: main('window.zoom') },
   { id: 'window.close', title: 'Close window', category: 'App', palette: false, run: main('window.close') },
@@ -319,7 +319,7 @@ const settingOn = (k: 'aiReadOnly' | 'termScreenReader' | 'termHighlight') => ()
 
 /** Menu labels (`&` before the mnemonic) and checkbox state of every command in the tree. */
 export const MENU_META: Record<string, MenuMeta> = {
-  'app.about': t(isMac ? 'About Hopline' : '&About Hopline'),
+  'app.about': t(isMac ? 'About Hopline Terminal' : '&About Hopline Terminal'),
   'app.settings': t(isMac ? 'Settings…' : 'Se&ttings…'),
   'app.checkUpdates': t('Check for updates…'),
   'app.quit': t('E&xit'),
