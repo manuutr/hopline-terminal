@@ -107,9 +107,9 @@ test('drag a session into a folder, then two at once, with a drop indicator', as
   await expect.poll(async () => (await byName(page, 'dist-eos1')).folderId).toBe((await list(page)).folders.find((f) => f.name === 'Core')!.id)
   await expect(item(page, 'dist-eos1')).toHaveAttribute('aria-level', '2')
 
-  // Multi: Ctrl-click two sessions and drag them together.
+  // Multi: select two sessions with the platform modifier and drag them together.
   await item(page, 'core-sw1').click()
-  await item(page, 'core-sw1 (telnet)').click({ modifiers: ['Control'] })
+  await item(page, 'core-sw1 (telnet)').click({ modifiers: ['ControlOrMeta'] })
   await expect(tree(page).locator('[aria-selected=true]')).toHaveCount(2)
   await dragTo(page, 'core-sw1', 'Core')
   const core = (await list(page)).folders.find((f) => f.name === 'Core')!.id

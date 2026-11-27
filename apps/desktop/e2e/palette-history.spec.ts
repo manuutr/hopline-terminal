@@ -4,7 +4,10 @@ test('palette finds a live command block and opens a setting directly', async ({
   const { page } = hop
   await hop.connect('core-sw1')
   await page.keyboard.type('show interfaces status\r')
-  await expect.poll(hop.termText).toContain('Duplex')
+  await expect.poll(() => page.evaluate(() => {
+    const { blocks } = (window as unknown as { __hoplineTest: { blocks: () => { command: string }[] } }).__hoplineTest
+    return blocks().map((block) => block.command)
+  })).toContain('show interfaces status')
   await page.keyboard.press(`${MOD}+K`)
   const search = page.getByRole('combobox', { name: 'Command palette' })
   await search.fill('show interfaces status')

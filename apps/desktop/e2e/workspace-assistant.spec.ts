@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import { rmSync } from 'node:fs'
 import { fakeOllama } from '../test/fake-llm'
-import { expect, launchHopline, MOD, sizeWindow, test } from './fixtures'
+import { expect, launchHopline, MOD, sizeWindow, test, waitForWorkspace } from './fixtures'
 
 test('fresh production workspace answers a queued question with an empty inventory', async () => {
   const { app, page, dir } = await launchHopline({ production: true, waitFor: '' })
@@ -38,6 +38,7 @@ test('workspace chat takes a question to the chosen device and brings its findin
     aiProvider: 'ollama', ollamaEndpoint: endpoint, ollamaModel: 'qwen3:8b', aiReadOnly: true
   }), llm.ollama.url)
   await page.reload()
+  await waitForWorkspace(page)
   await page.keyboard.press(MOD + '+I')
   const input = page.getByRole('textbox', { name: 'Workspace question' })
   llm.ollama.script.push({ text: 'An interface can lose carrier even while it is administratively enabled.' })

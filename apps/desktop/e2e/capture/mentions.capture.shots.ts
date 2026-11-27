@@ -3,7 +3,7 @@
  * an unknown mention, at 1440×900 and 1100×700 in both themes. Writes `mentions-*-<w>-<theme>.png`
  * to HOPLINE_SHOTS_OUT (default docs/design/screens).
  */
-import { expect, test } from '../fixtures'
+import { MOD, expect, test } from '../fixtures'
 import { sizeTo, snapNarrow } from './narrow'
 
 test('mentions: autocomplete and the pre-filled fleet preview', async ({ hop }) => {
@@ -30,7 +30,7 @@ test('mentions: autocomplete and the pre-filled fleet preview', async ({ hop }) 
     await page.keyboard.press('Escape')
     await expect(view).toBeHidden()
 
-    if (((await composer.boundingBox())?.width ?? 0) < 50) await page.keyboard.press('Control+Shift+I')
+    if (((await composer.boundingBox())?.width ?? 0) < 50) await page.keyboard.press(`${MOD}+I`)
     await expect.poll(async () => (await composer.boundingBox())?.width ?? 0).toBeGreaterThan(50)
     await composer.click()
     await composer.pressSequentially('compare the uplinks with @co')
