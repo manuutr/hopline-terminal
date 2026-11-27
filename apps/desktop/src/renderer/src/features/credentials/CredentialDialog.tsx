@@ -14,7 +14,7 @@ export const KIND_LABEL: Record<CredentialKind, string> = {
 
 const KIND_HINT: Record<CredentialKind, string> = {
   password: 'Saved encrypted. Leave it empty to be asked on connect.',
-  key: 'OpenSSH, PEM or PuTTY (.ppk v2/v3). Hopline reads the file itself; it is stored encrypted.',
+  key: 'OpenSSH, PEM or PuTTY (.ppk v2/v3). Hopline Terminal reads the file itself; it is stored encrypted.',
   agent: 'Keys stay in your SSH agent (OpenSSH, Pageant, 1Password). Nothing is stored here.',
   prompt: 'Only the username is saved. The password is asked for on every connection.'
 }
@@ -210,7 +210,7 @@ export function CredentialDialog({ open, editing, onClose }: { open: boolean; ed
 
         {locked && <p className="col-span-2 text-xs text-warn">Unlock the vault to save passwords or keys.</p>}
         {vault?.mode === 'session' && (kind === 'password' || kind === 'key') && (
-          <p className="col-span-2 text-xs text-warn">Session-only vault: this secret is forgotten when Hopline quits.</p>
+          <p className="col-span-2 text-xs text-warn">Session-only vault: this secret is forgotten when Hopline Terminal quits.</p>
         )}
         {error && (
           <p role="alert" className="col-span-2 text-xs text-danger">

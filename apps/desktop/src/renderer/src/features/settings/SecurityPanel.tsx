@@ -10,7 +10,7 @@ import { Row, Section } from './parts'
 const MODE: Record<VaultMode, { label: string; hint: string }> = {
   keychain: { label: 'OS keychain', hint: 'Unlocked with your login (DPAPI, macOS Keychain, libsecret/kwallet).' },
   master: { label: 'Master password', hint: 'Asked at startup and after the auto-lock delay. Works without a keyring.' },
-  session: { label: 'Session only', hint: 'Secrets live in memory and are forgotten when Hopline quits.' }
+  session: { label: 'Session only', hint: 'Secrets live in memory and are forgotten when Hopline Terminal quits.' }
 }
 
 /** Settings → Security: how saved secrets are protected (D5). */
@@ -87,7 +87,7 @@ export function SecurityPanel(): React.JSX.Element {
             <Row
               k="autoLock"
               label="Auto-lock"
-              hint="Lock after this many minutes without keyboard or mouse activity in Hopline. 0 never locks. Open sessions keep running. Changing it needs the current master password. Hopline also locks when the machine sleeps or the screen locks; on Linux the screen lock is only seen where the desktop reports it, so rely on sleep and this timer there."
+              hint="Lock after this many minutes without keyboard or mouse activity in Hopline Terminal. 0 never locks. Open sessions keep running. Changing it needs the current master password. Hopline Terminal also locks when the machine sleeps or the screen locks; on Linux the screen lock is only seen where the desktop reports it, so rely on sleep and this timer there."
             >
               <div className="flex items-center gap-2">
                 <Input

@@ -385,7 +385,7 @@ export class CrashReporting {
     if (!p) return { ok: false, reason: 'missing' }
     const yes = await this.d.confirm(
       'Send this crash dump?',
-      `A crash dump is a copy of a Hopline process's memory when it crashed. It cannot be cleaned: it can contain terminal output, commands, host names, and even a password or key that was in memory at the time. It goes to ${dsnTarget(d.dsn)}. Send it only if you trust that server, for example when a developer asked for this crash.`,
+      `A crash dump is a copy of a Hopline Terminal process's memory when it crashed. It cannot be cleaned: it can contain terminal output, commands, host names, and even a password or key that was in memory at the time. It goes to ${dsnTarget(d.dsn)}. Send it only if you trust that server, for example when a developer asked for this crash.`,
       'Send dump'
     )
     if (!yes) return { ok: false, reason: 'cancelled' }

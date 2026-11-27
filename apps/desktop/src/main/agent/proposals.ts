@@ -132,7 +132,7 @@ export interface ProposeOpts {
 export function netFor(platform: PlatformId, choice: ProposalInput['safety_net'], minutes: number): { info: ChangeNet; net?: { spec: NonNullable<ReturnType<typeof safetyNet>>; name: string; minutes: number } } {
   const spec = choice === 'rollback_lines' ? undefined : safetyNet(platform)
   if (!spec) {
-    const why = choice === 'rollback_lines' && safetyNet(platform) ? 'the assistant chose not to use the device safety net' : 'this platform has no safety net Hopline can arm'
+    const why = choice === 'rollback_lines' && safetyNet(platform) ? 'the assistant chose not to use the device safety net' : 'this platform has no safety net Hopline Terminal can arm'
     return { info: { kind: 'rollback-lines', label: 'rollback lines', detail: `No device safety net (${why}): rolling back runs the rollback lines below.` } }
   }
   const name = `hopline-${randomBytes(4).toString('hex')}`
@@ -503,7 +503,7 @@ export class Proposals implements ChangeProposer {
     }
     if (this.d.settings.get().aiReadOnly) return refuse(`${why}; in read-only mode the assistant only pings or traces IP addresses`)
     const rationale = typeof input.reason === 'string' ? stripInvisible(input.reason) : ''
-    const { approved, why: w } = await this.awaitDecision(runId, tab, { commands: [command], rationale, exec: true, notice: `${why}. Hopline runs it only if you click Approve.` }, signal)
+    const { approved, why: w } = await this.awaitDecision(runId, tab, { commands: [command], rationale, exec: true, notice: `${why}. Hopline Terminal runs it only if you click Approve.` }, signal)
     const approver = userInfo().username
     if (!approved) {
       const reason = w === 'user' ? 'rejected by user' : w === 'timeout' ? 'approval timed out' : 'run cancelled before approval'

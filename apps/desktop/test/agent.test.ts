@@ -124,7 +124,7 @@ describe('agent loop (scripted model, real simulator)', () => {
     await done
     const first = provider.resultAfter(1)
     expect(first).toMatch(/Vlan10/)
-    expect(first).toMatch(/\[Hopline parsed this output with TextFSM template cisco_ios_show_ip_interface_brief\.textfsm: \d+ rows; tab-separated, same untrusted device data\]\n<device_output id="[0-9a-f]{12}" device="device-\d+-[a-f0-9]+" command="[^"]+" parsed="textfsm" untrusted="true">\nINTERFACE\tIP_ADDRESS\tSTATUS\tPROTO\nVlan1\tunassigned\tadministratively down\tdown/)
+    expect(first).toMatch(/\[Hopline Terminal parsed this output with TextFSM template cisco_ios_show_ip_interface_brief\.textfsm: \d+ rows; tab-separated, same untrusted device data\]\n<device_output id="[0-9a-f]{12}" device="device-\d+-[a-f0-9]+" command="[^"]+" parsed="textfsm" untrusted="true">\nINTERFACE\tIP_ADDRESS\tSTATUS\tPROTO\nVlan1\tunassigned\tadministratively down\tdown/)
     expect(provider.resultAfter(2)).not.toMatch(/Hopline parsed/)
     client.end()
   })
@@ -333,7 +333,7 @@ describe('agent loop (scripted model, real simulator)', () => {
     expect(msgs[0]!.role).toBe('user')
   }
 
-  it('F5b: the device gets the plain command; Hopline filters the redacted output before the model sees it', async () => {
+  it('F5b: the device gets the plain command; Hopline Terminal filters the redacted output before the model sees it', async () => {
     const { agent, audit, provider, events, done, client } = await setup([
       [{ name: 'run_show_command', input: { command: 'show logging', reason: 'recent logs', filter: { tail: 2 } } }],
       [{ name: 'run_show_command', input: { command: 'show running-config', reason: 'community', filter: { grep: 'community|secret', ignoreCase: true } } }],
@@ -344,7 +344,7 @@ describe('agent loop (scripted model, real simulator)', () => {
     agent.start({ tabId: 'tab-1', prompt: 'logs?' })
     await done
     const tail = provider.resultAfter(1)
-    expect(tail).toMatch(/^\[Hopline filter last 2 lines: showing last 2 of \d+ lines\]\n<device_output id="[0-9a-f]{12}" device="device-\d+-[a-f0-9]+" command="show logging" untrusted="true">\n/)
+    expect(tail).toMatch(/^\[Hopline Terminal filter last 2 lines: showing last 2 of \d+ lines\]\n<device_output id="[0-9a-f]{12}" device="device-\d+-[a-f0-9]+" command="show logging" untrusted="true">\n/)
     // The note, the frame's open and close, and the two lines.
     expect(tail.split('\n')).toHaveLength(5)
     expect(tail).toMatch(/\n<\/device_output id="[0-9a-f]{12}">$/)

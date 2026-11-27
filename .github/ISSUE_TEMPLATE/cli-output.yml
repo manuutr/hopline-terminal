@@ -1,5 +1,5 @@
 name: Share a CLI fixture
-description: Help Hopline recognize a command, parse a table, or mask private fields.
+description: Help Hopline Terminal recognize a command, parse a table, or mask private fields.
 title: "[CLI] "
 body:
   - type: input
@@ -20,7 +20,7 @@ body:
   - type: textarea
     id: expectation
     attributes:
-      label: What should Hopline recognize?
+      label: What should Hopline Terminal recognize?
       description: Describe the expected table rows, command classification or labels to mask. For masking, include a field that should stay readable.
     validations:
       required: true

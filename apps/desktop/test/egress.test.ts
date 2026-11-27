@@ -19,7 +19,7 @@ import { fakeAnthropic, fakeOllama } from './fake-llm'
 const KEY = 'sk-ant-api03-EGRESS-CANARY-KEY-7c1d'
 const noop = () => {}
 const req = (text: string, over: Partial<TurnRequest> = {}): TurnRequest => ({
-  system: 'You are Hopline.',
+  system: 'You are Hopline Terminal.',
   messages: [{ role: 'user', parts: [{ type: 'text', text }] }],
   tools: [{ name: 'run_show_command', description: 'd', inputSchema: { type: 'object', properties: { command: { type: 'string' } }, required: ['command'], additionalProperties: false } }],
   signal: new AbortController().signal,

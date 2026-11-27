@@ -1,5 +1,5 @@
 name: Suggest a feature
-description: Describe a device workflow that Hopline could make easier.
+description: Describe a device workflow that Hopline Terminal could make easier.
 title: "[Feature] "
 body:
   - type: textarea

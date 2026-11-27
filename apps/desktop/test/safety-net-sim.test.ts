@@ -205,7 +205,7 @@ for (const k of CASES) {
     })
 
     if (k.platform === 'junos' || k.platform === 'eos')
-      it('the device timer expires before a confirm: Hopline detects the device rolled back and reports it', async () => {
+      it('the device timer expires before a confirm: Hopline Terminal detects the device rolled back and reports it', async () => {
         const r = await flow('expire')
         expect(r.provider.results[1]![0]).toMatch(/rolled the change back by itself/)
         expect(last(r.events)).toMatchObject({ phase: 'expired' })

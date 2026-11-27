@@ -100,7 +100,7 @@ export function analyze(platform: string, commands: string[], opts: { multi?: bo
     const head = v.kind === 'blocked' ? null : unresolvedExecLine(platform as Platform, v)
     if (head)
       return {
-        ...refused(`"${v.command}" starts with the exec command "${head}", but Hopline does not know the rest of it, so it is neither run as one exec command nor sent as a configuration change; check the spelling, or type it yourself`, commands),
+        ...refused(`"${v.command}" starts with the exec command "${head}", but Hopline Terminal does not know the rest of it, so it is neither run as one exec command nor sent as a configuration change; check the spelling, or type it yourself`, commands),
         lines: lines(exec)
       }
   }
@@ -110,7 +110,7 @@ export function analyze(platform: string, commands: string[], opts: { multi?: bo
     if (v.resolved && (v.kind === 'config' || v.kind === 'disruptive')) {
       // Never as one exec line: anything that enters or leaves a mode or changes the privilege level.
       if (changesMode(platform as Platform, v.command, v))
-        return { ...refused(`"${v.command}" changes the CLI mode or privilege level, which would leave the session in another mode; Hopline enters and leaves configuration mode itself`, commands), lines: lines(exec) }
+        return { ...refused(`"${v.command}" changes the CLI mode or privilege level, which would leave the session in another mode; Hopline Terminal enters and leaves configuration mode itself`, commands), lines: lines(exec) }
       if (!asConfigLine(platform as Platform, v)) {
         if (v.kind === 'disruptive' && opts.multi)
           return { ...refused(`${v.reason}. Disruptive commands are not sent to several devices: each one would need its own typed hostname. Run it on one device`, commands), lines: lines(exec) }

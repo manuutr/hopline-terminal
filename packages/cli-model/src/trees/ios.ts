@@ -346,9 +346,9 @@ export const IOS_CONFIG: Entry[] = [
   C('lldp run', 'Enable LLDP'),
   // The archive is the IOS-XE safety net (cli-model safety-net.ts): its path decides where the
   // rollback snapshot goes. The agent may not change it (Phase 5 review L4).
-  B('archive ...', 'Archive the configuration', { reason: 'the archive configuration is the safety net Hopline relies on; change it by hand' }),
-  B('no archive ...', undefined, { reason: 'the archive configuration is the safety net Hopline relies on; change it by hand' }),
-  B('default archive ...', undefined, { reason: 'the archive configuration is the safety net Hopline relies on; change it by hand' }),
+  B('archive ...', 'Archive the configuration', { reason: 'the archive configuration is the safety net Hopline Terminal relies on; change it by hand' }),
+  B('no archive ...', undefined, { reason: 'the archive configuration is the safety net Hopline Terminal relies on; change it by hand' }),
+  B('default archive ...', undefined, { reason: 'the archive configuration is the safety net Hopline Terminal relies on; change it by hand' }),
   C('crypto ...'),
   D('crypto key generate ...', 'Generate new keys', { reason: 'replaces the SSH host key' }),
   B('crypto key zeroize ...', 'Remove keys', { reason: 'removes the SSH host key and breaks SSH' }),

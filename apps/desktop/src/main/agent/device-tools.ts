@@ -39,7 +39,7 @@ export const DEVICE_TOOL_SPECS: ToolSpec[] = [
       'Run ONE read-only CLI command (show/ping/traceroute) on the device in the active terminal and return its output. ' +
       'The command appears live in the user\'s terminal. Anything that is not provably read-only is refused. ' +
       'Use full or common abbreviations native to the platform. Never chain commands. ' +
-      'To keep output small, prefer the "filter" parameter: Hopline runs the plain command and filters the captured output locally (tail, head, grep with regex alternation, -v, -i, context lines, count), identically on every vendor. ' +
+      'To keep output small, prefer the "filter" parameter: Hopline Terminal runs the plain command and filters the captured output locally (tail, head, grep with regex alternation, -v, -i, context lines, count), identically on every vendor. ' +
       'Use it whenever the platform lacks the pipe you need (IOS has no "| tail" or "| count"; some platforms have no pipes at all), and for regex alternation. ' +
       'Native device pipes like "| include" also work where the platform supports them, but every "|" starts a new device filter, so "| include a|b" is refused.',
     inputSchema: {
@@ -60,7 +60,7 @@ export const DEVICE_TOOL_SPECS: ToolSpec[] = [
       'Give the lines exactly as they would be typed inside configuration mode (without "configure terminal" or "end"). ' +
       'Only propose a change after you have confirmed the cause with show commands. ' +
       'Every proposal needs a rollback plan (the exact configuration lines that undo it) and verify commands (read-only show commands, each with what you expect to see once the change works). ' +
-      'On approval Hopline arms the platform safety net where there is one (Junos commit confirmed, EOS session commit timer, NX-OS checkpoint, IOS-XE archive), applies the lines, stops at the first error, runs the verify commands and returns their output. ' +
+      'On approval Hopline Terminal arms the platform safety net where there is one (Junos commit confirmed, EOS session commit timer, NX-OS checkpoint, IOS-XE archive), applies the lines, stops at the first error, runs the verify commands and returns their output. ' +
       'Then call report_verification; only the user confirms or rolls back.',
     inputSchema: {
       type: 'object',
@@ -239,7 +239,7 @@ export class DeviceTools implements ToolSet {
       const decision = verdict.kind === 'blocked' ? 'blocked' : 'refused'
       const reason =
         verdict.kind === 'config' && !verdict.resolved
-          ? `${verdict.reason}; Hopline only runs commands it recognises as read-only. Use a documented show command, or a pipe filter on one`
+          ? `${verdict.reason}; Hopline Terminal only runs commands it recognises as read-only. Use a documented show command, or a pipe filter on one`
           : verdict.kind === 'config'
           ? `${verdict.reason}; config changes must go through propose_config_change`
           : verdict.kind === 'disruptive'
@@ -333,8 +333,8 @@ export class DeviceTools implements ToolSet {
     const empty = note ? '(no matching lines)' : '(no output)'
     const modelCommand = privacy?.mask(command) ?? command
     let text = frameOutput(device, modelCommand, out || empty)
-    if (body.length > MAX_TOOL_CHARS) text += `\n[Hopline: output truncated: ${body.length - MAX_TOOL_CHARS} more characters; use a more specific command or the filter parameter]`
-    if (note) text = `[Hopline filter ${label}: ${note}]\n${text}`
+    if (body.length > MAX_TOOL_CHARS) text += `\n[Hopline Terminal: output truncated: ${body.length - MAX_TOOL_CHARS} more characters; use a more specific command or the filter parameter]`
+    if (note) text = `[Hopline Terminal filter ${label}: ${note}]\n${text}`
     // TextFSM: when a bundled template knows this command, the rows go along with the raw text.
     // Parsed from the REDACTED output only, and only for a complete, unfiltered read.
     if (r.status === 'ok' && kind === 'read' && !filter) {
@@ -342,7 +342,7 @@ export class DeviceTools implements ToolSet {
       if (parsed && parsed.rows.length) {
         const c = compactRows(parsed)
         const more = c.shown < c.total ? `, first ${c.shown} shown` : ''
-        text += `\n\n[Hopline parsed this output with TextFSM template ${parsed.template}: ${c.total} rows${more}; tab-separated, same untrusted device data]\n${frameOutput(device, modelCommand, c.text, ' parsed="textfsm"')}`
+        text += `\n\n[Hopline Terminal parsed this output with TextFSM template ${parsed.template}: ${c.total} rows${more}; tab-separated, same untrusted device data]\n${frameOutput(device, modelCommand, c.text, ' parsed="textfsm"')}`
       }
     }
     if (r.status === 'ok') return { text }

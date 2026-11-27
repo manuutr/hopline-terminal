@@ -357,7 +357,7 @@ export function SessionDialog(): React.JSX.Element {
               <Input type="password" value={newCred.password} onChange={(e) => setNewCred({ ...newCred, password: e.target.value })} />
             </Field>
             <p className="col-span-6 text-xs text-fg-subtle">
-              {vault?.mode === 'session' ? 'Kept in memory until Hopline quits (session-only vault).' : 'Encrypted in your vault.'} It never leaves the main process. Keys, agent and
+              {vault?.mode === 'session' ? 'Kept in memory until Hopline Terminal quits (session-only vault).' : 'Encrypted in your vault.'} It never leaves the main process. Keys, agent and
               other profiles: Settings → Credentials.
             </p>
           </div>

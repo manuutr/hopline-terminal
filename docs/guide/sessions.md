@@ -62,21 +62,21 @@ A session whose address or port forwards change during an import or sync loses i
 
 A **credential profile** is a username plus one of: a password, a private key, the SSH agent, or ask every time. Sessions point at a profile, so each linked session uses the saved password at its next sign-in. Profiles are managed in Settings › Credentials, or created inline from the session dialog's Credentials field.
 
-After a password changes on your devices or identity provider, select **Settings › Credentials › Update saved passwords…**. Select up to 200 password profiles, review the number of linked sessions, enter the new password twice and choose **Update**. Hopline applies the whole selection together. Existing connections stay open.
+After a password changes on your devices or identity provider, select **Settings › Credentials › Update saved passwords…**. Select up to 200 password profiles, review the number of linked sessions, enter the new password twice and choose **Update**. Hopline Terminal applies the whole selection together. Existing connections stay open.
 
 Saved secrets are never sent back to the window. The dialog shows that a secret exists, never its value.
 
 ### The vault
 
-One random data key encrypts every secret Hopline keeps: device passwords, private keys and passphrases, the API key, the NetBox token, the sync passphrase, saved scrollback, config backups and the egress log. The data key is protected in one of three ways (Settings › Security › Protection):
+One random data key encrypts every secret Hopline Terminal keeps: device passwords, private keys and passphrases, the API key, the NetBox token, the sync passphrase, saved scrollback, config backups and the egress log. The data key is protected in one of three ways (Settings › Security › Protection):
 
 | Mode | How it unlocks |
 | --- | --- |
 | **OS keychain** | With your OS login: DPAPI on Windows, the macOS Keychain, libsecret or KWallet on Linux. The default where a keyring exists. |
 | **Master password** | Asked at startup and after the auto-lock delay (scrypt). Works without a keyring. |
-| **Session only** | The key lives in memory and every secret is forgotten when Hopline quits. |
+| **Session only** | The key lives in memory and every secret is forgotten when Hopline Terminal quits. |
 
-On Linux without a keyring (common on WSL), the vault starts in session-only mode until you set a master password, and the status bar says so. Hopline never stores secrets with Electron's `basic_text` fallback.
+On Linux without a keyring (common on WSL), the vault starts in session-only mode until you set a master password, and the status bar says so. Hopline Terminal never stores secrets with Electron's `basic_text` fallback.
 
 **Auto-lock** locks the vault after 15 idle minutes by default, and when the machine sleeps or the screen locks. Locking drops the key from memory: open sessions keep running, and the next connect that needs a secret asks you to unlock. Changing the protection mode or the auto-lock needs the current master password.
 

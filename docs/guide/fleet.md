@@ -22,7 +22,7 @@ Pick the devices on the left:
 - **sessions** you select;
 - a **folder**, with its subfolders;
 - a **tag**;
-- **Start from a device**: Hopline walks its CDP and LLDP neighbours one or two hops and matches them to your saved sessions by name, then host, then a unique management IP.
+- **Start from a device**: Hopline Terminal walks its CDP and LLDP neighbours one or two hops and matches them to your saved sessions by name, then host, then a unique management IP.
 
 Resolve the scope to see the device list:
 

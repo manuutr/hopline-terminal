@@ -92,7 +92,7 @@ export function registerAll(map: Record<string, Handler>): void {
 /** Register a handler whose first argument is validated by `schema`. */
 export function handle<T>(channel: string, schema: { parse: (x: unknown) => T }, fn: (arg: T, e: IpcMainInvokeEvent) => unknown): void {
   ipcMain.handle(channel, (e, arg: unknown) => {
-    if (!trustedSender(e)) throw new Error(`${channel}: refused, not from Hopline's own page`)
+    if (!trustedSender(e)) throw new Error(`${channel}: refused, not from Hopline Terminal's own page`)
     return fn(schema.parse(arg), e)
   })
 }
@@ -245,7 +245,7 @@ export function coreHandlers(svc: Services): Record<string, Handler> {
     const name = repo.getCredential(credentialId)?.name ?? 'this credential'
     return pickers.confirm(
       `Use the saved credential "${name}" with ${where}?`,
-      `Its password or key will be sent to ${count === 1 ? 'that address' : `${count} addresses`} when ${count === 1 ? 'the session connects' : 'those sessions connect'}. Hopline asks because "${name}" has not been used there before. Cancel saves ${count === 1 ? 'the session' : 'them'} without it.`,
+      `Its password or key will be sent to ${count === 1 ? 'that address' : `${count} addresses`} when ${count === 1 ? 'the session connects' : 'those sessions connect'}. Hopline Terminal asks because "${name}" has not been used there before. Cancel saves ${count === 1 ? 'the session' : 'them'} without it.`,
       'Use credential'
     )
   }
@@ -376,7 +376,7 @@ export function coreHandlers(svc: Services): Record<string, Handler> {
             ? () =>
                 vaultConfirm(
                   'Keep secrets for this session only?',
-                  'Saved passwords, private keys, passphrases, the API key and the NetBox token stay in memory only and are gone for good when Hopline quits. Sessions and settings are kept.',
+                  'Saved passwords, private keys, passphrases, the API key and the NetBox token stay in memory only and are gone for good when Hopline Terminal quits. Sessions and settings are kept.',
                   'Session only'
                 )
             : undefined

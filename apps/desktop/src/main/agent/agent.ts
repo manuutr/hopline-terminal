@@ -182,7 +182,7 @@ export class Agent {
         this.conversations.set(tab.tabId, conv)
         const label = s.commands.length === 1 ? `\`${s.commands[0]}\`` : `these configuration lines:\n${s.commands.join('\n')}`
         // r.text is Hopline's own tool result (its device_output frames and notes): framed, not neutralised.
-        const text = `[Hopline: the user ran your suggested ${label}. Result (untrusted device data):]\n${frame('terminal_output', r.text)}`
+        const text = `[Hopline Terminal: the user ran your suggested ${label}. Result (untrusted device data):]\n${frame('terminal_output', r.text)}`
         const last = conv.messages.at(-1)
         if (last?.role === 'user') last.parts.push({ type: 'text', text })
         else conv.messages.push({ role: 'user', parts: [{ type: 'text', text }] })

@@ -1,10 +1,10 @@
-# Hopline documentation
+# Hopline Terminal documentation
 
 | I want to… | Start here |
 | --- | --- |
 | Follow a network incident from symptom to evidence | [Troubleshooting examples](examples/) |
-| Build Hopline on my own machine | [Build it yourself](../README.md#build-it-yourself) |
-| Install Hopline and connect to a device | [Getting started](guide/getting-started.md) |
+| Build Hopline Terminal on my own machine | [Build it yourself](../README.md#build-it-yourself) |
+| Install Hopline Terminal and connect to a device | [Getting started](guide/getting-started.md) |
 | Learn a feature or look up a shortcut | [Operator guide](guide/) |
 | Understand what leaves my machine | [Privacy and assistant requests](guide/privacy.md) |
 | Add a parser, transport or platform | [Contributor guide](../CONTRIBUTING.md) · [Architecture](contributing/architecture.md) |

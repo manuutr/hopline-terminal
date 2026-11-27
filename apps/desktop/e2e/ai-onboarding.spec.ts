@@ -100,7 +100,7 @@ test('local model (Ollama): discover models, connect, and a run with a local out
   expect(await hop.termText()).not.toMatch(/\| tail|tail 3/)
   // What the model saw: filtered, labelled.
   const chats = hop.llm.ollama.requests.filter((r) => r.path === '/api/chat' && (r.body as { stream?: boolean }).stream !== false)
-  expect(JSON.stringify(chats.at(-1)!.body)).toMatch(/\[Hopline filter last 3 lines: showing last 3 of \d+ lines\]/)
+  expect(JSON.stringify(chats.at(-1)!.body)).toMatch(/\[Hopline Terminal filter last 3 lines: showing last 3 of \d+ lines\]/)
 })
 
 test('the grep time budget holds inside Electron main (ReDoS bound is real in the shipped runtime)', async ({ hop }) => {

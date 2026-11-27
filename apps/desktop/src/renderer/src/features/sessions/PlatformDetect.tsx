@@ -110,7 +110,7 @@ export function SetPlatformDialog(): React.JSX.Element {
       open={!!session}
       onOpenChange={(o) => !o && close()}
       title="Set platform"
-      description={session ? `How Hopline reads ${session.name}: prompts, the guard's command model and autocomplete. AI commands stay blocked while it is unknown.` : undefined}
+      description={session ? `How Hopline Terminal reads ${session.name}: prompts, the guard's command model and autocomplete. AI commands stay blocked while it is unknown.` : undefined}
       footer={
         <>
           <Button variant="ghost" onClick={close}>

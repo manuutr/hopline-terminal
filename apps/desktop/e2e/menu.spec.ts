@@ -117,7 +117,7 @@ test('menu bar: the read-only checkbox follows the setting and toggles it; a mod
   await page.evaluate(() => (window as unknown as { hopline: { app: { info: () => Promise<unknown> } } }).hopline.app.info())
   await openTop(page, 'Help')
   await cmd(page, 'app.about').click()
-  const about = page.getByRole('dialog', { name: 'About Hopline' })
+  const about = page.getByRole('dialog', { name: 'About Hopline Terminal' })
   await expect(about).toBeVisible()
   await expect(about.locator('[data-about]')).toContainText(/Electron\s*\d+/)
   await about.getByRole('button', { name: 'Copy version info' }).click()

@@ -388,7 +388,7 @@ describe('applied change: confirm, rollback, read-only, expiry', () => {
     expect(sent.map((s) => s.command)).toEqual(['show archive', 'archive config', 'show archive'])
   })
 
-  it('a timer net: when the deadline passes, Hopline checks the device with a guarded read and reports its own rollback', async () => {
+  it('a timer net: when the deadline passes, Hopline Terminal checks the device with a guarded read and reports its own rollback', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] })
     let pending = true
     const { ctl, sent } = control('eos', () => at('dist-eos1#', 'dist-eos1'), {

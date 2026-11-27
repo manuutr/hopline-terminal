@@ -1,6 +1,6 @@
-# Hopline user guide
+# Hopline Terminal user guide
 
-Hopline is a desktop SSH, Telnet and serial client for network engineers, with an AI assistant that can investigate on its own and can only change a device after you approve the exact lines. This guide describes version 0.8. Each page stands on its own.
+Hopline Terminal is a desktop SSH, Telnet and serial client for network engineers, with an AI assistant that can investigate on its own and can only change a device after you approve the exact lines. This guide describes version 0.8. Each page stands on its own.
 
 Shortcuts are written with **Mod**: Ctrl+Shift on Windows and Linux, ⌘ on macOS. `Mod+K` is Ctrl+Shift+K on Windows and Linux and ⌘K on macOS. Plain `Ctrl+<letter>` always goes to the device.
 
@@ -36,7 +36,7 @@ Follow multi-device routing and change-control investigations in the [screenshot
 13. [Accessibility](accessibility.md): screen reader mode, the buffer view, keyboard-only use.
 14. [Troubleshooting and FAQ](troubleshooting.md).
 15. [Application and context menus](menus.md).
-16. [Privacy](privacy.md): what Hopline sends, when, and where it is recorded.
+16. [Privacy](privacy.md): what Hopline Terminal sends, when, and where it is recorded.
 
 ## Elsewhere
 

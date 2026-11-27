@@ -59,9 +59,9 @@ function fromJson(name: string, text: string): ThemeDraft {
   try {
     raw = JSON.parse(text) as Record<string, unknown>
   } catch {
-    throw new Error('That file is not a Hopline theme (it is not valid JSON)')
+    throw new Error('That file is not a Hopline Terminal theme (it is not valid JSON)')
   }
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('That file is not a Hopline theme')
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('That file is not a Hopline Terminal theme')
   const term = (raw['term'] ?? {}) as Record<string, unknown>
   const notes: string[] = []
   const colors = {} as TermColors
@@ -94,7 +94,7 @@ const decode = (s: string): string =>
       return String.fromCodePoint(n)
     }
     const v = ENTITIES[e]
-    if (v === undefined) throw new Error('The colour file uses an entity Hopline does not read')
+    if (v === undefined) throw new Error('The colour file uses an entity Hopline Terminal does not read')
     return v
   })
 
@@ -144,7 +144,7 @@ export function parsePlist(text: string): PlistValue {
       case 'real':
       case 'integer': {
         const n = Number(textUntil(tag).trim())
-        if (!Number.isFinite(n)) throw new Error('The colour file has a number Hopline cannot read')
+        if (!Number.isFinite(n)) throw new Error('The colour file has a number Hopline Terminal cannot read')
         return n
       }
       case 'array': {
@@ -212,7 +212,7 @@ export function fromItermColors(name: string, text: string): ThemeDraft {
     if (rgb.some((x) => x === null)) continue
     found[k] = '#' + rgb.map((x) => Math.round(x! * 255).toString(16).padStart(2, '0')).join('')
   }
-  if (!Object.keys(found).length) throw new Error('That iTerm2 file has no colours Hopline can read')
+  if (!Object.keys(found).length) throw new Error('That iTerm2 file has no colours Hopline Terminal can read')
   return draftFromPalette(name, found)
 }
 
@@ -222,7 +222,7 @@ function draftFromPalette(name: string, found: Partial<TermColors>): ThemeDraft 
   const missing = TERM_COLOR_KEYS.filter((k) => !found[k])
   const term = Object.fromEntries(TERM_COLOR_KEYS.map((k) => [k, found[k] ?? base[k]])) as unknown as TermColors
   const label = name.trim().slice(0, 60) || 'Imported theme'
-  const notes = missing.length ? [`Not in the file, taken from Hopline ${mode}: ${missing.join(', ')}.`] : []
+  const notes = missing.length ? [`Not in the file, taken from Hopline Terminal ${mode}: ${missing.join(', ')}.`] : []
   return { theme: { id: themeIdFor(label), label, mode, term }, notes }
 }
 

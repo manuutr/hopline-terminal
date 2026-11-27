@@ -108,7 +108,7 @@ export function AssistantSection({
                 className="font-mono"
               />
             )}
-            {vaultMode === 'session' && <div className="mt-1.5 text-2xs text-warn">Session-only vault: a key saved here is forgotten when Hopline quits. Set a master password under Security, or set {form.aiProvider.toUpperCase()}_API_KEY.</div>}
+            {vaultMode === 'session' && <div className="mt-1.5 text-2xs text-warn">Session-only vault: a key saved here is forgotten when Hopline Terminal quits. Set a master password under Security, or set {form.aiProvider.toUpperCase()}_API_KEY.</div>}
             {vaultLocked && <div className="mt-1.5 text-2xs text-warn">The vault is locked: unlock it to change the key.</div>}
           </Row>
           <Row k="aiModel" label="Model" hint={`Use a model with function calling at ${cloud.host}.`}>

@@ -1,7 +1,7 @@
 {
   "name": "@hopline/importers",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Pure session importers for Hopline (SecureCRT, MobaXterm, PuTTY, ssh_config, CSV, NetBox/Nautobot) and the import diff planner",
   "type": "module",
   "main": "./src/index.ts",

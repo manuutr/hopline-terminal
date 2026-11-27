@@ -58,7 +58,7 @@ const DEFAULTS: Record<string, string> = {
   logTemplate: '`%S_%Y-%M-%D_%h-%m-%s.log`',
   logTimestamps: 'Off',
   logRotateDaily: 'On',
-  termTheme: 'Hopline (follows the app theme)',
+  termTheme: 'Hopline Terminal (follows the app theme)',
   termFontFamily: 'Bundled JetBrains Mono',
   termFontSize: '13 px, line height 1.2',
   termCursorStyle: 'Bar, blinking',

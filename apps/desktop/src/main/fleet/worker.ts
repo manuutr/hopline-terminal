@@ -36,7 +36,7 @@ const SHOW_SPEC: ToolSpec = {
   description:
     'Run ONE read-only CLI command (show/ping/traceroute) on your device and return its output. ' +
     'Anything that is not provably read-only is refused, and the refusal is final. Use the platform\'s own syntax. Never chain commands. ' +
-    'Prefer the "filter" parameter to keep output small: Hopline runs the plain command and filters the captured output locally (tail, head, grep with regex alternation, -v, -i, context lines, count), identically on every vendor.'
+    'Prefer the "filter" parameter to keep output small: Hopline Terminal runs the plain command and filters the captured output locally (tail, head, grep with regex alternation, -v, -i, context lines, count), identically on every vendor.'
 }
 
 export interface WorkerDeps {
@@ -162,7 +162,7 @@ export class WorkerTools implements ToolSet {
       }
       const r = await this.device.call(name, input, ctx)
       const note = this.d.budgetNote?.()
-      return note ? { ...r, text: `${r.text}\n\n[Hopline: ${note}]` } : r
+      return note ? { ...r, text: `${r.text}\n\n[Hopline Terminal: ${note}]` } : r
     }
     if (name === 'submit_report') {
       const v = verifyReport(input, this.d.worker, this.d.ledger, this.d.lane)

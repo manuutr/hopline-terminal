@@ -2,4 +2,4 @@ blank_issues_enabled: true
 contact_links:
   - name: Report a security vulnerability privately
     url: https://github.com/manuutr/hopline-terminal/blob/main/SECURITY.md
-    about: Find the private reporting channel for your copy of Hopline.
+    about: Find the private reporting channel for your copy of Hopline Terminal.

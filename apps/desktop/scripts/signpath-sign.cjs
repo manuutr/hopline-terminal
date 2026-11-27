@@ -38,7 +38,7 @@ async function sign(configuration) {
   form.append('ProjectSlug', process.env.SIGNPATH_PROJECT_SLUG)
   form.append('SigningPolicySlug', process.env.SIGNPATH_POLICY_SLUG)
   if (process.env.SIGNPATH_ARTIFACT_CONFIGURATION_SLUG) form.append('ArtifactConfigurationSlug', process.env.SIGNPATH_ARTIFACT_CONFIGURATION_SLUG)
-  form.append('Description', `Hopline ${process.env.GITHUB_REF_NAME || 'local'}: ${basename(file)}`)
+  form.append('Description', `Hopline Terminal ${process.env.GITHUB_REF_NAME || 'local'}: ${basename(file)}`)
   form.append('Artifact', new Blob([await readFile(file)]), basename(file))
 
   const submit = await fetch(`${api}/${org}/SigningRequests`, { method: 'POST', headers: auth, body: form, redirect: 'error' })

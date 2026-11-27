@@ -80,7 +80,7 @@ describe('M1: the egress export is private and audited', () => {
 })
 
 describe('M2: a request never exceeds num_ctx', () => {
-  const suggestion = (n: number) => `[Hopline: the user ran your suggested command. Result (untrusted device data):]\n<terminal_output>\n${'x'.repeat(n)}\n</terminal_output>`
+  const suggestion = (n: number) => `[Hopline Terminal: the user ran your suggested command. Result (untrusted device data):]\n<terminal_output>\n${'x'.repeat(n)}\n</terminal_output>`
 
   it('three 40k-character suggest-mode results fit a 16k window, shortened head and tail with their frames kept', () => {
     const ms: ChatMessage[] = [{ role: 'user', parts: [{ type: 'text', text: 'why?' }, { type: 'text', text: suggestion(40_000) }, { type: 'text', text: suggestion(40_000) }, { type: 'text', text: suggestion(40_000) }] }]
@@ -89,7 +89,7 @@ describe('M2: a request never exceeds num_ctx', () => {
     expect(f.shortened).toBeGreaterThan(0)
     for (const p of f.messages[0]!.parts.slice(1)) {
       const t = (p as { text: string }).text
-      expect(t.startsWith('[Hopline: the user ran')).toBe(true)
+      expect(t.startsWith('[Hopline Terminal: the user ran')).toBe(true)
       expect(t.endsWith('</terminal_output>')).toBe(true)
     }
   })
