@@ -26,7 +26,7 @@ gpg --verify SHA256SUMS.txt.asc SHA256SUMS.txt
 
 On Windows, in PowerShell: `Get-FileHash .\Hopline-Terminal-<version>-win-x64.exe -Algorithm SHA256`, and compare it with the line in `SHA256SUMS.txt`.
 
-### Signing and first launch
+### Unsigned builds
 
 Check the checksum before opening the installer.
 
