@@ -1,13 +1,13 @@
 import { mkdtempSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { expect, showSessions, stubDialogs, test } from './fixtures'
+import { treeRow, expect, showSessions, stubDialogs, test } from './fixtures'
 
 test('config backups: back up, change, back up again, diff in Monaco, export redacted', async ({ hop }) => {
   const { page } = hop
   await hop.connect('core-sw1')
   await showSessions(page)
-  const row = page.locator('[role=treeitem][data-row-key^="tree:"][aria-label="core-sw1"]')
+  const row = treeRow(page, 'core-sw1').and(page.locator('[data-row-key^="tree:"]'))
 
   // First backup from the session menu.
   await row.click({ button: 'right' })
@@ -81,7 +81,7 @@ test('config backups: back up, change, back up again, diff in Monaco, export red
 
 test('R2: a session without a tab is backed up over a background connection; folder and tab menus reach backups', async ({ hop }) => {
   const { page } = hop
-  const row = page.locator('[role=treeitem][data-row-key^="tree:"][aria-label="dist-eos1"]')
+  const row = treeRow(page, 'dist-eos1').and(page.locator('[data-row-key^="tree:"]'))
   await expect(row).toBeVisible()
   const tabs = page.getByRole('tab')
   const before = await tabs.count()
@@ -98,7 +98,7 @@ test('R2: a session without a tab is backed up over a background connection; fol
   await expect(dialog).toBeHidden()
 
   // Folder menu: "Schedule backups…" adds a schedule for the folder, switched off until you turn it on.
-  await page.locator('[role=treeitem][aria-label="Lab (simulator)"]').first().click({ button: 'right' })
+  await treeRow(page, 'Lab (simulator)').first().click({ button: 'right' })
   await page.getByRole('menuitem', { name: 'Schedule backups…' }).click()
   await expect(dialog).toBeVisible()
   await expect(dialog.getByRole('combobox', { name: 'Folder or tag' })).toContainText('Lab (simulator)')

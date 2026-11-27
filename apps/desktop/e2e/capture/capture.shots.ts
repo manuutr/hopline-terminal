@@ -15,7 +15,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { ElectronApplication, Page } from '@playwright/test'
 import { makeEosDevice, makeIosDevice, startSim } from '../../../../packages/simulator/src/index.ts'
-import { expect, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
+import { treeRow, expect, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
 
 const OUT = process.env['HOPLINE_SHOTS_OUT'] ?? join(__dirname, '../../../../docs/design/screens')
 mkdirSync(OUT, { recursive: true })
@@ -162,13 +162,13 @@ test('capture: workspace, terminal, palette, splits, tabs, AI, prompts', async (
 
   await step(page, 'tree', async () => {
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'dist-eos1', exact: true }).first().dblclick()
+    await treeRow(page, 'dist-eos1').first().dblclick()
     await login(hop, /dist-eos1[#>]\s*$/)
     await page.keyboard.type('show version\r')
     await page.waitForTimeout(500)
     // Hover a row so the hover state is visible.
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'fra-spine-01', exact: true }).first().hover()
+    await treeRow(page, 'fra-spine-01').first().hover()
     await snap(page, '02-session-tree')
   })
 
@@ -270,7 +270,7 @@ test('capture: workspace, terminal, palette, splits, tabs, AI, prompts', async (
     await page.waitForTimeout(400)
     for (const n of ['fra-core-02', 'fra-edge-r1', 'fra-fw-01', 'fra-fw-02', 'core-sw1 (telnet)', 'fra-core-01']) {
       await showSessions(page)
-      await page.getByRole('treeitem', { name: n, exact: true }).first().dblclick()
+      await treeRow(page, n).first().dblclick()
       await page.waitForTimeout(700)
       const pw = page.locator('[role=dialog] input[type=password]')
       if (await pw.isVisible()) {
@@ -293,14 +293,14 @@ test('capture: workspace, terminal, palette, splits, tabs, AI, prompts', async (
   await step(page, 'tabs-overflow', async () => {
     // Cancel the password prompt: the tab shows the "auth failed" glyph.
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'br-ask-pw', exact: true }).first().dblclick()
+    await treeRow(page, 'br-ask-pw').first().dblclick()
     const pw = page.locator('[role=dialog] input[type=password]')
     await expect(pw).toBeVisible()
     await page.getByRole('button', { name: 'Cancel' }).click()
     await page.waitForTimeout(500)
     for (const n of ['br-muc-sw1', 'br-ham-sw1', 'br-ber-sw1', 'br-cgn-sw1', 'br-stu-sw1']) {
       await showSessions(page)
-      await page.getByRole('treeitem', { name: n, exact: true }).first().dblclick()
+      await treeRow(page, n).first().dblclick()
       await page.waitForTimeout(500)
     }
     await page.keyboard.press('Alt+2')
@@ -382,7 +382,7 @@ test('capture: settings, session and credential dialogs, password prompt, vault'
 
   await step(page, 'edit-session', async () => {
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).first().click({ button: 'right' })
+    await treeRow(page, 'core-sw1').first().click({ button: 'right' })
     await page.waitForTimeout(200)
     await snap(page, '02b-tree-context-menu')
   })
@@ -775,7 +775,7 @@ test('capture: files panel (SFTP, SCP), transfer conflict, port forwarding', asy
 
   await step(page, 'session-forwards', async () => {
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'leaf-files', exact: true }).first().click({ button: 'right' })
+    await treeRow(page, 'leaf-files').first().click({ button: 'right' })
     await page.getByRole('menuitem', { name: /Edit/ }).first().click()
     const dlg = page.getByRole('dialog', { name: /Edit leaf-files/ })
     await dlg.locator('.overflow-auto').first().evaluate((el) => (el.scrollTop = el.scrollHeight))
@@ -845,7 +845,7 @@ test('capture: config backups (history, diff, schedules)', async ({ hop }) => {
   const { app, page } = hop
   await size(app, page)
   await showSessions(page)
-  const row = page.locator('[role=treeitem][data-row-key^="tree:"][aria-label="core-sw1"]')
+  const row = treeRow(page, 'core-sw1').and(page.locator('[data-row-key^="tree:"]'))
   const backUp = async () => {
     await showSessions(page)
     await row.click({ button: 'right' })

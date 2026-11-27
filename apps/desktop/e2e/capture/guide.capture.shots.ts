@@ -21,7 +21,7 @@ import { join } from 'node:path'
 import type { Page } from '@playwright/test'
 import { makeEosDevice, startSim } from '../../../../packages/simulator/src/index.ts'
 import type { OllamaChatBody, OllamaTurn } from '../../test/fake-llm'
-import { MOD, expect, launchHopline, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
+import { treeRow, MOD, expect, launchHopline, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
 import { sizeTo } from './narrow'
 import { neutralUser } from './operator'
 
@@ -188,13 +188,13 @@ test('guide: sessions, terminal, palette, splits, find', async ({ hop }) => {
       const row = page.getByRole('treeitem', { name: new RegExp(`^${f}`) }).first()
       if ((await row.getAttribute('aria-expanded')) === 'false') await row.click()
     }
-    await page.getByRole('treeitem', { name: 'fra-spine-01', exact: true }).first().hover()
+    await treeRow(page, 'fra-spine-01').first().hover()
     await shot(page, 'session-tree', { light: true })
   }, false)
 
   await step(page, 'session-dialog-ssh', async () => {
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'fra-core-01', exact: true }).first().click({ button: 'right' })
+    await treeRow(page, 'fra-core-01').first().click({ button: 'right' })
     await page.getByRole('menuitem', { name: /^Edit/ }).first().click()
     const dlg = page.getByRole('dialog', { name: /Edit fra-core-01/ })
     await expect(dlg).toBeVisible()
@@ -310,7 +310,7 @@ test('guide: blocks, autocomplete, buffer view, backups', async ({ hop }) => {
   })
 
   await step(page, 'backups-diff', async () => {
-    const row = page.locator('[role=treeitem][data-row-key^="tree:"][aria-label="core-sw1"]')
+    const row = treeRow(page, 'core-sw1').and(page.locator('[data-row-key^="tree:"]'))
     const backUp = async () => {
       await showSessions(page)
       await row.click({ button: 'right' })
@@ -379,7 +379,7 @@ test('guide: settings, keyboard, themes, overrides, import', async ({ hop }) => 
     await fdlg.getByLabel('Font size override').fill('15')
     await fdlg.getByRole('button', { name: 'Save' }).click()
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).first().click({ button: 'right' })
+    await treeRow(page, 'core-sw1').first().click({ button: 'right' })
     await page.getByRole('menuitem', { name: 'Overrides…' }).click()
     const d = page.getByRole('dialog', { name: 'Overrides for core-sw1' })
     await d.locator('[data-override="termCursorStyle"]').getByRole('switch').click()

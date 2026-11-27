@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Saved session rows announce their visible details, and split connection tabs announce the pane count.
+
 ## 1.2.1 · 2026-11-27
 
 - Added macOS downloads for Apple Silicon and Intel. Each architecture has a DMG installer and a ZIP archive.

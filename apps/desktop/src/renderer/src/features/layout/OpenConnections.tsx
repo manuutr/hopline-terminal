@@ -37,14 +37,13 @@ function ConnectionRow({ ws, index, active, dragging, showIndex, onPointerDown }
   const accent = session?.color ? COLOR_CLASS[session.color] : undefined
   const paneCount = panes(ws.root).length
   const s = useUi.getState()
-  const hint = [title, focused?.detail ?? focused?.state, glyph && GLYPH_LABEL[glyph], quick && 'quick connect, not saved', paneCount > 1 && `${paneCount} panes`].filter(Boolean).join(' · ')
-
   const digit = index < 8 ? index + 1 : undefined
+  const hint = [title, focused?.detail ?? focused?.state, glyph && GLYPH_LABEL[glyph], quick && 'quick connect, not saved', paneCount > 1 && `${paneCount} panes`, ws.zoomedPaneId && 'Pane zoomed', showIndex && digit && `Shortcut ${digit}`].filter(Boolean).join(' · ')
+
   const tab = (
     <div
       role="tab"
       aria-selected={active}
-      aria-label={title}
       aria-keyshortcuts="Delete Alt+Shift+ArrowUp Alt+Shift+ArrowDown"
       tabIndex={active ? 0 : -1}
       data-ws-id={ws.id}
@@ -90,21 +89,22 @@ function ConnectionRow({ ws, index, active, dragging, showIndex, onPointerDown }
         dragging && 'opacity-50'
       )}
     >
-      <span className="flex w-4 shrink-0 items-center justify-center">
+      <span aria-hidden className="flex w-4 shrink-0 items-center justify-center">
         {glyph ? <StatusGlyph glyph={glyph} /> : focused && <StatusDot state={focused.state} />}
       </span>
-      <span className="flex min-w-0 flex-1" title={title}>
+      <span aria-hidden className="flex min-w-0 flex-1" title={title}>
         <span className="truncate">{title.slice(0, -3)}</span><span className="shrink-0">{title.slice(-3)}</span>
       </span>
+      <span className="sr-only">{title}</span>
       {accent && <span aria-hidden className={cn('h-0.5 w-2.5 shrink-0 rounded-full', accent.bar)} />}
       {ws.zoomedPaneId && (
         <Tooltip label="Pane zoomed" shortcut={sc('pane.zoom')}>
-          <Maximize2 aria-label="Pane zoomed" className="size-3 shrink-0 text-fg-subtle" />
+          <Maximize2 aria-hidden className="size-3 shrink-0 text-fg-subtle" />
         </Tooltip>
       )}
-      {paneCount > 1 && <span aria-label={`${paneCount} panes`} className="flex shrink-0 items-center gap-0.5 text-2xs text-fg-subtle"><Columns2 className="size-3" />{paneCount}</span>}
+      {paneCount > 1 && <span aria-hidden className="flex shrink-0 items-center gap-0.5 text-2xs text-fg-subtle"><Columns2 className="size-3" />{paneCount}</span>}
       <span className="relative flex size-6 shrink-0 items-center justify-center">
-        {showIndex && digit && <span className="text-xs tabular-nums text-fg-muted group-hover:invisible">{digit}</span>}
+        {showIndex && digit && <span aria-hidden className="text-xs tabular-nums text-fg-muted group-hover:invisible">{digit}</span>}
         {/* Delete and the context menu provide the keyboard equivalent of this pointer target. */}
         <span
           aria-hidden

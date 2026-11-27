@@ -1,5 +1,5 @@
 import type { ElectronApplication, Page } from '@playwright/test'
-import { MOD, expect, showSessions, test, keyLabel } from './fixtures'
+import { treeRow, MOD, expect, showSessions, test, keyLabel } from './fixtures'
 
 const termOptions = (page: Page) =>
   page.evaluate(() => (window as unknown as { __hoplineTest: { options: () => { fontSize: number; cursorStyle: string; background?: string } | null } }).__hoplineTest.options())
@@ -72,7 +72,7 @@ test('per-host overrides: a folder font size and a session theme apply to the op
   await expect.poll(async () => (await termOptions(page))!.fontSize).toBe(17)
 
   // The session sees the folder value as inherited, and sets its own cursor.
-  await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).first().click({ button: 'right' })
+  await treeRow(page, 'core-sw1').first().click({ button: 'right' })
   await page.getByRole('menuitem', { name: 'Overrides…' }).click()
   const sdlg = page.getByRole('dialog', { name: 'Overrides for core-sw1' })
   await expect(sdlg.locator('[data-override="termFontSize"] [data-inherited]')).toContainText('17 px · from Lab (simulator)')

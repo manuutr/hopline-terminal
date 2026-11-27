@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import type { Page } from '@playwright/test'
 import type { OllamaChatBody, OllamaTurn } from '../test/fake-llm'
 import { axeCheck } from './support/axe'
-import { MOD, expect, launchHopline, showSessions, test, type Hopline } from './fixtures'
+import { treeRow, MOD, expect, launchHopline, showSessions, test, type Hopline } from './fixtures'
 
 /**
  * axe-core on the main surfaces in dark, light and high contrast (docs/ACCESSIBILITY.md).
@@ -81,6 +81,7 @@ test('axe: connected tab, splits, files, backups, multi-run', async ({ hop }) =>
   await page.keyboard.press(`${MOD}+D`)
   const launcher = page.locator('[data-launcher] input')
   await expect(launcher).toBeFocused()
+  await expect(page.getByRole('tab', { selected: true })).toHaveAccessibleDescription(/2 panes/)
   await axeCheck(page, 'split with launcher')
   await launcher.fill('dist-eos1')
   await page.keyboard.press('Enter')
@@ -256,7 +257,7 @@ test('axe: settings search, getting started checklist, per-host overrides', asyn
   await folder.locator('[data-override="termFontSize"]').getByRole('switch', { name: 'Override font size' }).click()
   await axeCheck(page, 'overrides: folder')
   await closeDialog(page)
-  await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).first().click({ button: 'right' })
+  await treeRow(page, 'core-sw1').first().click({ button: 'right' })
   await page.getByRole('menuitem', { name: 'Overrides…' }).click()
   await expect(page.getByRole('dialog', { name: 'Overrides for core-sw1' })).toBeVisible()
   await axeCheck(page, 'overrides: session')

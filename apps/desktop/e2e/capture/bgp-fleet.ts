@@ -1,3 +1,4 @@
+import { treeRow } from '../fixtures'
 import { expect, type Page } from '@playwright/test'
 import { fakeOllama, type OllamaChatBody, type OllamaTurn } from '../../test/fake-llm'
 import { picture } from './example-session'
@@ -41,7 +42,7 @@ export async function captureBgpInvestigation(page: Page) {
   try {
     await page.evaluate(url => window.hopline.settings.update({ aiProvider: 'ollama', ollamaEndpoint: url, ollamaModel: 'qwen3:8b' }), model.url)
     await page.reload()
-    await page.getByRole('treeitem', { name: 'Transit peering', exact: true }).first().click({ button: 'right' })
+    await treeRow(page, 'Transit peering').first().click({ button: 'right' })
     await page.getByRole('menuitem', { name: 'Investigate across devices…' }).click()
     const view = page.getByRole('dialog', { name: 'Investigate across devices' })
     await view.getByRole('button', { name: 'Resolve scope' }).click()

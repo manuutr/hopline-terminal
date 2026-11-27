@@ -215,7 +215,7 @@ test('context menus: terminal (copy, paste, clear), tab (close others, close bel
   await page.getByRole('menu').getByRole('menuitem', { name: 'Rename…', exact: true }).click()
   await page.getByRole('dialog').getByRole('textbox').fill('core uplink check')
   await page.keyboard.press('Enter')
-  await expect(tabs.nth(0)).toHaveAttribute('aria-label', 'core uplink check')
+  await expect(tabs.nth(0)).toHaveAccessibleName('core uplink check')
 
   // Session tree: the same look, no icon per row, shortcuts right-aligned.
   await showSessions(page)

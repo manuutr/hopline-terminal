@@ -194,12 +194,17 @@ test('dividers resize panes, clicking focuses a pane, tabs reorder by key and dr
 
   // Mod+PageUp/PageDown move the active tab.
   await hop.connect('dist-eos1')
-  const names = () => page.getByRole('tab').evaluateAll((els) => els.map((e) => e.getAttribute('aria-label')))
-  expect(await names()).toEqual(['core-sw1', 'dist-eos1'])
+  const expectOrder = async (first: string, second: string) => {
+    const tabs = page.getByRole('tab')
+    await expect(tabs).toHaveCount(2)
+    await expect(tabs.nth(0)).toHaveAccessibleName(first)
+    await expect(tabs.nth(1)).toHaveAccessibleName(second)
+  }
+  await expectOrder('core-sw1', 'dist-eos1')
   await page.keyboard.press(`${MOD}+PageUp`)
-  await expect.poll(names).toEqual(['dist-eos1', 'core-sw1'])
+  await expectOrder('dist-eos1', 'core-sw1')
   await page.keyboard.press(`${MOD}+PageDown`)
-  await expect.poll(names).toEqual(['core-sw1', 'dist-eos1'])
+  await expectOrder('core-sw1', 'dist-eos1')
 
   // Drag to reorder: past the 4 px threshold it moves the tab and does not activate it.
   // The key reorders update DOM order immediately. Wait for the tab faces to settle before
@@ -212,6 +217,6 @@ test('dividers resize panes, clicking focuses a pane, tabs reorder by key and dr
   await page.mouse.down()
   await page.mouse.move(second.x + 20, second.y + second.height - 5, { steps: 10 })
   await page.mouse.up()
-  await expect.poll(names).toEqual(['dist-eos1', 'core-sw1'])
+  await expectOrder('dist-eos1', 'core-sw1')
   await expect(page.getByRole('tab', { selected: true })).toHaveAccessibleName('dist-eos1')
 })

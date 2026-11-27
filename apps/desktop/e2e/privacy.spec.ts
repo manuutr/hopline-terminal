@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import type { AddressInfo } from 'node:net'
 import { gunzipSync } from 'node:zlib'
 import { makeIosDevice, startSim } from '../../../packages/simulator/src/index.ts'
-import { MOD, expect, launchHopline, showSessions, stubDialogs, test, sizeWindow } from './fixtures'
+import { treeRow, MOD, expect, launchHopline, showSessions, stubDialogs, test, sizeWindow } from './fixtures'
 
 /**
  * Phase 7: the first-run privacy screen, auto-update against a local fake update server (nothing
@@ -191,7 +191,7 @@ test.describe('auto-update against a local server', () => {
 
       // A session is open: "restart" is refused in main, whatever the window asks.
       await showSessions(page)
-      await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).or(page.getByText('core-sw1', { exact: true })).first().dblclick()
+      await treeRow(page, 'core-sw1').or(page.getByText('core-sw1', { exact: true })).first().dblclick()
       const pw = page.locator('[role=dialog] input[type=password]')
       await expect.poll(async () => (await pw.isVisible()) || /core-sw1[#>]\s*$/.test(await page.evaluate(() => (window as unknown as { __hoplineTest: { text: () => string } }).__hoplineTest.text()))).toBe(true)
       if (await pw.isVisible()) (await pw.fill('admin'), await pw.press('Enter'))

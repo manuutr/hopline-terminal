@@ -6,7 +6,7 @@
 import type { ElectronApplication, Page } from '@playwright/test'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { expect, launchHopline, showSessions, test } from '../fixtures'
+import { treeRow, expect, launchHopline, showSessions, test } from '../fixtures'
 import { sizeTo, snapNarrow } from './narrow'
 
 const SIZES = [
@@ -94,7 +94,7 @@ test('0.7 UX surfaces', async ({ hop }) => {
     '75-overrides-session',
     async () => {
       await showSessions(page)
-      await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).first().click({ button: 'right' })
+      await treeRow(page, 'core-sw1').first().click({ button: 'right' })
       await page.getByRole('menuitem', { name: 'Overrides…' }).click()
       const d = page.getByRole('dialog', { name: 'Overrides for core-sw1' })
       await d.locator('[data-override="termCursorStyle"]').getByRole('switch').click()

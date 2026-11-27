@@ -7,7 +7,7 @@ import { expect, type ElectronApplication, type Page } from '@playwright/test'
 import { appendFileSync, mkdirSync, rmSync } from 'node:fs'
 import { loadavg } from 'node:os'
 import { join } from 'node:path'
-import { launchHopline, showSessions, termTextOf } from '../apps/desktop/e2e/fixtures'
+import { launchHopline, showSessions, termTextOf, treeRow } from '../apps/desktop/e2e/fixtures'
 import { makeEosDevice, makeIosDevice, startSim, startTelnetSim, type RunningSim } from '../packages/simulator/src/index.ts'
 
 export const RAW_DIR = join(__dirname, 'results', '.raw')
@@ -74,7 +74,7 @@ export async function lab(opts: { env?: Record<string, string>; renderer?: 'webg
   const open = async (name = 'core-sw1'): Promise<string> => {
     const before = await tabIds(page)
     await showSessions(page)
-    await page.getByRole('treeitem', { name, exact: true }).first().dblclick()
+    await treeRow(page, name).first().dblclick()
     await expect.poll(async () => (await tabIds(page)).length, { timeout: 15_000 }).toBe(before.length + 1)
     const id = (await tabIds(page)).find((t) => !before.includes(t))!
     const ready = new RegExp(`${name}[#>]\\s*$`)

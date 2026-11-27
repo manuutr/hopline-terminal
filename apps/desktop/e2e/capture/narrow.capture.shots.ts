@@ -12,7 +12,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { Page } from '@playwright/test'
 import { makeEosDevice, startSim } from '../../../../packages/simulator/src/index.ts'
-import { expect, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
+import { treeRow, expect, showSessions, stubDialogs, test, type Hopline } from '../fixtures'
 import { assertFits, NARROW, sizeTo, snapNarrow } from './narrow'
 
 const openAi = async (page: Page) => {
@@ -140,7 +140,7 @@ test('narrow: config backups dialog with the AI panel and a split', async ({ hop
   await sizeTo(app, page, 1100, 700)
   await hop.connect('core-sw1')
   await showSessions(page)
-  const row = page.locator('[role=treeitem][data-row-key^="tree:"][aria-label="core-sw1"]')
+  const row = treeRow(page, 'core-sw1').and(page.locator('[data-row-key^="tree:"]'))
   const backUp = async () => {
     await showSessions(page)
     await row.click({ button: 'right' })
