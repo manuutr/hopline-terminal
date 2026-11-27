@@ -1,6 +1,8 @@
 # Changelog
 
-## 1.2.1
+## 1.2.1 · 2026-11-27
+
+- Added macOS downloads for Apple Silicon and Intel. Each architecture has a DMG installer and a ZIP archive.
 
 - Renamed the desktop app to Hopline Terminal. Existing sessions, credentials, log directories and administrative policy paths carry forward.
 
