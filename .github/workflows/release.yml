@@ -57,11 +57,7 @@ jobs:
           CI: '1'
         run: |
           if [ "$RUNNER_OS" = Linux ]; then
-            # Use the runner's installed Chrome sandbox for Electron's standalone smoke and startup tests.
-            node -e "require('electron')"
-            test -u /opt/google/chrome/chrome-sandbox
-            ln -sf /opt/google/chrome/chrome-sandbox node_modules/electron/dist/chrome-sandbox
-            xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npm run e2e -w @hopline/desktop
+            bash scripts/ci/electron-e2e-linux.sh
           else
             npm run e2e -w @hopline/desktop
           fi
