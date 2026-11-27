@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { deviceFs, makeIosDevice, resolvePath, startSim } from '../../../packages/simulator/src/index.ts'
-import { expect, MOD, showSessions, sizeWindow, stubDialogs, test, type Hopline } from './fixtures'
+import { expect, MOD, showSessions, sizeWindow, stubDialogs, test, type Hopline, waitForWorkspace } from './fixtures'
 
 // Exercise the same two DNS frames readers download in the public walkthrough.
 function dnsCapture(): Buffer {
@@ -153,6 +153,7 @@ test('attach and drop appliance captures into chat without a terminal session', 
     await window.hopline.settings.update({ aiProvider: 'ollama', ollamaEndpoint: endpoint, ollamaModel: 'qwen3:8b' })
   }, llm.ollama.url)
   await page.reload()
+  await waitForWorkspace(page)
   await page.keyboard.press(MOD + '+K')
   const palette = page.getByRole('combobox', { name: 'Command palette' })
   await palette.fill('Ask the assistant')

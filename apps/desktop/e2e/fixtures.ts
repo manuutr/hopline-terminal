@@ -81,6 +81,11 @@ export async function launchHopline(opts: { production?: boolean; dir?: string; 
   return { app, page, dir }
 }
 
+/** Wait for persisted settings and shortcut handlers after loading the desktop workspace. */
+export async function waitForWorkspace(page: Page): Promise<void> {
+  await page.waitForFunction(() => performance.getEntriesByName('hopline:ready').length > 0)
+}
+
 /** CSP violations the renderer logged, per window (launchHopline records them). */
 export const cspViolations = new WeakMap<Page, string[]>()
 
