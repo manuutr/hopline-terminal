@@ -1,0 +1,74 @@
+core-sw1#show running-config
+Building configuration...
+
+Current configuration : 9874 bytes
+!
+! Last configuration change at 11:02:11 UTC Tue Nov 24 2026 by netops
+! NVRAM config last updated at 09:40:02 UTC Tue Nov 24 2026 by netops
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname core-sw1
+!
+vrf definition MGMT
+ rd 65001:99
+ !
+ address-family ipv4
+ exit-address-family
+!
+vlan 10
+ name USERS
+!
+vlan 20
+ name PRINTERS
+!
+vlan 30
+ name WIFI
+!
+interface Loopback0
+ ip address 10.255.0.1 255.255.255.255
+!
+interface GigabitEthernet1/0/1
+ description uplink to edge-r1
+ no switchport
+ ip address 10.0.0.5 255.255.255.252
+!
+interface GigabitEthernet1/0/2
+ description uplink to isp-r2 (AS65002)
+ no switchport
+ ip address 10.0.0.1 255.255.255.252
+ shutdown
+!
+interface GigabitEthernet1/0/48
+ description trunk to dist-eos1
+ switchport trunk allowed vlan 10,20,30
+ switchport mode trunk
+!
+interface Vlan10
+ description USERS
+ ip address 10.10.10.1 255.255.255.0
+!
+router bgp 65001
+ bgp router-id 10.255.0.1
+ bgp log-neighbor-changes
+ neighbor 10.0.0.2 remote-as 65002
+ neighbor 10.0.0.2 description isp-r2
+ neighbor 10.0.0.6 remote-as 65000
+ neighbor 10.0.0.6 description edge-r1
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.6
+!
+ip access-list extended EDGE-IN
+ 10 permit tcp any host 10.255.0.1 eq bgp
+ 20 deny   ip any any log
+!
+route-map RM-EDGE-IN permit 10
+ match ip address prefix-list PL-EDGE-IN
+!
+line vty 0 15
+ transport input ssh
+!
+end

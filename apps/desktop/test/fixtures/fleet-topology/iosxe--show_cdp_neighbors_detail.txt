@@ -1,0 +1,29 @@
+-------------------------
+Device ID: edge-r1.lab.example.net
+Entry address(es): 
+  IP address: 10.0.0.6
+Platform: cisco ISR4431/K9,  Capabilities: Router Source-Route-Bridge IGMP
+Interface: GigabitEthernet1/0/1,  Port ID (outgoing port): GigabitEthernet0/0/0
+Holdtime : 157 sec
+
+Version :
+Cisco IOS Software [Bengaluru], ISR Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.6.5
+
+advertisement version: 2
+Duplex: full
+
+-------------------------
+Device ID: AP-3F-East
+Entry address(es): 
+  IP address: 10.10.30.20
+Platform: cisco C9120AXI-B,  Capabilities: Trans-Bridge Source-Route-Bridge IGMP
+Interface: GigabitEthernet1/0/6,  Port ID (outgoing port): GigabitEthernet0
+Holdtime : 122 sec
+
+Version :
+Cisco IOS Software, C9120AX Software
+
+advertisement version: 2
+Duplex: full
+
+Total cdp entries displayed : 2

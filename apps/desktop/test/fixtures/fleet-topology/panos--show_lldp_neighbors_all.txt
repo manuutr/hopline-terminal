@@ -1,0 +1,17 @@
+Local information:
+Index 17
+Local interface: ethernet1/2
+Local Port ID: 2
+Neighbor information:
+
+Chassis type: MAC address
+Chassis ID: 70:0f:6a:b2:30:00
+Port type: Interface name
+Port ID: Gi1/0/47
+Port description: to-fw1
+TTL: 120
+System name: core-sw1
+System description: Cisco IOS Software [Cupertino], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.9.4a
+System capabilities:
+Supported: B, R,
+Enabled: B, R,

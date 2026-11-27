@@ -1,0 +1,27 @@
+fgt-edge1 # show system interface port2
+config system interface
+    edit "port2"
+        set vdom "root"
+        set ip 10.0.2.1 255.255.255.252
+        set allowaccess ping
+        set type physical
+        set alias "to-core-sw1"
+        set lldp-reception enable
+        set snmp-index 2
+    next
+end
+fgt-edge1 # show firewall policy 10
+config firewall policy
+    edit 10
+        set name "LAN-to-core"
+        set uuid 2c6b1d7e-5f1a-51ef-6f3a-1a2b3c4d5e6f
+        set srcintf "port3"
+        set dstintf "port2"
+        set action accept
+        set srcaddr "LAN-NET"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+        set logtraffic all
+    next
+end

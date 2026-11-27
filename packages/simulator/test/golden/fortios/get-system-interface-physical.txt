@@ -1,0 +1,26 @@
+fgt-edge1 # get system interface physical
+== [onboard]
+    ==[port1]
+        mode: static
+        ip: 203.0.113.2 255.255.255.252
+        ipv6: ::/0
+        status: up
+        speed: 10000Mbps (Duplex: full)
+        FEC: none
+        FEC_cap: none
+    ==[port2]
+        mode: static
+        ip: 10.0.2.1 255.255.255.252
+        ipv6: ::/0
+        status: up
+        speed: 10000Mbps (Duplex: full)
+        FEC: none
+        FEC_cap: none
+    ==[port10]
+        mode: static
+        ip: 192.168.1.99 255.255.255.0
+        ipv6: ::/0
+        status: up
+        speed: 1000Mbps (Duplex: full)
+        FEC: none
+        FEC_cap: none

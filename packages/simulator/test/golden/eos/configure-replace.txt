@@ -1,0 +1,3 @@
+switch(config)# configure replace start-config
+! Preserving static routes. Use 'no ip routing delete-static-routes' to clear them.
+switch#

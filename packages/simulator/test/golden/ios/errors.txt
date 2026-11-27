@@ -1,0 +1,10 @@
+core-sw1#show ip intrface brief
+                    ^
+% Invalid input detected at '^' marker.
+
+core-sw1#sh c
+% Ambiguous command:  "sh c"
+core-sw1#clock set 13:32:00
+% Incomplete command.
+
+core-sw1#

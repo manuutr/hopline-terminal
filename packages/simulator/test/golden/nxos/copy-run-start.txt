@@ -1,0 +1,4 @@
+leaf1# copy running-config startup-config
+[########################################] 100%
+Copy complete, now saving to disk (please wait)...
+Copy complete.

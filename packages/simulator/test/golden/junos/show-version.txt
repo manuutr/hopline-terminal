@@ -1,0 +1,16 @@
+netops@edge-r1> show version
+Hostname: edge-r1
+Model: vmx
+Junos: 22.4R3.25
+JUNOS OS Kernel 64-bit  [20231115.f0321c3_builder_stable_12_224]
+JUNOS OS libs [20231115.f0321c3_builder_stable_12_224]
+JUNOS OS runtime [20231115.f0321c3_builder_stable_12_224]
+JUNOS OS time zone information [20231115.f0321c3_builder_stable_12_224]
+JUNOS network stack and utilities [20231206.104530_builder_junos_224_r3]
+JUNOS libs [20231206.104530_builder_junos_224_r3]
+JUNOS modules [20231206.104530_builder_junos_224_r3]
+JUNOS mx modules [20231206.104530_builder_junos_224_r3]
+JUNOS daemons [20231206.104530_builder_junos_224_r3]
+JUNOS mx daemons [20231206.104530_builder_junos_224_r3]
+
+netops@edge-r1>

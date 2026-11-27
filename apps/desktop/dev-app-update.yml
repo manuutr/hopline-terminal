@@ -1,0 +1,5 @@
+# Read by electron-updater in dev builds only, and only when the e2e test points it at a local
+# fake update server (HOPLINE_E2E_UPDATE_URL; see src/main/privacy.ts). Never packaged.
+provider: generic
+url: http://127.0.0.1:9/
+updaterCacheDirName: hopline-updater-dev

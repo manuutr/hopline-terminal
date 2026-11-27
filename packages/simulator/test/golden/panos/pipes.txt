@@ -1,0 +1,3 @@
+username@hostname> show system info | match app-version
+app-version: 8087-5126
+username@hostname> show user group list | except ou=acme

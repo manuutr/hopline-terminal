@@ -1,0 +1,4 @@
+fgt-edge1 # get router info ospf neighbor
+OSPF process 0:
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.255.0.1        1   Full/ -          00:00:35    10.0.2.2        port2

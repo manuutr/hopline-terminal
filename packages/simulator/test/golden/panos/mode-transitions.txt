@@ -1,0 +1,13 @@
+username@hostname> configure
+Entering configuration mode
+[edit]
+username@hostname#
+
+username@hostname# quit
+Exiting configuration mode
+username@hostname>
+
+username@hostname# run ping host 10.1.1.2
+PING 10.1.1.2 (10.1.1.2) 56(84) bytes of data
+...
+username@hostname#

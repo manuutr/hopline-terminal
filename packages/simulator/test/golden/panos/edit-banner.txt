@@ -1,0 +1,4 @@
+[edit]
+admin@PA-3060# edit deviceconfig system ntp-servers
+[edit deviceconfig system ntp-servers]
+admin@PA-3060#

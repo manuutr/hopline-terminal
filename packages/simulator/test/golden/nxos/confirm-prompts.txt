@@ -1,0 +1,5 @@
+leaf1# write erase
+Warning: This command will erase the startup-configuration.
+Do you wish to proceed anyway? (y/n)  [n] y
+leaf1# reload
+This command will reboot the system. (y/n)?  [n] y

@@ -1,0 +1,3 @@
+fgt-edge1 # diagnose ip arp list
+index=4 ifname=port2 10.0.2.2 00:1e:bd:4a:10:01 state=00000002 use=32 confirm=670 update=212 ref=6
+index=5 ifname=port3 10.20.0.50 3c:9b:d6:66:52:ab state=00000002 use=0 confirm=0 update=3159 ref=2

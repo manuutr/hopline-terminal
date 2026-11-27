@@ -1,0 +1,8 @@
+netops@edge-r1> show arp no-resolve
+MAC Address       Address         Interface                Flags
+00:0c:29:5e:a1:47 10.0.0.5        ge-0/0/1.0               none
+00:00:5e:00:01:0a 192.168.100.1   fxp0.0                   none
+2c:6b:f5:10:44:01 203.0.113.1     ge-0/0/0.0               none
+Total entries: 3
+
+netops@edge-r1>

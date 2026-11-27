@@ -1,0 +1,5 @@
+admin@Lab-5250> request system software install version 9.0.4
+Executing this command will install a new version of software. It will not take effect until system is restarted. Do you want to continue? (y or n)
+
+admin@Lab-5250> request restart system
+Executing this command will disconnect the current session. Do you want to continue? (y or n)

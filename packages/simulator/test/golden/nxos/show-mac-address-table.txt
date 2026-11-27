@@ -1,0 +1,11 @@
+leaf1# show mac address-table
+Legend:
+        * - primary entry, G - Gateway MAC, (R) - Routed MAC, O - Overlay MAC
+        age - seconds since last seen,+ - primary entry using vPC Peer-Link,
+        (T) - True, (F) - False
+     VLAN       MAC Address       Type     age    Secure  NTFY     Ports
+------------+-----------------+----------+-------+------+------+------------------
+*    100        0050.56a1.0101   dynamic    0        F      F    Eth1/1
+*    100        0050.56a1.0102   dynamic    0        F      F    Eth1/2
+*    200        0050.56a1.0203   dynamic    0        F      F    Po10
+G    100      00de.fb20.0001     static     -        F      F    sup-eth1(R)

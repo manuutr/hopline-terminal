@@ -1,0 +1,12 @@
+leaf1# checkpoint pre-change description before BGP edit
+...........Done
+leaf1# rollback running-config checkpoint pre-change
+Note: Applying config parallelly may fail Rollback verification
+Collecting Running-Config
+#Generating Rollback Patch
+Executing Rollback Patch
+Generating Running-config for verification
+Generating Patch for verification
+Verification is Successful.
+
+Rollback completed successfully.

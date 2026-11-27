@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  // Pure TS: no Node or DOM types, so a stray Node API fails to compile.
+  "compilerOptions": { "noEmit": true, "lib": ["ES2023"], "types": [] },
+  "include": ["src/**/*", "test/**/*"]
+}

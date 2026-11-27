@@ -1,0 +1,7 @@
+The TextFSM templates and test fixtures in this package are from ntc-templates
+(https://github.com/networktocode/ntc-templates), commit 06fa33389fbcca31cd59aac5fd5cb2ce5c900939.
+
+Copyright 2015 Jason Edelman <jason@networktocode.com>, Network to Code, LLC, and contributors.
+Licensed under the Apache License, Version 2.0 (see LICENSE in this directory).
+
+The templates are bundled unmodified. A curated subset is included; see scripts/fetch-templates.mjs.

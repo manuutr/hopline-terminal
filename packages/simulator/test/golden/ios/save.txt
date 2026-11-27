@@ -1,0 +1,7 @@
+core-sw1#copy running-config startup-config
+Destination filename [startup-config]?
+Building configuration...
+[OK]
+core-sw1#write memory
+Building configuration...
+[OK]

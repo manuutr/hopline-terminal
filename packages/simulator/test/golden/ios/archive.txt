@@ -1,0 +1,16 @@
+core-sw1(config)#archive
+core-sw1(config-archive)#path flash:archive/core-sw1
+core-sw1(config-archive)#maximum 14
+core-sw1(config-archive)#time-period 1440
+core-sw1(config-archive)#write-memory
+core-sw1(config-archive)#end
+core-sw1#archive config
+core-sw1#show archive
+The maximum archive configurations allowed is 14.
+There are currently 1 archive configurations saved.
+The next archive file will be named flash:archive/core-sw1-2
+ Archive #  Name
+   1        flash:archive/core-sw1-1 <- Most Recent
+   2
+   3
+...

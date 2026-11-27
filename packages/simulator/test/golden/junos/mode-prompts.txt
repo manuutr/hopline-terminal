@@ -1,0 +1,11 @@
+netops@edge-r1> configure
+Entering configuration mode
+
+[edit]
+netops@edge-r1# edit interfaces ge-0/0/1 unit 0
+
+[edit interfaces ge-0/0/1 unit 0]
+netops@edge-r1# top
+
+[edit]
+netops@edge-r1#

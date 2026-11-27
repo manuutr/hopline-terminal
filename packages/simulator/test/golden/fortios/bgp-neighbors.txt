@@ -1,0 +1,19 @@
+fgt-edge1 # get router info bgp neighbors 10.0.2.2
+VRF 0 neighbor table:
+BGP neighbor is 10.0.2.2, remote AS 65001, local AS 65020, external link
+  BGP version 4, remote router ID 10.255.0.1
+  BGP state = Established, up for 2d03h11m
+  Last read 00:00:01, hold time is 180, keepalive interval is 60 seconds
+  Configured hold time is 180, keepalive interval is 60 seconds
+  Neighbor capabilities:
+    Route refresh: advertised and received (old and new)
+    Address family IPv4 Unicast: advertised and received
+  Received 48211 messages, 0 notifications, 0 in queue
+  Sent 48230 messages, 0 notifications, 0 in queue
+  Route refresh request: received 0, sent 0
+  Minimum time between advertisement runs is 30 seconds
+
+ For address family: IPv4 Unicast
+  BGP table version 7, neighbor version 7
+  Index 1, Offset 0, Mask 0x2
+  ...

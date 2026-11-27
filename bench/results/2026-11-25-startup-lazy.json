@@ -1,0 +1,612 @@
+{
+  "date": "2026-11-25T18:53:02.994Z",
+  "label": "startup-lazy",
+  "git": {
+    "sha": "1412339",
+    "dirty": true
+  },
+  "machine": {
+    "platform": "linux",
+    "release": "6.18.58.1-microsoft-standard-WSL2",
+    "cpu": "Intel(R) Core(TM) i9-14900K",
+    "cores": 32,
+    "memGb": 31,
+    "load1End": 7.41
+  },
+  "context": {
+    "startup.packaged.samples": {
+      "first": [
+        {
+          "window": 385,
+          "paint": 526.5,
+          "ready": 559.199951171875,
+          "palette": 692,
+          "main": {
+            "spawn": 22.64208984375,
+            "whenReady": 258.265625,
+            "createWindow": 295.7451171875,
+            "readyToShow": 442.35205078125
+          }
+        },
+        {
+          "window": 387,
+          "paint": 542.699951171875,
+          "ready": 573.699951171875,
+          "palette": 696,
+          "main": {
+            "spawn": 19.73193359375,
+            "whenReady": 271.229248046875,
+            "createWindow": 308.076904296875,
+            "readyToShow": 468.72021484375
+          }
+        },
+        {
+          "window": 317,
+          "paint": 438.199951171875,
+          "ready": 465,
+          "palette": 576,
+          "main": {
+            "spawn": 13.9541015625,
+            "whenReady": 225.5009765625,
+            "createWindow": 252.485107421875,
+            "readyToShow": 381.425537109375
+          }
+        },
+        {
+          "window": 318,
+          "paint": 424.300048828125,
+          "ready": 450.10009765625,
+          "palette": 545,
+          "main": {
+            "spawn": 17.35400390625,
+            "whenReady": 215.254638671875,
+            "createWindow": 245.737548828125,
+            "readyToShow": 370.56982421875
+          }
+        },
+        {
+          "window": 306,
+          "paint": 428.89990234375,
+          "ready": 457,
+          "palette": 553,
+          "main": {
+            "spawn": 16.907958984375,
+            "whenReady": 208.78955078125,
+            "createWindow": 234.77392578125,
+            "readyToShow": 360.25537109375
+          }
+        }
+      ],
+      "again": [
+        {
+          "window": 363,
+          "paint": 520.39990234375,
+          "ready": 546.89990234375,
+          "palette": 636,
+          "main": {
+            "spawn": 17.9208984375,
+            "whenReady": 262.121826171875,
+            "createWindow": 282.759765625,
+            "readyToShow": 429.987060546875
+          }
+        },
+        {
+          "window": 379,
+          "paint": 522.89990234375,
+          "ready": 549.39990234375,
+          "palette": 648,
+          "main": {
+            "spawn": 19.594970703125,
+            "whenReady": 280.25341796875,
+            "createWindow": 300.462158203125,
+            "readyToShow": 449.29150390625
+          }
+        },
+        {
+          "window": 279,
+          "paint": 388.89990234375,
+          "ready": 412.7998046875,
+          "palette": 482,
+          "main": {
+            "spawn": 14.031982421875,
+            "whenReady": 198.15283203125,
+            "createWindow": 211.283203125,
+            "readyToShow": 332.82421875
+          }
+        },
+        {
+          "window": 301,
+          "paint": 410.199951171875,
+          "ready": 431.199951171875,
+          "palette": 507,
+          "main": {
+            "spawn": 14.1650390625,
+            "whenReady": 212.23876953125,
+            "createWindow": 228.478271484375,
+            "readyToShow": 354.716064453125
+          }
+        },
+        {
+          "window": 296,
+          "paint": 412.300048828125,
+          "ready": 432.10009765625,
+          "palette": 501,
+          "main": {
+            "spawn": 15.764892578125,
+            "whenReady": 210.1689453125,
+            "createWindow": 223.52587890625,
+            "readyToShow": 354.067138671875
+          }
+        }
+      ]
+    },
+    "startup.dev.samples": {
+      "first": [
+        {
+          "window": 274,
+          "paint": 427.800048828125,
+          "ready": 437.300048828125,
+          "palette": 497,
+          "main": {
+            "spawn": 17.470947265625,
+            "whenReady": 218.30712890625,
+            "createWindow": 243.70458984375,
+            "readyToShow": 366.993408203125
+          }
+        },
+        {
+          "window": 281,
+          "paint": 465.300048828125,
+          "ready": 476,
+          "palette": 540,
+          "main": {
+            "spawn": 18.83203125,
+            "whenReady": 220.5810546875,
+            "createWindow": 250.25439453125,
+            "readyToShow": 391.75439453125
+          }
+        },
+        {
+          "window": 291,
+          "paint": 433.10009765625,
+          "ready": 449.60009765625,
+          "palette": 496,
+          "main": {
+            "spawn": 15.2470703125,
+            "whenReady": 217.890625,
+            "createWindow": 258.81884765625,
+            "readyToShow": 378.6181640625
+          }
+        },
+        {
+          "window": 254,
+          "paint": 400.10009765625,
+          "ready": 408.60009765625,
+          "palette": 455,
+          "main": {
+            "spawn": 16.492919921875,
+            "whenReady": 201.529296875,
+            "createWindow": 226.53564453125,
+            "readyToShow": 343.869873046875
+          }
+        },
+        {
+          "window": 272,
+          "paint": 428.5,
+          "ready": 440.300048828125,
+          "palette": 493,
+          "main": {
+            "spawn": 15.3779296875,
+            "whenReady": 218.90087890625,
+            "createWindow": 242.710205078125,
+            "readyToShow": 370.919189453125
+          }
+        }
+      ],
+      "again": [
+        {
+          "window": 272,
+          "paint": 417.39990234375,
+          "ready": 428.2998046875,
+          "palette": 481,
+          "main": {
+            "spawn": 14.803955078125,
+            "whenReady": 225.65576171875,
+            "createWindow": 235.095947265625,
+            "readyToShow": 360.3017578125
+          }
+        },
+        {
+          "window": 275,
+          "paint": 411.10009765625,
+          "ready": 425.2001953125,
+          "palette": 472,
+          "main": {
+            "spawn": 21.333984375,
+            "whenReady": 228.544189453125,
+            "createWindow": 237.158447265625,
+            "readyToShow": 352.03369140625
+          }
+        },
+        {
+          "window": 238,
+          "paint": 376,
+          "ready": 388.300048828125,
+          "palette": 435,
+          "main": {
+            "spawn": 14.218994140625,
+            "whenReady": 197.237548828125,
+            "createWindow": 205.390380859375,
+            "readyToShow": 320.199951171875
+          }
+        },
+        {
+          "window": 246,
+          "paint": 403.10009765625,
+          "ready": 415.900146484375,
+          "palette": 464,
+          "main": {
+            "spawn": 13.0791015625,
+            "whenReady": 204.740966796875,
+            "createWindow": 213.433349609375,
+            "readyToShow": 338.7939453125
+          }
+        },
+        {
+          "window": 254,
+          "paint": 383.300048828125,
+          "ready": 396.199951171875,
+          "palette": 442,
+          "main": {
+            "spawn": 14.447021484375,
+            "whenReady": 206.040771484375,
+            "createWindow": 214.46484375,
+            "readyToShow": 330.357177734375
+          }
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "startup.packaged.first_launch.first_paint_ms": {
+      "value": 424.300048828125,
+      "median": 438.199951171875,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        526.5,
+        542.699951171875,
+        438.199951171875,
+        424.300048828125,
+        428.89990234375
+      ],
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.ready_ms": {
+      "value": 450.10009765625,
+      "median": 465,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        559.199951171875,
+        573.699951171875,
+        465,
+        450.10009765625,
+        457
+      ],
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.palette_ms": {
+      "value": 545,
+      "median": 576,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        692,
+        696,
+        576,
+        545,
+        553
+      ],
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.palette_median_ms": {
+      "value": 576,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.main_spawn_ms": {
+      "value": 17.35400390625,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.main_whenReady_ms": {
+      "value": 225.5009765625,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.main_createWindow_ms": {
+      "value": 252.485107421875,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.first_launch.main_readyToShow_ms": {
+      "value": 381.425537109375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.returning.first_paint_ms": {
+      "value": 388.89990234375,
+      "median": 412.300048828125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        520.39990234375,
+        522.89990234375,
+        388.89990234375,
+        410.199951171875,
+        412.300048828125
+      ],
+      "load1": 7.36
+    },
+    "startup.packaged.returning.ready_ms": {
+      "value": 412.7998046875,
+      "median": 432.10009765625,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        546.89990234375,
+        549.39990234375,
+        412.7998046875,
+        431.199951171875,
+        432.10009765625
+      ],
+      "load1": 7.36
+    },
+    "startup.packaged.returning.palette_ms": {
+      "value": 482,
+      "median": 507,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        636,
+        648,
+        482,
+        507,
+        501
+      ],
+      "load1": 7.36
+    },
+    "startup.packaged.returning.palette_median_ms": {
+      "value": 507,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.returning.main_spawn_ms": {
+      "value": 15.764892578125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.returning.main_whenReady_ms": {
+      "value": 212.23876953125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.returning.main_createWindow_ms": {
+      "value": 228.478271484375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.packaged.returning.main_readyToShow_ms": {
+      "value": 354.716064453125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.36
+    },
+    "startup.dev.first_launch.first_paint_ms": {
+      "value": 400.10009765625,
+      "median": 428.5,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        427.800048828125,
+        465.300048828125,
+        433.10009765625,
+        400.10009765625,
+        428.5
+      ],
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.ready_ms": {
+      "value": 408.60009765625,
+      "median": 440.300048828125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        437.300048828125,
+        476,
+        449.60009765625,
+        408.60009765625,
+        440.300048828125
+      ],
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.palette_ms": {
+      "value": 455,
+      "median": 496,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        497,
+        540,
+        496,
+        455,
+        493
+      ],
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.palette_median_ms": {
+      "value": 496,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.main_spawn_ms": {
+      "value": 16.492919921875,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.main_whenReady_ms": {
+      "value": 218.30712890625,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.main_createWindow_ms": {
+      "value": 243.70458984375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.first_launch.main_readyToShow_ms": {
+      "value": 370.919189453125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.returning.first_paint_ms": {
+      "value": 376,
+      "median": 403.10009765625,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        417.39990234375,
+        411.10009765625,
+        376,
+        403.10009765625,
+        383.300048828125
+      ],
+      "load1": 7.41
+    },
+    "startup.dev.returning.ready_ms": {
+      "value": 388.300048828125,
+      "median": 415.900146484375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        428.2998046875,
+        425.2001953125,
+        388.300048828125,
+        415.900146484375,
+        396.199951171875
+      ],
+      "load1": 7.41
+    },
+    "startup.dev.returning.palette_ms": {
+      "value": 435,
+      "median": 464,
+      "unit": "ms",
+      "better": "lower",
+      "note": "best of 5 (report.mjs keeps the best run; median in the json)",
+      "runs": [
+        481,
+        472,
+        435,
+        464,
+        442
+      ],
+      "load1": 7.41
+    },
+    "startup.dev.returning.palette_median_ms": {
+      "value": 464,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.returning.main_spawn_ms": {
+      "value": 14.447021484375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.returning.main_whenReady_ms": {
+      "value": 206.040771484375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.returning.main_createWindow_ms": {
+      "value": 214.46484375,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    },
+    "startup.dev.returning.main_readyToShow_ms": {
+      "value": 338.7939453125,
+      "unit": "ms",
+      "better": "lower",
+      "note": "median of 5",
+      "info": true,
+      "load1": 7.41
+    }
+  }
+}

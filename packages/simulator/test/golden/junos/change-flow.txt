@@ -1,0 +1,26 @@
+netops@edge-r1> configure
+Entering configuration mode
+
+[edit]
+netops@edge-r1# set interfaces ge-0/0/2 description SPARE
+
+[edit]
+netops@edge-r1# show | compare
+[edit interfaces ge-0/0/2]
++   description SPARE;
+
+[edit]
+netops@edge-r1# commit confirmed 5 comment "spare desc"
+commit confirmed will be automatically rolled back in 5 minutes unless confirmed
+commit complete
+
+# commit confirmed will be rolled back in 5 minutes
+[edit]
+netops@edge-r1# commit
+commit complete
+
+[edit]
+netops@edge-r1# exit
+Exiting configuration mode
+
+netops@edge-r1>

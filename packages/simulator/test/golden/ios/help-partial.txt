@@ -1,0 +1,4 @@
+core-sw1#co?
+configure  connect  copy
+
+core-sw1#co

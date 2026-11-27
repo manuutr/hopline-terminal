@@ -1,0 +1,18 @@
+fgt-edge1 # get system performance status
+CPU states: 1% user 0% system 0% nice 99% idle 0% iowait 0% irq 0% softirq
+CPU0 states: 0% user 0% system 0% nice 100% idle 0% iowait 0% irq 0% softirq
+CPU1 states: 2% user 0% system 0% nice 98% idle 0% iowait 0% irq 0% softirq
+Memory: 3112532k total, 1018512k used (32.7%), 1863964k free (59.9%), 230056k freeable (7.4%)
+Average network usage: 99 / 9 kbps in 1 minute, 99 / 4 kbps in 10 minutes, 102 / 21 kbps in 30 minutes
+Maximal network usage: 144 / 37 kbps in 1 minute, 158 / 61 kbps in 10 minutes, 1069 / 4463 kbps in 30 minutes
+Average sessions: 20 sessions in 1 minute, 19 sessions in 10 minutes, 18 sessions in 30 minutes
+Maximal sessions: 32 sessions in 1 minute, 35 sessions in 10 minutes, 56 sessions in 30 minutes
+Average session setup rate: 0 sessions per second in last 1 minute, 0 sessions per second in last 10 minutes, 0 sessions per second in last 30 minutes
+Maximal session setup rate: 3 sessions per second in last 1 minute, 12 sessions per second in last 10 minutes, 21 sessions per second in last 30 minutes
+Average NPU sessions: 0 sessions in last 1 minute, 0 sessions in last 10 minutes, 0 sessions in last 30 minutes
+Maximal NPU sessions: 0 sessions in last 1 minute, 0 sessions in last 10 minutes, 0 sessions in last 30 minutes
+Average nTurbo sessions: 0 sessions in last 1 minute, 0 sessions in last 10 minutes, 0 sessions in last 30 minutes
+Maximal nTurbo sessions: 0 sessions in last 1 minute, 0 sessions in last 10 minutes, 0 sessions in last 30 minutes
+Virus caught: 0 total in 1 minute
+IPS attacks blocked: 0 total in 1 minute
+Uptime: 2 days, 3 hours, 14 minutes

@@ -1,0 +1,46 @@
+Capability codes:
+  (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+  (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
+Device ID            Local Intf      Hold-time  Capability  Port ID  
+
+Chassis id: spine1
+Port id: Ethernet1/1
+Local Port id: Eth1/49
+Port Description: Ethernet1/1
+System Name: spine1
+System Description: Cisco Nexus Operating System (NX-OS) Software 10.3(4a)
+Time remaining: 120 seconds
+System Capabilities: BR
+Enabled Capabilities: BR
+Management Address: 10.255.0.101
+Vlan ID: not advertised
+
+Device ID            Local Intf      Hold-time  Capability  Port ID  
+
+Chassis id: dist-eos1
+Port id: Ethernet45
+Local Port id: Eth1/47
+Port Description: Ethernet45
+System Name: dist-eos1
+System Description: Arista Networks EOS version 4.31.2F running on an Arista DCS-7050SX3-48YC8
+Time remaining: 120 seconds
+System Capabilities: BR
+Enabled Capabilities: BR
+Management Address: 10.255.0.10
+Vlan ID: not advertised
+
+Device ID            Local Intf      Hold-time  Capability  Port ID  
+
+Chassis id: dist-eos1
+Port id: Ethernet46
+Local Port id: Eth1/48
+Port Description: Ethernet46
+System Name: dist-eos1
+System Description: Arista Networks EOS version 4.31.2F running on an Arista DCS-7050SX3-48YC8
+Time remaining: 120 seconds
+System Capabilities: BR
+Enabled Capabilities: BR
+Management Address: 10.255.0.10
+Vlan ID: not advertised
+
+Total entries displayed: 3

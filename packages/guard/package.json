@@ -1,0 +1,13 @@
+{
+  "name": "@hopline/guard",
+  "private": true,
+  "version": "1.2.0",
+  "description": "Pure command classifier, deny-list and output redactor for Hopline's AI agent",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@hopline/cli-model": "*"
+  },
+  "license": "Apache-2.0"
+}

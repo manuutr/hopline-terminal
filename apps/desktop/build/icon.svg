@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    Hopline mark: one hop from a device you are on (ring) to the next (filled), over an arc.
+    Colours from docs/design/VISUAL-DIRECTION.md: canvas #0d0e10, surface #121316, accent #5ec9b6.
+    Regenerate the png/ico/icns with `npm run icons` (scripts/icons.mjs) after editing.
+  -->
+  <rect x="80" y="80" width="864" height="864" rx="196" fill="#121316"/>
+  <rect x="81" y="81" width="862" height="862" rx="195" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <path d="M 296 604 A 216 216 0 0 1 728 604" fill="none" stroke="#5ec9b6" stroke-width="60"/>
+  <circle cx="296" cy="604" r="74" fill="#121316" stroke="#5ec9b6" stroke-width="44"/>
+  <circle cx="728" cy="604" r="92" fill="#5ec9b6"/>
+</svg>

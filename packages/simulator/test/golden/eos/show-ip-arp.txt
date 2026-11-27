@@ -1,0 +1,5 @@
+dist-eos1#show ip arp
+Address         Age (sec)  Hardware Addr   Interface
+10.0.1.0          0:01:12  2899.3a22.0007  Ethernet1
+10.100.0.21       0:00:41  5254.0012.3456  Vlan100, Ethernet10
+10.100.0.22       0:03:02  5254.0012.3457  Vlan100, Ethernet11

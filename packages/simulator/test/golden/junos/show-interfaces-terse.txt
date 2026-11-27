@@ -1,0 +1,23 @@
+netops@edge-r1> show interfaces terse
+Interface               Admin Link Proto    Local                 Remote
+ge-0/0/0                up    up
+ge-0/0/0.0              up    up   inet     203.0.113.2/30
+ge-0/0/1                up    up
+ge-0/0/1.0              up    up   inet     10.0.0.6/30
+                                   multiservice
+ge-0/0/2                down  down
+dsc                     up    up
+fxp0                    up    up
+fxp0.0                  up    up   inet     192.168.100.11/24
+gre                     up    up
+ipip                    up    up
+lo0                     up    up
+lo0.0                   up    up   inet     10.255.0.2          --> 0/0
+lo0.16385               up    up   inet
+lsi                     up    up
+mtun                    up    up
+pimd                    up    up
+pime                    up    up
+tap                     up    up
+
+netops@edge-r1>

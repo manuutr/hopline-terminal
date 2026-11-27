@@ -1,0 +1,32 @@
+
+-------------------------
+Device ID: core-sw1.lab.example.net
+SysName : core-sw1
+Entry address(es): 
+  IPv4 address: 10.0.0.1
+Platform: cisco C9300-48P,  Capabilities: Router Switch IGMP 
+Interface: GigabitEthernet0/0/0/1
+Port ID (outgoing port): GigabitEthernet1/0/2
+Holdtime : 151 sec
+
+Version :
+Cisco IOS Software [Cupertino], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.9.4a
+
+advertisement version: 2
+Duplex: full
+
+-------------------------
+Device ID: leaf1(FDO24120AB1)
+SysName : leaf1
+Entry address(es): 
+  IPv4 address: 10.255.0.30
+Platform: N9K-C93180YC-EX,  Capabilities: Router Switch IGMP 
+Interface: GigabitEthernet0/0/0/2
+Port ID (outgoing port): Ethernet1/50
+Holdtime : 133 sec
+
+Version :
+Cisco Nexus Operating System (NX-OS) Software, Version 10.3(4a)
+
+advertisement version: 2
+Duplex: full

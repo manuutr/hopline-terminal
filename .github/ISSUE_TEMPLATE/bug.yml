@@ -1,0 +1,36 @@
+name: Report a bug
+description: Report a problem with a connection, the terminal, or the workspace.
+title: "[Bug] "
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Hopline version
+      description: Open Help → About Hopline to find the version.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - Linux
+        - Linux under WSLg
+        - macOS
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the device platform, command, and what Hopline displayed. A synthetic example with the same column spacing is ideal. Replace credentials, hostnames, addresses, customer names and circuit descriptions in output and screenshots.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What did you expect, and what happened?
+    validations:
+      required: true

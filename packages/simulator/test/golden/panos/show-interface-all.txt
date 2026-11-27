@@ -1,0 +1,33 @@
+total configured hardware interfaces: 8
+name                    id    speed/duplex/state/fec        mac address
+--------------------------------------------------------------------------------
+ethernet1/1             16    1000/full/up/auto             00:50:56:8a:10:01
+ethernet1/2             17    1000/full/up/auto             00:50:56:8a:10:02
+ethernet1/3             18    1000/full/up/auto             00:50:56:8a:10:03
+ethernet1/4             19    ukn/ukn/down((autoneg))/ukn   00:50:56:8a:10:04
+ae1                     64    [n/a]/[n/a]/up/[n/a]          00:50:56:8a:10:40
+vlan                    1     [n/a]/[n/a]/up/[n/a]          00:50:56:8a:10:01
+loopback                3     [n/a]/[n/a]/up/[n/a]          00:50:56:8a:10:03
+tunnel                  4     [n/a]/[n/a]/up/[n/a]          00:50:56:8a:10:04
+
+aggregation groups: 1
+ae1 members:
+  ethernet1/5 ethernet1/6
+
+
+total configured logical interfaces: 11
+
+name                      id    vsys zone             forwarding               tag    address
+
+------------------- ----- ---- ---------------- ------------------------ ------ ------------------
+ethernet1/1               16    1    untrust          vr:default               0      10.0.3.2/30
+ethernet1/2               17    1    trust            vr:default               0      10.0.3.6/30
+ethernet1/3               18    1                     N/A                      0      N/A
+ethernet1/3.100           256   1    dmz              vr:default               100    10.100.0.1/24
+ethernet1/4               19    1                     N/A                      0      N/A
+ae1                       64    1                     N/A                      0      N/A
+vlan                      1     1                     N/A                      0      N/A
+loopback                  3     1                     N/A                      0      N/A
+loopback.1                257   1    trust            vr:default               0      10.255.0.20/32
+tunnel                    4     1                     N/A                      0      N/A
+tunnel.1                  258   1    vpn              vr:default               0      169.254.10.1/30

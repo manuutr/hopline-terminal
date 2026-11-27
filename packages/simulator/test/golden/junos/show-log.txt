@@ -1,0 +1,9 @@
+netops@edge-r1> show log messages | last 6
+Nov 24 09:10:02  edge-r1 mib2d[6120]: SNMP_TRAP_LINK_DOWN: ifIndex 528, ifAdminStatus down(2), ifOperStatus down(2), ifName ge-0/0/2
+Nov 24 09:11:47  edge-r1 rpd[5123]: BGP_NEIGHBOR_STATE_CHANGED: BGP peer 203.0.113.1 (External AS 64500) changed state from Established to Idle (event HoldTime) (instance master)
+Nov 24 09:12:15  edge-r1 sshd[7701]: Accepted publickey for netops from 192.168.100.50 port 51522 ssh2
+Nov 24 09:12:31  edge-r1 mgd[7703]: UI_DBASE_LOGIN_EVENT: User 'netops' entering configuration mode
+Nov 24 09:14:05  edge-r1 mgd[7703]: UI_COMMIT: User 'netops' requested 'commit' operation (comment: spare desc)
+Nov 24 09:14:09  edge-r1 mgd[7703]: UI_DBASE_LOGOUT_EVENT: User 'netops' exiting configuration mode
+
+netops@edge-r1>

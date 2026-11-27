@@ -1,0 +1,11 @@
+
+maximum of entries supported :      1500
+default timeout :                   1800 seconds
+total MAC entries in table :        2
+total MAC entries shown :           2
+status: s - static, c - complete, i - incomplete
+
+vlan                hw address        interface         status   ttl
+--------------------------------------------------------------------------------
+l2-lab              00:50:56:8a:30:01 ethernet1/7         c      1778
+l2-lab              00:50:56:8a:30:02 ethernet1/8         c      1796

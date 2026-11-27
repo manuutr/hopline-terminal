@@ -1,0 +1,17 @@
+dist-eos1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    aabb.cc00.0110    DYNAMIC     Et48       1       2 days, 3:11:09 ago
+ 100    5254.0012.3456    DYNAMIC     Et10       1       17 days, 12:04:51 ago
+ 100    5254.0012.3457    DYNAMIC     Et11       1       0:05:05 ago
+Total Mac Addresses for this criterion: 3
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0

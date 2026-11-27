@@ -1,0 +1,31 @@
+# Check out LF everywhere, Windows included: fixtures and tests compare exact bytes, and
+# git's core.autocrlf on Windows runners would otherwise turn them into CRLF.
+* text=auto eol=lf
+
+# Binary: never touch line endings or diff as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp4 binary
+*.ico binary
+*.icns binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.gz binary
+*.dmg binary
+*.exe binary
+*.node binary
+*.db binary
+*.sqlite binary
+*.hopline binary
+# Vendored ntc-templates and their fixtures stay byte-identical to upstream (some use CRLF).
+packages/parsers/templates/** -text
+packages/parsers/test/fixtures/** -text
+*.pcap binary
+*.pcapng binary
+*.tgz binary

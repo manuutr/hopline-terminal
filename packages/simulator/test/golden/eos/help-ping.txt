@@ -1,0 +1,6 @@
+switch> ping ?
+WORD  Ping destination address or hostname
+ip    IPv4 echo
+ipv6  IPv6 echo
+mpls  Send echo messages for LSP
+vrf   Ping in a VRF

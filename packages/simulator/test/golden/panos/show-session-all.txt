@@ -1,0 +1,7 @@
+ID/vsys  application    state  type flag  src[sport]/zone/proto (translated IP[port])
+                                              dst[dport]/zone (translated IP[port]
+-------------------------------------------------------------------------------
+35299/1  ssl            ACTIVE  FLOW  NS  10.100.0.10[52648]/dmz/6 (10.0.3.2[19044])
+                                          93.184.216.34[443]/untrust (93.184.216.34[443])
+35301/1  dns-base       ACTIVE  FLOW  NS  10.100.0.11[40112]/dmz/17 (10.0.3.2[23811])
+                                          8.8.8.8[53]/untrust (8.8.8.8[53])

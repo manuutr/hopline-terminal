@@ -1,0 +1,16 @@
+core-sw1#show ip bgp summary
+BGP router identifier 10.255.0.1, local AS number 65001
+BGP table version is 482, main routing table version 482
+16 network entries using 3968 bytes of memory
+16 path entries using 2176 bytes of memory
+5/5 BGP path/bestpath attribute entries using 1480 bytes of memory
+2 BGP AS-PATH entries using 64 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 7688 total bytes of memory
+BGP activity 491/475 prefixes, 512/496 paths, scan interval 60 secs
+16 networks peaked at 09:12:44 Oct 14 2026 UTC (5w6d ago)
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.0.0.2        4        65002       0       0        1    0    0 03:02:11  Idle
+10.0.0.6        4        65000   61234   61190      482    0    0 5w6d           12

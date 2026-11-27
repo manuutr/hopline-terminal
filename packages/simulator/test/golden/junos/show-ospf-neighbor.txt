@@ -1,0 +1,5 @@
+netops@edge-r1> show ospf neighbor
+Address          Interface              State     ID               Pri  Dead
+10.0.0.5         ge-0/0/1.0             Full      10.255.0.1         1    34
+
+netops@edge-r1>

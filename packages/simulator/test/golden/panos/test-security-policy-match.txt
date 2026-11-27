@@ -1,0 +1,16 @@
+"dmz-dns-out; index: 3" {
+        from dmz;
+        source 10.100.0.0/24;
+        source-region none;
+        to untrust;
+        destination [ 8.8.8.8 8.8.4.4 ];
+        destination-region none;
+        user any;
+        source-device any;
+        destinataion-device any;
+        category any;
+        application/service 0:dns/udp/any/53;
+        action allow;
+        icmp-unreachable: no
+        terminal yes;
+}

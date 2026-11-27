@@ -1,0 +1,15 @@
+leaf1# show ip interface brief vrf all
+IP Interface Status for VRF "default"(1)
+Interface            IP Address      Interface Status
+Lo0                  10.255.0.20     protocol-up/link-up/admin-up       
+Eth1/49              10.0.2.1        protocol-up/link-up/admin-up       
+Eth1/50              10.0.2.3        protocol-down/link-down/admin-down 
+
+IP Interface Status for VRF "management"(2)
+Interface            IP Address      Interface Status
+mgmt0                192.168.100.20  protocol-up/link-up/admin-up       
+
+IP Interface Status for VRF "TENANT-A"(3)
+Interface            IP Address      Interface Status
+Vlan100              10.20.100.1     protocol-up/link-up/admin-up       
+Vlan200              10.20.200.1     protocol-up/link-up/admin-up       

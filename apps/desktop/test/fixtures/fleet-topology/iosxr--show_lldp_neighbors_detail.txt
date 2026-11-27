@@ -1,0 +1,24 @@
+Capability codes:
+        (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+        (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
+
+------------------------------------------------
+Local Interface: GigabitEthernet0/0/0/0
+Chassis id: 0026.88ff.8881
+Port id: ge-0/0/0
+Port Description: to-pe1
+System Name: edge-r1
+
+System Description: 
+Juniper Networks, Inc. mx204 internet router, kernel JUNOS 22.4R3.25
+
+Time remaining: 101 seconds
+Hold Time: 120 seconds
+System Capabilities: B,R
+Enabled Capabilities: R
+Management Addresses:
+  IPv4 address: 192.168.100.11 
+
+Peer MAC Address: 00:26:88:ff:88:81
+
+Total entries displayed: 1

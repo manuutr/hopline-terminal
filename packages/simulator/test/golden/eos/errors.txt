@@ -1,0 +1,9 @@
+dist-eos1#show ip bgp sumary
+% Invalid input (at token 3: 'sumary')
+dist-eos1#show interfaces Ethernet99 status
+% Invalid input (at token 2: 'Ethernet99')
+dist-eos1#con
+% Ambiguous command
+dist-eos1#show ip
+% Incomplete command
+dist-eos1#

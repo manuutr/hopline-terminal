@@ -1,0 +1,2 @@
+fgt-edge1 # diagnose lldprx neighbor summary
+1 port 'port2' 4 mac 00:1E:BD:4A:10:01 chassis 00:1E:BD:4A:10:00 port 'Gi1/0/1' system 'core-sw1'

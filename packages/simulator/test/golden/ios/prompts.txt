@@ -1,0 +1,14 @@
+User Access Verification
+
+Username: netops
+Password:
+core-sw1>enable
+Password:
+core-sw1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+core-sw1(config)#interface Gi1/0/2
+core-sw1(config-if)#exit
+core-sw1(config)#router bgp 65001
+core-sw1(config-router)#address-family ipv4
+core-sw1(config-router-af)#end
+core-sw1#

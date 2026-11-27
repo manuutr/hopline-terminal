@@ -1,0 +1,6 @@
+fgt-edge1 # config system interface
+fgt-edge1 (interface) # edit port1
+fgt-edge1 (port1) # set alias WAN-ISP1
+fgt-edge1 (port1) # next
+fgt-edge1 (interface) # end
+fgt-edge1 #

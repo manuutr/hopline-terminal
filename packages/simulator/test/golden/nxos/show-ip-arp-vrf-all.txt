@@ -1,0 +1,14 @@
+leaf1# show ip arp vrf all
+
+Flags: * - Adjacencies learnt on non-active FHRP router
+       + - Adjacencies synced via CFSoE
+       # - Adjacencies Throttled for Glean
+       D - Static Adjacencies attached to down interface
+
+IP ARP Table for all contexts
+Total number of entries: 4
+Address         Age       MAC Address     Interface
+10.0.2.0        00:12:44  00de.fb65.0101  Ethernet1/49
+192.168.100.1   00:04:10  0000.0c9f.f001  mgmt0
+10.20.100.11    00:01:02  0050.56a1.0101  Vlan100
+10.20.100.12    00:00:57  0050.56a1.0102  Vlan100

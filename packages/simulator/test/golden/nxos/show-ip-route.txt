@@ -1,0 +1,18 @@
+leaf1# show ip route
+IP Route Table for VRF "default"
+'*' denotes best ucast next-hop
+'**' denotes best mcast next-hop
+'[x/y]' denotes [preference/metric]
+'%<string>' in via output denotes VRF <string>
+
+10.0.2.0/31, ubest/mbest: 1/0, attached
+    *via 10.0.2.1, Eth1/49, [0/0], 3d22h, direct
+10.0.2.1/32, ubest/mbest: 1/0, attached
+    *via 10.0.2.1, Eth1/49, [0/0], 3d22h, local
+10.255.0.20/32, ubest/mbest: 2/0, attached
+    *via 10.255.0.20, Lo0, [0/0], 3d22h, local
+    *via 10.255.0.20, Lo0, [0/0], 3d22h, direct
+10.255.0.101/32, ubest/mbest: 1/0
+    *via 10.0.2.0, Eth1/49, [110/41], 3d22h, ospf-UNDERLAY, intra
+10.100.0.0/16, ubest/mbest: 1/0
+    *via 10.0.2.0, [20/0], 3d22h, bgp-65020, external, tag 65100

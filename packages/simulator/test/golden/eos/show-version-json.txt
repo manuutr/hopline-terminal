@@ -1,0 +1,21 @@
+dist-eos1#show version | json
+{
+    "mfgName": "Arista",
+    "modelName": "DCS-7050SX3-48YC8",
+    "hardwareRevision": "11.01",
+    "serialNumber": "JPE19470123",
+    "systemMacAddress": "28:99:3a:11:00:00",
+    "hwMacAddress": "28:99:3a:11:00:00",
+    "configMacAddress": "00:00:00:00:00:00",
+    "version": "4.31.2F",
+    "architecture": "x86_64",
+    "internalVersion": "4.31.2F-35141176.4312F",
+    "internalBuildId": "7d8f4a5c-2b1e-4c3a-9f06-1e2d3c4b5a69",
+    "imageFormatVersion": "3.0",
+    "imageOptimization": "Strata-4GB",
+    "bootupTimestamp": 1762378800.0,
+    "uptime": 1512120.5,
+    "memTotal": 8099260,
+    "memFree": 5512384,
+    "isIntlVersion": false
+}

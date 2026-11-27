@@ -1,0 +1,30 @@
+dist-eos1#show logging
+Syslog logging: enabled
+Buffer logging: level debugging
+Console logging: level errors
+Persistent logging: disabled
+Monitor logging: level errors
+Synchronous logging: disabled
+Trap logging: level informational
+    Logging to '10.255.255.50' port 514 in VRF MGMT via udp
+Sequence numbers: disabled
+Syslog facility: local7
+Hostname format: Hostname only
+Repeat logging interval: disabled
+Repeat messages: disabled
+Root login logging: disabled
+
+External configuration:
+    active:
+    inactive:
+
+Facility                   Severity            Effective Severity
+--------------------       -------------       ------------------
+aaa                        debugging           debugging
+accounting                 debugging           debugging
+...
+
+Log Buffer:
+Nov 24 09:12:44 dist-eos1 Ebra: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet2 (spine2), changed state to down
+Nov 24 09:12:45 dist-eos1 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 10.0.1.2 (VRF default AS 65100) 6/6 (Cease/other configuration change) 0 bytes
+Nov 24 09:12:45 dist-eos1 Bgp: %BGP-5-ADJCHANGE: peer 10.0.1.2 (VRF default AS 65100) old state Established event Stop new state Idle

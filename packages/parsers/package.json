@@ -1,0 +1,24 @@
+{
+  "name": "@hopline/parsers",
+  "private": true,
+  "version": "1.2.0",
+  "description": "TextFSM engine (TypeScript, faithful to Python textfsm) with a curated, bundled subset of ntc-templates mapped to Hopline platform ids",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./match": "./src/match.ts"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "fetch-templates": "node scripts/fetch-templates.mjs"
+  },
+  "dependencies": {
+    "@hopline/cli-model": "*"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "js-yaml": "^4.3.2"
+  }
+}

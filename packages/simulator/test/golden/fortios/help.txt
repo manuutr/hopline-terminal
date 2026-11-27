@@ -1,0 +1,7 @@
+fgt-edge1 # get router info ?
+bfd           Show BFD information.
+bgp           Show BGP information.
+...
+fgt-edge1 (port1) # set status ?
+up      Interface up.
+down    Interface down.

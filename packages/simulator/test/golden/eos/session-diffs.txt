@@ -1,0 +1,11 @@
+dist-eos1(config-s-chg1)#show session-config diffs
+--- system:/running-config
++++ session:/chg1-session-config
+@@ -61,6 +61,7 @@
+ interface Ethernet2
+    description spine2
+    no switchport
++   shutdown
+    ip address 10.0.1.3/31
+ !
+ interface Ethernet10

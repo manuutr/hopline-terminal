@@ -1,0 +1,71 @@
+leaf1# show running-config
+
+!Command: show running-config
+!Running configuration last done at: Tue Nov 24 08:15:02 2026
+!Time: Tue Nov 24 09:01:44 2026
+
+version 10.3(4a) Bios:version 05.47
+hostname leaf1
+vdc leaf1 id 1
+  limit-resource vlan minimum 16 maximum 4094
+  limit-resource vrf minimum 2 maximum 4096
+
+feature ospf
+feature bgp
+feature interface-vlan
+feature lacp
+feature lldp
+
+vlan 1,100,200
+vlan 100
+  name DB
+vlan 200
+  name APP
+
+vrf context TENANT-A
+  rd auto
+vrf context management
+  ip route 0.0.0.0/0 192.168.100.1
+
+interface Vlan100
+  no shutdown
+  vrf member TENANT-A
+  ip address 10.20.100.1/24
+
+interface port-channel10
+  switchport mode trunk
+  switchport trunk allowed vlan 100,200
+
+interface Ethernet1/1
+  switchport access vlan 100
+
+interface Ethernet1/49
+  description spine1 Ethernet1/1
+  no switchport
+  mtu 9216
+  ip address 10.0.2.1/31
+  ip ospf network point-to-point
+  ip router ospf UNDERLAY area 0.0.0.0
+  no shutdown
+
+interface mgmt0
+  vrf member management
+  ip address 192.168.100.20/24
+
+interface loopback0
+  ip address 10.255.0.20/32
+  ip router ospf UNDERLAY area 0.0.0.0
+router ospf UNDERLAY
+  router-id 10.255.0.20
+router bgp 65020
+  router-id 10.255.0.20
+  address-family ipv4 unicast
+  neighbor 10.0.2.0
+    remote-as 65100
+    description spine1
+    address-family ipv4 unicast
+  neighbor 10.0.2.2
+    remote-as 65100
+    description spine2
+    shutdown
+    address-family ipv4 unicast

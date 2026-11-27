@@ -1,0 +1,10 @@
+leaf1# show ip ?
+  access-lists    List IP access lists
+  adjacency       Display adjacency information
+  arp             Display ARP information
+  bgp             Display BGP information
+  interface       Display IP interface status and configuration
+  ospf            Display OSPF information
+  route           Show route table
+  ...
+leaf1# show ip 

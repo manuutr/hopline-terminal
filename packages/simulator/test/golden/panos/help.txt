@@ -1,0 +1,21 @@
+username@hostname# set deviceconfig system dns-setting ?
+> dns-proxy-object   Dns proxy object to use for resolving fqdns
+> servers            Primary and secondary dns servers
+  <Enter>            Finish input
+
+username@hostname# set deviceconfig system dns-setting servers ?
++ primary     Primary DNS server IP address
++ secondary   Secondary DNS server IP address
+  <Enter>     Finish input
+
+username@hostname# set deviceconfig system dns-setting servers primary ?
+<ip>  <ip>
+
+admin@PA-3060# set deviceconfig high-availability enabled ?
+  no    no
+  yes   yes
+
+username@hostname> scp import configuration ?
++ remote-port   SSH port number on remote host
++ source-ip     Set source address to specified interface address
+* from          Source (username@host:path)

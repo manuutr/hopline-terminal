@@ -1,0 +1,5 @@
+switch# terminal length 10
+Pagination set to 10 lines.
+switch# configure
+switch(config)# terminal length 0
+Pagination disabled.

@@ -1,0 +1,12 @@
+fgt-edge1 # get router info bgp summary
+BGP router identifier 10.255.0.20, local AS number 65020
+BGP table version is 7
+1 BGP AS-PATH entries
+0 BGP community entries
+
+Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.0.2.2        4      65001   48211   48230        7    0    0 2d03h11m        5
+203.0.113.1     4      64500    9120    9131        7    0    0 2d03h10m        1
+198.51.100.9    4      64501       0       0        0    0    0    never Idle       
+
+Total number of neighbors 3

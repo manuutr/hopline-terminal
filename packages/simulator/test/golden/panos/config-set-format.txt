@@ -1,0 +1,6 @@
+admin@fw1# show network interface ethernet ethernet1/1
+set network interface ethernet ethernet1/1 layer3 ip 10.0.3.2/30
+set network interface ethernet ethernet1/1 layer3 interface-management-profile allow-ping
+set network interface ethernet ethernet1/1 comment "to edge-r1"
+[edit]
+admin@fw1#

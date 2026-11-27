@@ -1,0 +1,7 @@
+leaf1# show logging logfile | last 6
+2026 Nov 20 10:05:31 leaf1 %ETHPORT-5-IF_UP: Interface Ethernet1/49 is up in mode routed
+2026 Nov 20 10:05:44 leaf1 %OSPF-5-ADJCHANGE:  ospf-UNDERLAY [11234]  Nbr 10.255.0.101 on Ethernet1/49 went FULL
+2026 Nov 20 10:05:52 leaf1 %BGP-5-ADJCHANGE:  bgp-65020 [11502] (default) neighbor 10.0.2.0 Up 
+2026 Nov 23 13:40:18 leaf1 %ETHPORT-5-IF_ADMIN_DOWN: Interface Ethernet1/50 is admin down (Administratively down)
+2026 Nov 23 13:40:18 leaf1 %BGP-5-ADJCHANGE:  bgp-65020 [11502] (default) neighbor 10.0.2.2 Down - sent:  administratively shutdown
+2026 Nov 24 08:15:02 leaf1 %VSHD-5-VSHD_SYSLOG_CONFIG_I: Configured from vty by admin on 192.168.100.5@pts/0

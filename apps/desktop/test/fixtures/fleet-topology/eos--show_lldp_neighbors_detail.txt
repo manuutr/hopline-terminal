@@ -1,0 +1,31 @@
+Interface Ethernet1 detected 1 LLDP neighbors:
+
+  Neighbor 2899.3a11.0001/Ethernet7, age 12 seconds
+  Discovered 2 days, 3:11:40 ago; Last changed 2 days, 3:11:40 ago
+  - Chassis ID type: MAC address (4)
+    Chassis ID     : 2899.3a11.0001
+  - Port ID type: Interface name (5)
+    Port ID     : "Ethernet7"
+  - Time To Live: 120 seconds
+  - System Name: "spine1"
+  - System Description: "Arista Networks EOS version 4.31.2F running on an Arista DCS-7280SR3-48YC8"
+  - System Capabilities : Bridge, Router
+    Enabled Capabilities: Bridge, Router
+  - Management Address Subtype: IPv4 (1)
+    Management Address        : 10.255.0.100
+
+Interface Ethernet48 detected 1 LLDP neighbors:
+
+  Neighbor 2899.3a11.0030/Gi1/0/48, age 12 seconds
+  Discovered 2 days, 3:11:40 ago; Last changed 2 days, 3:11:40 ago
+  - Chassis ID type: MAC address (4)
+    Chassis ID     : 2899.3a11.0030
+  - Port ID type: Interface name (5)
+    Port ID     : "Gi1/0/48"
+  - Time To Live: 120 seconds
+  - System Name: "core-sw1"
+  - System Description: "Cisco IOS Software [Cupertino], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.9.4a"
+  - System Capabilities : Bridge, Router
+    Enabled Capabilities: Bridge, Router
+  - Management Address Subtype: IPv4 (1)
+    Management Address        : 10.255.0.1

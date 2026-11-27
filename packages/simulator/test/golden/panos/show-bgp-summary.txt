@@ -1,0 +1,24 @@
+  ==========
+  router id:                     10.255.0.20
+  virtual router:                default
+  reject default route:          no
+  redist default route:          allow
+  Install BGP routes:            yes
+  Graceful Restart:              supported
+  AS size:                       4
+  Local AS:                      65020
+  Local member AS:               0
+  Cluster id:                    0.0.0.0
+  Default local preference:      100
+  Always compare MED:            no
+  Aggregate regardless MED:      yes
+  Deterministic MED processing:  yes
+  Accept ORF:                    no
+  Accept CISCO style prefix:     yes
+  mp-bgp-enable:                 yes
+  afi-safi-ipv4-unicast:         yes
+  rib-out entries:               current 14, peak 14
+    peer edge-r1: AS 65000, Established, IP 10.0.3.1
+      bgpAfiIpv4/unicast pfx:    Accepted pfx: 1, Advertised pfx: 6
+    peer core-sw1: AS 65001, Established, IP 10.0.3.5
+      bgpAfiIpv4/unicast pfx:    Accepted pfx: 5, Advertised pfx: 2

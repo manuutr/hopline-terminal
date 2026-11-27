@@ -1,0 +1,7 @@
+admin@PA-3060# validate full
+Validate job enqueued with jobid 3041
+
+> show jobs id 3041
+Enqueued              Dequeued       ID             Type    Status Result Completed
+2015/05/18 14:00:40   14:00:40     3041         Validate       FIN     OK  14:01:11
+Details:Configuration is valid

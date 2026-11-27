@@ -1,0 +1,2 @@
+leaf1# routing-context vrf TENANT-A
+leaf1%TENANT-A#

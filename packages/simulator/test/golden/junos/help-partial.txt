@@ -1,0 +1,5 @@
+user@host> c?
+Possible completions:
+clear      Clear information in the system
+configure  Manipulate software configuration information
+user@host> c

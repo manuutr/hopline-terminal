@@ -1,0 +1,31 @@
+netops@edge-r1> show configuration | display set | no-more
+set version 22.4R3.25
+set system host-name edge-r1
+set system root-authentication encrypted-password "$6$REDACTED"
+set system login user netops class super-user
+set system services ssh
+set system management-instance
+set interfaces ge-0/0/0 description TRANSIT-A
+set interfaces ge-0/0/0 unit 0 family inet address 203.0.113.2/30
+set interfaces ge-0/0/1 description core-sw1:Gi1/0/1
+set interfaces ge-0/0/1 unit 0 family inet address 10.0.0.6/30
+set interfaces ge-0/0/2 disable
+set interfaces fxp0 unit 0 family inet address 192.168.100.11/24
+set interfaces lo0 unit 0 family inet address 10.255.0.2/32
+set routing-options router-id 10.255.0.2
+set routing-options autonomous-system 65000
+set protocols ospf area 0.0.0.0 interface ge-0/0/1.0 interface-type p2p
+set protocols ospf area 0.0.0.0 interface lo0.0 passive
+set protocols bgp group CORE type external
+set protocols bgp group CORE peer-as 65001
+set protocols bgp group CORE neighbor 10.0.0.5
+set protocols bgp group TRANSIT type external
+set protocols bgp group TRANSIT export TRANSIT-OUT
+set protocols bgp group TRANSIT peer-as 64500
+set protocols bgp group TRANSIT neighbor 203.0.113.1
+set policy-options prefix-list OUR-AGG 198.51.100.0/24
+set policy-options policy-statement TRANSIT-OUT term AGG from prefix-list OUR-AGG
+set policy-options policy-statement TRANSIT-OUT term AGG then accept
+set policy-options policy-statement TRANSIT-OUT term REST then reject
+
+netops@edge-r1>

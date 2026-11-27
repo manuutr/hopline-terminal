@@ -1,0 +1,42 @@
+admin@fw1> show system info
+
+hostname: fw1
+ip-address: 10.255.10.10
+netmask: 255.255.255.0
+default-gateway: 10.255.10.1
+ipv6-address: unknown
+ipv6-link-local-address: fe80::250:56ff:fe8a:1000/64
+ipv6-default-gateway: 
+mac-address: 00:50:56:8a:10:00
+time: Tue Nov 24 09:12:44 2026
+uptime: 12 days, 3:41:07
+family: vm
+model: PA-VM
+serial: 007954000123456
+vm-mac-base: BA:DB:EE:FB:AD:00
+vm-mac-count: 256
+vm-uuid: 564D8B6D-7BDB-75AF-400F-B062016DC67E
+vm-cpuid: ESX:FB060000FDFB8B07
+vm-license: VM-300
+vm-mode: VMWare ESXi
+sw-version: 11.1.6
+global-protect-client-package-version: 0.0.0
+app-version: 8930-9310
+app-release-date: 2026/11/18 15:04:12 PST
+av-version: 5021-5539
+av-release-date: 2026/11/23 06:01:33 PST
+threat-version: 8930-9310
+threat-release-date: 2026/11/18 15:04:12 PST
+wf-private-version: 0
+wf-private-release-date: unknown
+url-db: paloaltonetworks
+wildfire-version: 0
+wildfire-release-date: unknown
+url-filtering-version: 20261124.20142
+global-protect-datafile-version: 0
+global-protect-datafile-release-date: unknown
+logdb-version: 11.1.2
+platform-family: vm
+vpn-disable-mode: off
+multi-vsys: off
+operational-mode: normal

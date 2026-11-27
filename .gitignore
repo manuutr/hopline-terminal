@@ -1,0 +1,40 @@
+node_modules/
+out/
+out-test/
+dist/
+/apps/desktop/release/
+*.log
+.env
+.env.*
+packages/simulator/host_key*
+test-results/
+playwright-report/
+
+# agent worktrees
+.claude/worktrees/
+
+# live eval reports (docs/EVALS.md): only the summaries are committed
+eval/results/*
+!eval/results/SUMMARY-*.md
+
+# benchmark scratch (bench/results/<date>.json and .md are committed)
+bench/results/.raw/
+bench/results/.pw/
+bench/results/.*.log
+
+# Locally generated review captures and detector cache
+/docs/design/screens/
+/docs/design/polish/
+/.impeccable/
+
+# Operator data and local signing material
+*.pcap
+*.pcapng
+*.hopline
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.p12
+*.pfx
+*.p8
+!docs/examples/dns-failure/name-error.pcap

@@ -1,0 +1,620 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+@import '@xterm/xterm/css/xterm.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Hopline design tokens.
+ * Raw values live on :root / .dark; Tailwind utilities map to them via @theme inline,
+ * so every component reads semantic names (bg-surface, text-fg-muted, border-line).
+ * One accent ("signal" teal). Status colors (ok/warn/danger) are reserved for state.
+ */
+:root {
+  --spacing: 4px;
+  --z-terminal: 5;
+  --z-hints: 6;
+  --z-scrim: 40;
+  --z-dialog: 50;
+  --spring-stiffness: 420;
+  --spring-damping: 38;
+  /* Sampled critically damped spring for compositor-driven movement. */
+  --ease-spring: linear(0, .173 10%, .443 20%, .659 30%, .803 40%, .892 50%, .943 60%, .973 70%, .99 85%, 1);
+  /* motion: chrome only (panels, menus, palette, dialogs); the terminal never animates */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  /* exits are the short end of the 120-180 ms range (VISUAL-DIRECTION.md, Motion) */
+  --dur-exit: 120ms;
+  --ease-std: var(--ease-in-out);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /*
+   * Surfaces (docs/design/VISUAL-DIRECTION.md). The window, title bar, status bar and terminal
+   * share one colour (canvas = term) so the window reads as one surface; side panels (surface)
+   * are one quiet step off it. Raised = inputs and code wells; overlay = menus, palette, dialogs.
+   */
+  --c-canvas: #fcfcfc;
+  --c-surface: #f4f4f5;
+  --c-raised: #ffffff;
+  --c-overlay: #fcfdff;
+  --c-float: #eff2f6;
+  --c-info: #245a96;
+  --c-hover: rgb(20 22 26 / 0.045);
+  --c-active: rgb(20 22 26 / 0.08);
+
+  /* text: all AA (>= 4.5:1) on canvas, surface and raised (test/design-tokens.test.ts) */
+  --c-fg: #17181b;
+  --c-fg-muted: #4f535a;
+  --c-fg-subtle: #61656d;
+
+  /* lines: 1 px, low contrast */
+  --c-line: rgb(20 22 26 / 0.08);
+  --c-line-strong: rgb(20 22 26 / 0.14);
+  /* form-control boundaries (inputs, selects, the Toggle's off track): 3:1 against the field */
+  --c-line-input: rgb(20 22 26 / 0.3);
+
+  /* the one accent */
+  --c-accent: #0a6c60;
+  --c-accent-fg: #ffffff;
+  --c-accent-soft: rgb(10 108 96 / 0.09);
+
+  /* semantic: state only, never decoration */
+  --c-ok: #17733f;
+  --c-warn: #875700;
+  --c-danger: #b42d33;
+  --c-ok-soft: rgb(23 115 63 / 0.09);
+  --c-warn-soft: rgb(135 87 0 / 0.09);
+  --c-danger-soft: rgb(180 45 51 / 0.08);
+
+  --c-ring: rgb(10 108 96 / 0.55);
+  /* modal scrim: a light veil in light (a heavy one turned the light theme grey), deeper in dark */
+  --c-scrim: rgb(20 22 26 / 0.14);
+  --shadow-overlay: 0 2px 6px rgb(0 0 0 / 0.06), 0 8px 24px -6px rgb(0 0 0 / 0.16), 0 0 0 1px var(--c-line-strong);
+
+  /* terminal (light) */
+  --term-bg: #fcfcfc;
+  --term-fg: #1d1f23;
+  --term-cursor: #0a6c60;
+  --term-selection: rgb(10 108 96 / 0.16);
+
+  /* window chrome: the title bar is 36 px; macOS traffic lights need 78 px on the left */
+  --titlebar-h: 36px;
+}
+
+.dark {
+  --c-canvas: #0d0e10;
+  --c-surface: #13171c;
+  --c-raised: #191e25;
+  --c-overlay: #1c2129;
+  --c-float: #252c36;
+  --c-info: #91bff9;
+  --c-hover: rgb(255 255 255 / 0.045);
+  --c-active: rgb(255 255 255 / 0.08);
+
+  --c-fg: #e6e7ea;
+  --c-fg-muted: #a4a7ae;
+  --c-fg-subtle: #969aa3;
+
+  --c-line: rgb(255 255 255 / 0.07);
+  --c-line-strong: rgb(255 255 255 / 0.12);
+  --c-line-input: rgb(255 255 255 / 0.2);
+
+  --c-accent: #5ec9b6;
+  --c-accent-fg: #06201b;
+  --c-accent-soft: rgb(94 201 182 / 0.12);
+
+  --c-ok: #62cb8c;
+  --c-warn: #e3ad57;
+  --c-danger: #f17a78;
+  --c-ok-soft: rgb(98 203 140 / 0.11);
+  --c-warn-soft: rgb(227 173 87 / 0.11);
+  --c-danger-soft: rgb(241 122 120 / 0.11);
+
+  --c-ring: rgb(94 201 182 / 0.6);
+  --c-scrim: rgb(0 0 0 / 0.5);
+  --shadow-overlay: 0 3px 8px rgb(0 0 0 / 0.16), 0 14px 36px -10px rgb(0 0 0 / 0.28), 0 0 0 1px var(--c-line-strong);
+
+  --term-bg: #0d0e10;
+  --term-fg: #dcdee2;
+  --term-cursor: #5ec9b6;
+  --term-selection: rgb(94 201 182 / 0.24);
+}
+
+.dark.contrast {
+  --c-canvas: #080a0d;
+  --c-surface: #101419;
+  --c-raised: #181e25;
+  --c-overlay: #222831;
+  --c-float: #2b323b;
+  --c-line: #89949e;
+  --c-line-strong: #b6c0cb;
+  --c-line-input: #cbd3db;
+  --c-fg: #ffffff;
+  --c-fg-muted: #e5ebf2;
+  --c-fg-subtle: #c7d2dd;
+  --c-accent: #8dffe3;
+  --c-ring: #ffda70;
+  --c-ok: #91efa4;
+  --c-warn: #ffda70;
+  --c-danger: #ffa6aa;
+  --c-info: #b3d5ff;
+  --term-bg: #080a0d;
+  --term-fg: #ffffff;
+  --term-cursor: #ffda70;
+}
+
+::view-transition-group(root), ::view-transition-old(root), ::view-transition-new(root) {
+  animation-duration: var(--dur-base);
+  animation-timing-function: var(--ease-out);
+}
+[data-reduce-motion] *, [data-reduce-motion] *::before, [data-reduce-motion] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+@theme inline {
+  --color-surface-0: var(--c-canvas);
+  --color-surface-1: var(--c-surface);
+  --color-surface-2: var(--c-raised);
+  --color-surface-3: var(--c-overlay);
+  --color-surface-4: var(--c-float);
+  --color-info: var(--c-info);
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-raised: var(--c-raised);
+  --color-overlay: var(--c-overlay);
+  --color-hover: var(--c-hover);
+  --color-active: var(--c-active);
+  --color-fg: var(--c-fg);
+  --color-fg-muted: var(--c-fg-muted);
+  --color-fg-subtle: var(--c-fg-subtle);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-line-input: var(--c-line-input);
+  --color-accent: var(--c-accent);
+  --color-accent-fg: var(--c-accent-fg);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-ok: var(--c-ok);
+  --color-warn: var(--c-warn);
+  --color-danger: var(--c-danger);
+  --color-ok-soft: var(--c-ok-soft);
+  --color-warn-soft: var(--c-warn-soft);
+  --color-danger-soft: var(--c-danger-soft);
+  --color-ring: var(--c-ring);
+  --color-scrim: var(--c-scrim);
+  /* --term-paint: the background the active terminal theme actually paints (set by TerminalView). */
+  --color-term: var(--term-paint, var(--term-bg));
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
+
+  /* type scale: dense UI, 13px base */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.875rem;
+  --text-base--line-height: 1.375rem;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+
+  --shadow-overlay: var(--shadow-overlay);
+
+  --ease-out-quint: var(--ease-out);
+  --animate-menu-in: menu-in var(--dur-fast) var(--ease-out-quint);
+  --animate-evidence-in: evidence-in var(--dur-base) var(--ease-out-quint);
+  @keyframes menu-in {
+    from { opacity: 0; transform: translate(var(--menu-x, 0), var(--menu-y, 0)); }
+    to { opacity: 1; transform: none; }
+  }
+  --animate-workspace-in: workspace-in var(--dur-base) var(--ease-out-quint);
+  @keyframes workspace-in {
+    from { opacity: .6; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes evidence-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  --animate-fade-in: fade-in var(--dur-fast) var(--ease-out-quint);
+  --animate-pop-in: pop-in var(--dur-base) var(--ease-out-quint);
+  /* exits are shorter than entrances and accelerate away */
+  --animate-fade-out: fade-out var(--dur-exit) var(--ease-in) forwards;
+  --animate-pop-out: pop-out var(--dur-exit) var(--ease-in) forwards;
+  --animate-pulse-dot: pulse-dot 1.4s ease-in-out infinite;
+  /* "needs approval": pulse twice, then hold still */
+  --animate-attention: attention 320ms var(--ease-out-quint) 2;
+  /* the arming delay of Approve / Confirm, shown (the element sets animation-duration to ARM_MS) */
+  --animate-arm: arm 1500ms linear forwards;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes pop-out {
+    from { opacity: 1; transform: none; }
+    to { opacity: 0; transform: translateY(-2px) scale(0.99); }
+  }
+  @keyframes pop-in {
+    from { opacity: 0; transform: translateY(-4px) scale(0.985); }
+    to { opacity: 1; transform: none; }
+  }
+  /* a scale nudge, not a glow */
+  @keyframes attention {
+    0%, 100% { transform: none; }
+    50% { transform: scale(1.25); }
+  }
+  @keyframes arm {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    /* clip, not hidden: a hidden box can still be scrolled by focus/scrollIntoView (a closed side
+       panel's off-screen content dragged the whole window 10 px sideways). */
+    overflow: clip;
+  }
+  body {
+    @apply bg-canvas text-fg font-sans text-sm antialiased;
+    -webkit-font-smoothing: antialiased;
+    /* Inter: tabular figures stay opt-in (tabular-nums); cv11 = single-storey a, calmer at 12-13 px */
+    font-feature-settings: 'cv11', 'tnum';
+    user-select: none;
+  }
+  ::selection {
+    background: var(--term-selection);
+    color: inherit;
+  }
+  /* One icon language: lucide line icons at one stroke width. */
+  svg.lucide {
+    stroke-width: 1.5px;
+    width: 16px;
+    height: 16px;
+  }
+  input,
+  textarea,
+  [contenteditable],
+  .selectable {
+    user-select: text;
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-ring);
+    outline-offset: 1px;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-line-strong);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /*
+   * Reduced motion: nothing moves. Not "very short" (0.01ms still starts a transition and fires
+   * its events): no animation and no transition at all. e2e/motion.spec.ts checks that opening the
+   * palette, a menu, a dialog and a panel runs none. The arming delay of Approve/Confirm is a timer,
+   * not an animation, so it still holds; only its progress bar stops drawing.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Terminal autocomplete: drawn over the xterm canvas, never written into the buffer. */
+.hop-ghost {
+  position: absolute;
+  z-index: var(--z-terminal);
+  pointer-events: none;
+  white-space: pre;
+  color: var(--c-fg-subtle);
+}
+.hop-hints {
+  position: absolute;
+  z-index: var(--z-hints);
+  pointer-events: none;
+  min-width: 12rem;
+  max-width: 32rem;
+  padding: 3px;
+  border-radius: 6px;
+  background: var(--c-overlay);
+  box-shadow: var(--shadow-overlay);
+  font-size: var(--text-2xs);
+  line-height: 18px;
+  animation: fade-in var(--dur-fast) var(--ease-out);
+}
+.hop-hint {
+  display: flex;
+  gap: 12px;
+  padding: 0 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.hop-hint-word {
+  font-family: var(--font-mono);
+  color: var(--c-fg);
+}
+.hop-hint[data-kind='param'] .hop-hint-word {
+  color: var(--c-accent);
+}
+.hop-hint[data-kind='value'] .hop-hint-word {
+  color: var(--c-ok);
+}
+.hop-hint-help {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--c-fg-subtle);
+}
+
+/* Native <select>: our own chevron (a mid-grey that reads in both themes), not the OS widget's. */
+.hop-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23868a93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+.hop-select option {
+  background: var(--c-overlay);
+  color: var(--c-fg);
+}
+
+.terminal-grid::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  inset: 0 0 auto;
+  height: var(--history-height, 0);
+  backdrop-filter: saturate(.55);
+}
+.xterm .xterm-decoration.history-chip {
+  width: max-content !important;
+  max-width: 100%;
+  pointer-events: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  color: var(--c-fg-muted);
+  padding: 0 8px;
+  font: var(--text-2xs)/1.3 var(--font-sans);
+}
+.terminal-pill {
+  z-index: var(--z-hints);
+  border: 1px solid var(--c-line-strong);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--c-overlay);
+  color: var(--c-fg-muted);
+  font-size: var(--text-xs);
+  box-shadow: var(--shadow-overlay);
+  animation: fade-in var(--dur-fast) var(--ease-out);
+}
+.terminal-pill:hover { color: var(--c-fg); }
+
+.connection-alive { animation: breathe 2.4s ease-in-out infinite; }
+.connection-spin { animation: spin .9s linear infinite; }
+.connection-drop { animation: disconnect var(--dur-base) var(--ease-out); }
+.activity-blip {
+  position: absolute;
+  right: -2px;
+  bottom: 0;
+  width: 2px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--c-accent);
+  pointer-events: none;
+  animation: activity var(--dur-slow) var(--ease-out) both;
+}
+.connect-progress { transform-origin: left; animation: progress-scan 1.2s ease-in-out infinite; }
+.syslog-sweep { pointer-events: none; background: var(--c-danger-soft); animation: activity var(--dur-slow) var(--ease-out) both; }
+.metric-value { animation: roll-value var(--dur-fast) var(--ease-out); }
+@keyframes breathe { 50% { opacity: .7; transform: scale(.9); } }
+@keyframes disconnect { 25%, 75% { transform: translateX(-1px); } 50% { transform: translateX(2px); } }
+@keyframes activity { from { opacity: 1; } to { opacity: 0; } }
+@keyframes roll-value { from { opacity: .45; transform: translateY(2px); } }
+@keyframes progress-scan { from { transform: translateX(-50%) scaleX(.35); } to { transform: translateX(110%) scaleX(.35); } }
+
+.focus-frame, .selection-rail {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9;
+  transform-origin: top left;
+}
+.focus-frame { border: 1px solid var(--c-accent); border-top-width: 2px; }
+.focus-frame::before {
+  content: '';
+  position: absolute;
+  border-top: 6px solid var(--c-accent);
+  border-right: 6px solid transparent;
+}
+.selection-rail { background: var(--c-accent); border-radius: var(--radius-sm); }
+/* The recessed edge dims an unfocused pane without compositing over its terminal glyphs. */
+.pane-shade { box-shadow: inset 0 0 0 2px var(--c-fg); opacity: .08; }
+.contrast .pane-shade { display: none; }
+.contrast .question-chip { border-color: var(--c-line-strong); }
+.contrast :focus-visible { outline: 2px solid var(--c-ring); outline-offset: 2px; }
+
+.terminal-caret {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 4;
+  width: 1.5px;
+  pointer-events: none;
+  animation: cursor-breathe 1.1s ease-in-out infinite alternate;
+}
+.terminal-caret[data-smooth=true] { transition: transform var(--dur-fast) var(--ease-out); }
+@keyframes cursor-breathe { 0%, 20% { opacity: 1; } 100% { opacity: .18; } }
+
+.vendor-chip {
+  width: 3.3em;
+  flex-shrink: 0;
+  text-align: center;
+  border-radius: 999px;
+  font: 500 var(--text-2xs)/1.55 var(--font-mono);
+}
+.vendor-default { color: var(--c-info); background: color-mix(in srgb, var(--c-info) 11%, transparent); }
+.vendor-eos { color: var(--c-accent); background: var(--c-accent-soft); }
+.vendor-fos { color: var(--c-warn); background: var(--c-warn-soft); }
+[data-row-key], [data-ws-id], .list-exit-face { transform-origin: top left; }
+.list-exit-face {
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-inline: 8px;
+  color: var(--c-fg-muted);
+  font-size: var(--text-xs);
+  pointer-events: none;
+}
+[data-split-target]::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 50%;
+  border: 1px solid var(--c-accent);
+  background: var(--c-accent-soft);
+  pointer-events: none;
+  z-index: 10;
+}
+[data-split-target=column]::after { inset: 50% 0 0; }
+
+[data-menu-content] { position: relative; isolation: isolate; }
+[data-menu-content]:focus-within::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 4px auto;
+  height: var(--highlight-height, 0);
+  border-radius: var(--radius-sm);
+  background: var(--c-active);
+  transform: translateY(var(--highlight-y, 0));
+  transition: transform var(--dur-fast) var(--ease-out);
+  pointer-events: none;
+}
+[data-menu-content]:focus-within [data-highlighted] { background: transparent; }
+
+.question-chip { border: 1px solid var(--c-line); border-radius: var(--radius-md); padding: 4px 8px; background: var(--c-raised); color: var(--c-fg-muted); text-align: left; font-size: var(--text-xs); }
+.question-chip:hover { color: var(--c-fg); border-color: var(--c-line-strong); }
+.assistant-signal { animation: signal-in var(--dur-slow) var(--ease-out) both; }
+@keyframes signal-in { from { transform: translateY(3px); opacity: .35; } }
+.assistant-dock { transition: transform var(--dur-base) var(--ease-spring), opacity var(--dur-fast), visibility 0s; }
+.assistant-dock[data-open=false] { transform: translateX(18px); opacity: 0; pointer-events: none; visibility: hidden; transition-duration: var(--dur-exit), var(--dur-exit), 0s; transition-delay: 0s, 0s, var(--dur-exit); }
+.thinking-dots { display: inline-flex; gap: 3px; }
+.thinking-dots i { width: 3px; height: 3px; border-radius: 50%; background: currentColor; animation: thinking-wave 1.2s ease-in-out infinite alternate; }
+.thinking-dots i:nth-child(2) { animation-delay: .18s; }
+.thinking-dots i:nth-child(3) { animation-delay: .36s; }
+@keyframes thinking-wave { from { opacity: .4; } to { transform: translateY(-2px); opacity: 1; } }
+
+.delayed-skeleton { animation: skeleton-appear 1ms 150ms backwards; }
+.skeleton-line { position: relative; overflow: hidden; }
+.skeleton-line::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(100deg, transparent 15%, color-mix(in srgb, var(--c-fg) 19%, transparent) 50%, transparent 85%);
+  animation: skeleton-pass 1.5s 150ms ease-in-out infinite;
+}
+.skeleton-line + .skeleton-line::after { animation-delay: 240ms; }
+@keyframes skeleton-appear { from { opacity: 0; } }
+@keyframes skeleton-pass { 72%, 100% { transform: translateX(100%); } }
+[data-selection-face] { position: absolute; pointer-events: none; transform-origin: left center; }
+[data-selection-face=segment] {
+  border-radius: var(--radius-sm); background: var(--c-active);
+  box-shadow: inset 0 1px color-mix(in srgb, var(--c-fg) 12%, transparent);
+}
+[data-selection-face=tab] { background: var(--c-accent); border-radius: 2px; z-index: 2; }
+.switch-thumb { transition: translate var(--dur-base) var(--ease-spring), scale var(--dur-fast) var(--ease-out); }
+[role=switch][aria-checked=false] .switch-thumb { transform-origin: left; }
+[role=switch][aria-checked=true] .switch-thumb { transform-origin: right; }
+[role=switch]:enabled:active .switch-thumb { scale: 1.16 .92; }
+[data-sonner-toast][data-mounted=true]:is([data-type=success], [data-type=error], [data-type=info], [data-type=warning]) [data-icon] {
+  animation: toast-ack var(--dur-base) var(--ease-out);
+}
+@keyframes toast-ack {
+  from { transform: scale(.72); opacity: .4; }
+  65% { transform: scale(1.08); }
+  to { transform: scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { [role=switch]:enabled:active .switch-thumb { scale: 1; } }
+[data-reduce-motion] [role=switch]:enabled:active .switch-thumb { scale: 1; }
+[data-sonner-toast].toast-timed [data-content]::after { content: ''; position: absolute; bottom: 0; left: 4px; right: 4px; height: 2px; background: var(--c-accent); opacity: .6; transform-origin: left; animation: toast-clock var(--toast-time) linear forwards; }
+[data-sonner-toast][data-expanded=true] [data-content]::after { animation-play-state: paused; }
+@keyframes toast-clock { to { transform: scaleX(0); } }
+@media (max-width: 1050px) { .status-bar { gap: 8px; } }
+
+/* Blurring a changing terminal forces pixel readback on software compositors. */
+body:has([data-pane-id] .terminal-grid:is([data-renderer=dom], [data-deep-history])) [data-command-backdrop] {
+  backdrop-filter: none;
+  background: color-mix(in srgb, var(--c-canvas) 55%, transparent);
+}
+
+.table-drawer { height: clamp(min(140px, 96%), var(--table-height, 58%), 96%); }
+.table-resize-grip, .results-resize-grip {
+  display: grid; place-items: center; touch-action: none; user-select: none; color: var(--c-fg-muted);
+}
+.table-resize-grip { width: 100%; height: 12px; flex: none; cursor: ns-resize; }
+.table-resize-grip svg { height: 12px; }
+.results-resize-grip { position: absolute; right: 0; bottom: 0; z-index: 1; width: 22px; height: 22px; cursor: nwse-resize; }
+.table-resize-grip:is(:hover,:focus-visible,:active), .results-resize-grip:is(:hover,:focus-visible,:active) { color: var(--c-accent); background: var(--c-accent-soft); }
+.multi-results-viewer {
+  top: 3vh; width: clamp(min(480px,96vw), var(--viewer-width,1080px),96vw);
+  height: clamp(min(300px,94vh), var(--viewer-height,min(690px,86vh)),94vh); max-height: 94vh;
+}
+.multi-results-viewer > div:last-of-type { padding-right: 28px; }
+
+/* Settings keeps secondary explanations available on request. */
+[data-setting-tips="hidden"] [data-settings-hint]:not([data-essential]),
+[data-setting-tips="hidden"] [data-settings-extra] {
+  display: none;
+}
+
+[data-setting-tips] [data-settings-fields]:has(> [data-settings-row]) {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+}
+[data-setting-tips] [data-settings-fields] > [data-settings-row] {
+  margin-inline: 0;
+  padding: 8px 12px;
+}
+[data-setting-tips] [data-settings-fields] > [data-settings-row] + [data-settings-row] {
+  border-top: 1px solid var(--c-line);
+  border-radius: 0;
+}
+[data-settings-page="general"] [data-settings-control] {
+  align-items: flex-end;
+}
+[data-settings-page="general"] [data-settings-control] > [role="radiogroup"],
+[data-setting-tips] [data-settings-control] > [role="switch"]:only-child,
+[data-setting-tips] [data-settings-control] > button:only-child {
+  align-self: flex-end;
+}

@@ -1,0 +1,17 @@
+----------------------------------------
+Device ID:spine1(FDO24120AB1)
+
+Interface address(es):
+    IPv4 Address: 10.255.0.101
+Platform: N9K-C9364C, Capabilities: Router Switch IGMP Filtering Supports-STP-Dispute
+Interface: Ethernet1/49, Port ID (outgoing port): Eth1/1
+Holdtime: 133 sec
+
+----------------------------------------
+Device ID:mgmt-sw1
+
+Interface address(es):
+    IPv4 Address: 0.0.0.0
+Platform: WS-C3850-48T, Capabilities: S IGMP Filtering
+Interface: mgmt0, Port ID (outgoing port): Gig1/0/20
+Holdtime: 179 sec

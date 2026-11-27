@@ -1,0 +1,34 @@
+------------------------------------------------
+Local Intf: Gi1/0/1
+Chassis id: 3c22.fb81.0000
+Port id: Gi0/0/0
+Port Description: Gi0/0/0
+System Name: edge-r1.lab
+
+System Description: 
+Cisco IOS Software [Bengaluru], ISR Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.6.5
+
+Time remaining: 148 seconds
+System Capabilities: R
+Enabled Capabilities: R
+Management Addresses:
+    IP: 10.0.0.6
+
+------------------------------------------------
+Local Intf: Gi1/0/48
+Chassis id: 3c22.fb81.0000
+Port id: Ethernet48
+Port Description: Ethernet48
+System Name: dist-eos1
+
+System Description: 
+Arista Networks EOS version 4.31.2F running on an Arista DCS-7050SX3-48YC8
+
+Time remaining: 111 seconds
+System Capabilities: B,R
+Enabled Capabilities: B,R
+Management Addresses:
+    IP: 10.255.0.10
+
+
+Total entries displayed: 2

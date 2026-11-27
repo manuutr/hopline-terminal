@@ -1,0 +1,19 @@
+dist-eos1#show version
+Arista DCS-7050SX3-48YC8
+Hardware version: 11.01
+Serial number: JPE19470123
+Hardware MAC address: 2899.3a11.0000
+System MAC address: 2899.3a11.0000
+
+Software image version: 4.31.2F
+Architecture: x86_64
+Internal build version: 4.31.2F-35141176.4312F
+Internal build ID: 7d8f4a5c-2b1e-4c3a-9f06-1e2d3c4b5a69
+Image format version: 3.0
+Image optimization: Strata-4GB
+
+Kernel version: 5.10.209-arista-amd64
+
+Uptime: 2 weeks, 3 days, 14 hours and 22 minutes
+Total memory: 8099260 kB
+Free memory: 5512384 kB

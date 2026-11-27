@@ -1,0 +1,12 @@
+fgt-edge1 # config firewall policy
+fgt-edge1 (policy) # edit 10
+fgt-edge1 (10) # set srcaddr LAN-NET
+entry not found in datasource
+
+value parse error before 'LAN-NET'
+Command fail. Return code -3
+fgt-edge1 (10) # set bogus 1
+command parse error before 'bogus'
+Command fail. Return code -61
+fgt-edge1 (10) # abort
+fgt-edge1 (policy) #

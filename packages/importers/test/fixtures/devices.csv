@@ -1,0 +1,12 @@
+Name,IP Address,Port,Protocol,Username,Folder,Platform,Tags,Description,Password
+core-sw1,10.0.0.1/24,,ssh,netops,DC1/Core,cisco-ios-xe,"core,dc1",Primary core,
+core-sw2,10.0.0.2,2222,SSH2,netops,DC1/Core,Cisco IOS-XE,core,"Secondary core, ""B"" side",hunter2
+leaf-ä1,10.0.1.1,,,,DC1/Leaf/Row 1,nxos,leaf;dc1,"Multi-line
+description",
+fw-edge,10.0.9.1,,ssh,admin,DC1/Edge,paloalto-panos,fw,,
+tokyo-東京,192.0.2.5,23,telnet,,APAC,,,,
+no-ip-yet,,,,,DC1/Core,,,,
+console-1,/dev/ttyUSB0,,serial,,Lab,,,,
+core-sw1,10.0.0.1,,ssh,netops,DC1/Core,cisco-ios-xe,core,duplicate row,
+old-box,10.0.0.99,513,rlogin,,Lab,,,,
+weird-port,10.0.0.98,99999,ssh,,Lab,,,,

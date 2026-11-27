@@ -1,0 +1,11 @@
+core-sw1#show cdp neighbors
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,
+                  D - Remote, C - CVTA, M - Two-port Mac Relay
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+edge-r1.lab.example.net
+                 Gig 1/0/1         157              R I   ISR4431/K Gig 0/0/0
+AP-3F-East       Gig 1/0/6         122             T B I  C9120AXI- Gig 0
+
+Total cdp entries displayed : 2

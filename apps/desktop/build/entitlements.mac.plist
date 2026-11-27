@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Hardened runtime entitlements (docs/SIGNING.md). Hopline is not sandboxed (it reads ~/.ssh,
+  writes session logs anywhere, and opens serial ports), so the App Sandbox is NOT enabled.
+  The network and serial keys below only take effect inside the App Sandbox; they are listed so
+  that a future sandboxed (Mac App Store) build keeps working without a hunt.
+-->
+<plist version="1.0">
+<dict>
+  <!-- V8's JIT. -->
+  <key>com.apple.security.cs.allow-jit</key>
+  <true/>
+  <!-- Native modules (better-sqlite3, serialport) are signed with the app's own Developer ID; no
+       disable-library-validation needed. -->
+
+  <!-- Sandbox-only, inert without com.apple.security.app-sandbox: -->
+  <key>com.apple.security.network.client</key>
+  <true/>
+  <!-- Local port forwards listen on a port. -->
+  <key>com.apple.security.network.server</key>
+  <true/>
+  <!-- USB-serial console cables. -->
+  <key>com.apple.security.device.serial</key>
+  <true/>
+  <key>com.apple.security.device.usb</key>
+  <true/>
+</dict>
+</plist>

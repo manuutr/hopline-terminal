@@ -1,0 +1,32 @@
+[Bookmarks]
+SubRep=
+ImgNum=42
+bastion=#109#0%bastion.corp.example.net%22%jump%%-1%-1%%%%%0%0%0%%%-1%0%0%0%%1080%%0%0%1#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+COM10=#131#8%0%1115200%3%0%0%1%2%COM10  (USB-SERIAL CH340 (COM10))#JetBrains Mono%12%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+com (usb-serial)= #131#8%-2%1009600%3%0%0%1%2%COM3  (USB Serial Port (COM3))#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+desk rdp=#91#4%10.9.9.9%3389%%0%0%%%%-1%0%0%0%%%0%0%%1080%%0%0#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+
+[Bookmarks_1]
+SubRep=Network\Core
+ImgNum=41
+core-nxos-01= #109#0%10.20.0.11%22%netops%%-1%-1%%bastion.corp.example.net%22%jump%0%0%0%_CurrentDrive_:\Keys\core.ppk%%-1%0%0%0%%1080%%0%0%1%%0%%%%0%-1%-1%-1#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%-1%_CurrentDrive_:\Logs%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0#Spine __PTVIRG__ row 4 __DIEZE__1#-1
+Zürich edge=#109#0%10.30.0.1%2222%<default>%%-1%-1%%jump1.example.net__PIPE__10.30.255.1%22__PIPE__2200%alice__PIPE__%0%0%0%%%-1%0%0%0%%1080%%0%0%1#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+tokyo-telnet=#98#1%10.40.0.1%5000%%%2%%%%%0%0%%1080%%#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+
+[Bookmarks_2]
+SubRep=Network\Core\Empty
+ImgNum=41
+
+[Bookmarks_3]
+SubRep=Lab
+ImgNum=41
+ubuntu wsl=#140#14%Ubuntu%%%%%%%%#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+lab-sw=#109#0%10.50.0.1%22%lab%%-1%-1%%%%%0%0%0%%%-1%0%0%0%%1080%%0%0%1#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+lab-sw=#109#0%10.50.0.2%22%lab%%-1%-1%%%%%0%0%0%%%-1%0%0%0%%1080%%0%0%1#MobaFont%10%0%0%-1%15%236,236,236%30,30,30%180,180,180%0%-1%0%%xterm%-1%0%_Std_Colors_0_%80%24%0%1%-1%<none>%%0%1%-1#0# #-1
+no-host=#109#0%%22%%%-1%-1%%%%%0%0%0%%%-1%0%0%0%%1080%%0%0%1#MobaFont%10#0# #-1
+
+[Passwords]
+ssh22:jump@bastion.corp.example.net=_@9jajOXKe2Vk+DEADBEEF
+
+[Misc]
+LastSessionCount=12

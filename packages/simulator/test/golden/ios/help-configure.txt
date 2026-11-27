@@ -1,0 +1,11 @@
+core-sw1#configure ?
+  confirm            Confirm replacement of running-config with a new config file
+  memory             Configure from NV memory
+  network            Configure from a TFTP network host
+  overwrite-network  Overwrite NV memory from TFTP network host
+  replace            Replace the running-config with a new config file
+  revert             Parameters for reverting the configuration
+  terminal           Configure from the terminal
+  <cr>               <cr>
+
+core-sw1#configure

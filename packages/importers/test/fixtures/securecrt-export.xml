@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Modelled on the structure documented in docs/research/competitors-terminals.md
+     appendix B (three open-source importers agree on it). Not an untouched user
+     export: validate against real SecureCRT 9.x exports before release. -->
+<VanDyke version="3.0">
+  <key name="Global Options">
+    <string name="Config Path">${VDS_USER_DATA_PATH}</string>
+    <dword name="Global Session Password Saved">1</dword>
+  </key>
+  <key name="Credentials">
+    <key name="lab login">
+      <string name="Username">netops</string>
+      <string name="Password V2">02:SECRET-CREDENTIAL-BLOB-DO-NOT-IMPORT</string>
+    </key>
+  </key>
+  <key name="Sessions">
+    <key name="Default">
+      <string name="Protocol Name">SSH2</string>
+      <dword name="[SSH2] Port">22</dword>
+    </key>
+    <key name="Prod">
+      <dword name="Is Session">0</dword>
+      <string name="Protocol Name">SSH2</string>
+      <key name="web">
+        <dword name="Is Session">1</dword>
+        <string name="Protocol Name">SSH2</string>
+        <string name="Hostname">10.3.3.3</string>
+        <dword name="[SSH2] Port">2222</dword>
+        <string name="Username">deploy</string>
+        <string name="Credential Title">lab login</string>
+        <string name="Identity Filename V2">${VDS_SSH_DATA_PATH}/id_rsa</string>
+        <array name="Description">
+          <string>Front-end web &amp; cache</string>
+          <string>Owner: &lt;platform team&gt;</string>
+        </array>
+        <array name="Port Forward Table V2"><string>8080|127.0.0.1|0|localhost|80|</string></array>
+        <binary name="Normal Font v2">f3 ff ff ff 00 00 00 00</binary>
+      </key>
+      <key name="db &amp; cache">
+        <dword name="Is Session">1</dword>
+        <string name="Protocol Name">SSH2</string>
+        <string name="Hostname">10.3.3.4</string>
+        <string name="Username">dba</string>
+        <string name="Firewall Name">Session:Prod/web</string>
+        <string name="Password V2">03:ANOTHER-SECRET-BLOB</string>
+        <dword name="Session Password Saved">1</dword>
+      </key>
+      <key name="Spines">
+        <dword name="Is Session">0</dword>
+        <key name="spine-eos-1">
+          <dword name="Is Session">1</dword>
+          <string name="Protocol Name">SSH2</string>
+          <string name="Hostname">spine1.dc.example.net</string>
+          <key name="Connection">
+            <dword name="[SSH2] Port">830</dword>
+            <dword name="Enable Agent Forwarding">1</dword>
+          </key>
+        </key>
+      </key>
+      <key name="Empty Folder">
+        <dword name="Is Session">0</dword>
+      </key>
+    </key>
+    <key name="Console">
+      <dword name="Is Session">0</dword>
+      <key name="ttyUSB0 console">
+        <dword name="Is Session">1</dword>
+        <string name="Protocol Name">Serial</string>
+        <string name="Linux Com Port">/dev/ttyUSB0</string>
+        <dword name="Linux Baud Rate">9600</dword>
+        <dword name="Linux Printer Baud Rate">115200</dword>
+        <dword name="Linux Data Bits">7</dword>
+        <dword name="Linux Parity">1</dword>
+        <dword name="Linux Stop Bits">2</dword>
+        <dword name="Linux XON Flow">1</dword>
+      </key>
+      <key name="desk pc">
+        <dword name="Is Session">1</dword>
+        <string name="Protocol Name">RDP</string>
+        <string name="Hostname">10.9.9.9</string>
+      </key>
+    </key>
+    <key name="telnet-sw">
+      <string name="Protocol Name">Telnet</string>
+      <string name="Hostname">10.4.4.4</string>
+      <dword name="Port">2323</dword>
+    </key>
+  </key>
+</VanDyke>

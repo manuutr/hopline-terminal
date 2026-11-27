@@ -1,0 +1,2 @@
+switch# di?
+diff  dir  disable

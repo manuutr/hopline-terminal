@@ -1,0 +1,5 @@
+netops@edge-r1> show foo
+                     ^
+syntax error, expecting <command>: foo
+
+netops@edge-r1>

@@ -1,0 +1,19 @@
+switchName> ?
+  clear       Reset functions
+  connect     Open a terminal connection
+  default     Set a command to its defaults
+  disable     Turn off privileged commands
+  enable      Turn on privileged commands
+  exit        Exit from the EXEC
+  logout      Exit from the EXEC
+  no          Negate a command or set its defaults
+  ping        Send echo messages
+  show        Show running system information
+  ssh         Open ssh connection
+  tcpdump     Monitor packets with tcpdump
+  telnet      Open a telnet connection
+  terminal    Configure the terminal
+  traceroute  Trace route to destination
+  watch       Execute a command repeatedly
+  who         Display information about terminal lines
+  zerotouch   ZeroTouch configuration

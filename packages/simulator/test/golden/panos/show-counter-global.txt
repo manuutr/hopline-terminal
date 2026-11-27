@@ -1,0 +1,13 @@
+Global counters:
+Elapsed time since last sampling: 55.446 seconds
+
+name                                   value     rate severity  category  aspect    description
+--------------------------------------------------------------------------------
+pkt_recv                                1832       33 info      packet    pktproc   Packets received
+pkt_sent                                1710       30 info      packet    pktproc   Packets transmitted
+flow_ipv6_disabled                         3        0 drop      flow      parse     Packets dropped: IPv6 disabled on interface
+flow_policy_deny                          12        0 drop      flow      session   Session setup: denied by policy
+flow_host_service_deny                     4        0 drop      flow      mgmt      Device management session denied
+--------------------------------------------------------------------------------
+Total counters shown: 5
+--------------------------------------------------------------------------------

@@ -1,0 +1,35 @@
+leaf1# show interface brief
+
+--------------------------------------------------------------------------------
+Port   VRF          Status IP Address                              Speed    MTU
+--------------------------------------------------------------------------------
+mgmt0  --           up     192.168.100.20                          1000     1500
+
+--------------------------------------------------------------------------------
+Ethernet      VLAN    Type Mode   Status  Reason                   Speed     Port
+Interface                                                                    Ch #
+--------------------------------------------------------------------------------
+Eth1/1        100     eth  access up      none                        25G(D) --
+Eth1/2        100     eth  access up      none                        25G(D) --
+Eth1/3        200     eth  access down    Link not connected         auto(D) --
+Eth1/47       1       eth  trunk  up      none                        25G(D) 10
+Eth1/48       1       eth  trunk  up      none                        25G(D) 10
+Eth1/49       --      eth  routed up      none                       100G(D) --
+Eth1/50       --      eth  routed down    Administratively down      auto(D) --
+
+--------------------------------------------------------------------------------
+Port-channel VLAN    Type Mode   Status  Reason                    Speed   Protocol
+Interface                                                                  
+--------------------------------------------------------------------------------
+Po10         1       eth  trunk  up      none                       a-25G(D)  lacp
+
+--------------------------------------------------------------------------------
+Interface     Status     Description
+--------------------------------------------------------------------------------
+Lo0           up         router-id / BGP source
+
+--------------------------------------------------------------------------------
+Interface Secondary VLAN(Type)                    Status Reason                 
+--------------------------------------------------------------------------------
+Vlan100   --                                      up     --
+Vlan200   --                                      up     --

@@ -1,0 +1,35 @@
+dist-eos1#show running-config
+! Command: show running-config
+! device: dist-eos1 (DCS-7050SX3-48YC8, EOS-4.31.2F)
+!
+! boot system flash:/EOS-4.31.2F.swi
+!
+hostname dist-eos1
+!
+vlan 100
+   name DB
+!
+vrf instance MGMT
+!
+interface Ethernet1
+   description spine1
+   no switchport
+   ip address 10.0.1.1/31
+!
+interface Ethernet10
+   description server-db01
+   switchport access vlan 100
+!
+interface Management1
+   vrf MGMT
+   ip address 192.168.255.21/24
+!
+ip routing
+no ip routing vrf MGMT
+!
+router bgp 65010
+   router-id 10.255.0.10
+   neighbor 10.0.1.0 remote-as 65100
+   neighbor 10.0.1.0 description spine1
+!
+end

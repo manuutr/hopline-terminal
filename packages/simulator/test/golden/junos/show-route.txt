@@ -1,0 +1,22 @@
+netops@edge-r1> show route
+
+inet.0: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0          *[BGP/170] 3d 04:12:50, localpref 100
+                      AS path: 65001 I, validation-state: unverified
+                    >  to 10.0.0.5 via ge-0/0/1.0
+10.0.0.4/30        *[Direct/0] 3d 04:13:40
+                    >  via ge-0/0/1.0
+10.0.0.6/32        *[Local/0] 3d 04:13:40
+                       Local via ge-0/0/1.0
+10.255.0.1/32      *[OSPF/10] 3d 04:12:58, metric 1
+                    >  to 10.0.0.5 via ge-0/0/1.0
+10.255.0.2/32      *[Direct/0] 3d 04:13:41
+                    >  via lo0.0
+203.0.113.0/30     *[Direct/0] 3d 04:13:40
+                    >  via ge-0/0/0.0
+203.0.113.2/32     *[Local/0] 3d 04:13:40
+                       Local via ge-0/0/0.0
+
+netops@edge-r1>

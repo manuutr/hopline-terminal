@@ -1,0 +1,11 @@
+dist-eos1#show lldp neighbors
+Last table change time   : 2 days, 3:11:40 ago
+Number of table inserts  : 4
+Number of table deletes  : 1
+Number of table drops    : 0
+Number of table age-outs : 1
+
+Port          Neighbor Device ID       Neighbor Port ID    TTL
+---------- ------------------------ ---------------------- ---
+Et1           spine1                   Ethernet7           120
+Et48          core-sw1                 Gi1/0/48            120

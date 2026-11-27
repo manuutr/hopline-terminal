@@ -1,0 +1,9 @@
+dist-eos1#show interfaces status
+Port       Name                Status       Vlan     Duplex Speed  Type            Flags Encapsulation
+Et1        spine1              connected    routed   full   25G    25GBASE-SR
+Et2        spine2              notconnect   routed   full   25G    25GBASE-SR
+Et3                            notconnect   1        full   25G    Not Present
+Et10       server-db01         connected    100      full   10G    10GBASE-SR
+Et11       server-db02         connected    100      full   10G    10GBASE-SR
+Et48       trunk to core-sw1   connected    trunk    full   1G     1000BASE-T
+Ma1                            connected    routed   a-full a-1G   10/100/1000

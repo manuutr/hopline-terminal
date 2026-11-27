@@ -1,0 +1,7 @@
+dist-eos1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.255.0.10, local AS number 65010
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor         V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  spine1                   10.0.1.0         4 65100          25871     23954    0    0   17d12h Estab   214    214
+  spine2                   10.0.1.2         4 65100              0         0    0    0 05:02:11 Idle

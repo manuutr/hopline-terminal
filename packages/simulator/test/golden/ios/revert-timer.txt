@@ -1,0 +1,6 @@
+core-sw1#configure terminal revert timer 5
+Rollback Confirmed Change: Backing up current running config to flash:archive/core-sw1-Nov-24-14-10-02.123-0
+Enter configuration commands, one per line.  End with CNTL/Z.
+core-sw1(config)#...
+core-sw1(config)#end
+core-sw1#configure confirm

@@ -1,0 +1,19 @@
+fgt-edge1 # diagnose sys session filter dst 10.10.10.5
+fgt-edge1 # diagnose sys session list
+
+session info: proto=6 proto_state=01 duration=42 expire=3558 timeout=3600 flags=00000000 socktype=0 sockport=0 av_idx=0 use=3
+origin-shaper=
+reply-shaper=
+per_ip_shaper=
+class_id=0 ha_id=0 policy_dir=0 tunnel=/ vlan_cos=0/255
+state=log may_dirty npu f00
+statistic(bytes/packets/allow_err): org=4120/31/1 reply=18230/29/1 tuples=2
+tx speed(Bps/kbps): 98/0 rx speed(Bps/kbps): 434/3
+orgin->sink: org pre->post, reply pre->post dev=5->4/4->5 gwy=10.0.2.2/10.20.0.50
+hook=pre dir=org act=noop 10.20.0.50:51514->10.10.10.5:443(0.0.0.0:0)
+hook=post dir=reply act=noop 10.10.10.5:443->10.20.0.50:51514(0.0.0.0:0)
+misc=0 policy_id=10 pol_uuid_idx=0 auth_info=0 chk_client_info=0 vd=0
+serial=002b1aec tos=ff/ff app_list=0 app=0 url_cat=0
+rpdb_link_id=00000000 ngfwid=n/a
+npu_state=00000000
+total session 1

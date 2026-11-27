@@ -1,0 +1,7 @@
+Feature Name          Instance  State
+--------------------  --------  --------
+bash-shell             1          enabled
+bfd                    1          disabled
+bgp                    1          disabled
+dhcp                   1          disabled
+eigrp                  1          disabled

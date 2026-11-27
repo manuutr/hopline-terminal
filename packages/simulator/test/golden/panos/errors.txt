@@ -1,0 +1,8 @@
+admin@fw1> shwo system info
+Unknown command: shwo
+admin@fw1> show interface ethernet9/9
+Server error : show -> interface ethernet9/9 is invalid
+admin@fw1> show routing route bogus
+Invalid syntax.
+admin@fw1# set network interface ethernet ethernet1/1 layer3 ip 10.0.3.300/30
+Invalid syntax.

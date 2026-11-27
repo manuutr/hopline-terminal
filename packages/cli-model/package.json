@@ -1,0 +1,11 @@
+{
+  "name": "@hopline/cli-model",
+  "private": true,
+  "version": "1.2.0",
+  "description": "Pure per-vendor CLI model: platform profiles, command trees with typed parameters and risk levels, an abbreviation resolver and a completion engine",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "sideEffects": false,
+  "license": "Apache-2.0"
+}

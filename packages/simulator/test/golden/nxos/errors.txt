@@ -1,0 +1,12 @@
+leaf1# show interfaces brief
+            ^
+% Invalid command at '^' marker.
+leaf1# sh ip bgp summ
+             ^
+% Invalid command at '^' marker.
+leaf1# show ip
+              ^
+% Incomplete command at '^' marker.
+leaf1# s ver
+       ^
+% Ambiguous command at '^' marker.
