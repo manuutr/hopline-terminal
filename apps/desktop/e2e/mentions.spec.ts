@@ -1,5 +1,5 @@
 import type { OllamaChatBody, OllamaTurn } from '../test/fake-llm'
-import { expect, test } from './fixtures'
+import { MOD, expect, test } from './fixtures'
 
 /**
  * F11: "@ai … @device" from the terminal line and the panel composer opens the fleet view with
@@ -93,7 +93,7 @@ test('composer: "@" autocomplete picks a device by keyboard; an unknown mention 
   await hop.connect('core-sw1')
   const composer = page.getByPlaceholder(/Ask about core-sw1/)
   // The panel opens collapsed until there is a key or the user asks: open it like a user would.
-  if (((await composer.boundingBox())?.width ?? 0) < 50) await page.keyboard.press('Control+Shift+I')
+  if (((await composer.boundingBox())?.width ?? 0) < 50) await page.keyboard.press(`${MOD}+I`)
   await expect.poll(async () => (await composer.boundingBox())?.width ?? 0).toBeGreaterThan(50)
   await composer.click()
   await composer.pressSequentially('compare with @eo')
@@ -136,7 +136,7 @@ test('a draft and its attached command follow their terminal until explicitly se
   await page.keyboard.type('show ip interface brief\r')
   await expect.poll(hop.termText).toMatch(/Vlan10[\s\S]*core-sw1#\s*$/)
   const core = page.getByPlaceholder(/Ask about core-sw1/)
-  if (((await core.boundingBox())?.width ?? 0) < 50) await page.keyboard.press('Control+Shift+I')
+  if (((await core.boundingBox())?.width ?? 0) < 50) await page.keyboard.press(`${MOD}+I`)
   await core.fill('Which interfaces are up?')
   const attach = page.getByRole('button', { name: 'Attach command output' })
   const remove = page.getByRole('button', { name: 'Remove attachment' })

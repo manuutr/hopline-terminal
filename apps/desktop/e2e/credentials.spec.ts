@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import type { Page } from '@playwright/test'
 import ssh2 from 'ssh2'
 import { generateEd25519, makeIosDevice, startSim, type RunningSim } from '../../../packages/simulator/src/index.ts'
-import { MOD, expect, launchHopline, stubDialogs, termTextOf, test } from './fixtures'
+import { MOD, expect, launchHopline, stubDialogs, termTextOf, test, waitForWorkspace } from './fixtures'
 
 /** A device whose password appears nowhere else: if it shows up in the renderer, it leaked. */
 const SECRET = 'Sim-Canary-Pw-4242'
@@ -16,6 +16,7 @@ test.beforeAll(async () => {
 test.afterAll(() => sim.close())
 
 async function openSettingsTab(page: Page, tab: string) {
+  await waitForWorkspace(page)
   await page.keyboard.press(`${MOD}+Comma`)
   await page.getByRole('tab', { name: tab }).click()
 }

@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page } from '@playwright/test'
 import { appendFileSync, mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
+import { waitForWorkspace } from '../fixtures'
 
 /**
  * axe-core checks for the e2e suite (docs/ACCESSIBILITY.md). Each surface is scanned in three
@@ -19,13 +20,20 @@ const REPORT = join(__dirname, '../../test-results/axe-report.jsonl')
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
 
 export async function setTheme(page: Page, theme: 'dark' | 'light' | 'contrast'): Promise<void> {
-  await page.evaluate((t) => {
+  await waitForWorkspace(page)
+  await page.evaluate(async (t) => {
+    await document.fonts.ready
     localStorage.setItem('hopline.theme', t)
     document.documentElement.classList.toggle('dark', t !== 'light')
     document.documentElement.classList.toggle('contrast', t === 'contrast')
     document.documentElement.dataset.theme = t
     document.documentElement.style.colorScheme = t === 'light' ? 'light' : 'dark'
     window.dispatchEvent(new CustomEvent('hopline:theme', { detail: t }))
+    // Measure the final palette even when an off-screen runner delays the first paint.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+    for (const animation of document.getAnimations()) {
+      if (animation instanceof CSSTransition) animation.finish()
+    }
   }, theme)
 }
 
@@ -45,8 +53,6 @@ export async function axeCheck(page: Page, surface: string, opts: { strict?: boo
   const out: AxeOutcome[] = []
   for (const theme of ['light', 'contrast', 'dark'] as const) {
     await setTheme(page, theme)
-    // Let transitions (160 ms) settle: axe reads computed colours mid-animation otherwise.
-    await page.waitForTimeout(250)
     const r = await new AxeBuilder({ page }).setLegacyMode(true).withTags(TAGS).analyze()
     const o: AxeOutcome = { surface, theme, counts: {}, failing: [], allowed: [], moderate: [] }
     for (const v of r.violations) {
