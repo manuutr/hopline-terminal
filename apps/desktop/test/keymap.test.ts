@@ -86,6 +86,7 @@ describe('palette prefixes', () => {
 })
 
 describe('action registry: dispatch', () => {
+  const mod: Mods = process.platform === 'darwin' ? { metaKey: true } : { ctrlKey: true, shiftKey: true }
   let actions: typeof import('../src/renderer/src/lib/actions')
   let modal = false
   beforeAll(async () => {
@@ -109,15 +110,15 @@ describe('action registry: dispatch', () => {
       { id: 't.b', title: 'B', category: 'App', keys: ['Mod+L'], when: () => false, run: () => hits.push('b') }
     ])
     try {
-      expect(press('J', 'KeyJ', { ctrlKey: true, shiftKey: true }).handled).toBe(true)
+      expect(press('J', 'KeyJ', mod).handled).toBe(true)
       // Plain Ctrl+J is the device's: untouched.
       expect(press('j', 'KeyJ', { ctrlKey: true }).handled).toBe(false)
       // Unavailable: not handled, not swallowed.
-      const b = press('L', 'KeyL', { ctrlKey: true, shiftKey: true })
+      const b = press('L', 'KeyL', mod)
       expect(b.handled).toBe(false)
       expect(b.prevented()).toBe(false)
       actions.useKeymap.setState({ overrides: { 't.a': ['Ctrl+Alt+J'] } })
-      expect(press('J', 'KeyJ', { ctrlKey: true, shiftKey: true }).handled).toBe(false)
+      expect(press('J', 'KeyJ', mod).handled).toBe(false)
       expect(press('j', 'KeyJ', { ctrlKey: true, altKey: true }).handled).toBe(true)
       expect(hits).toEqual(['a', 'a'])
     } finally {
@@ -130,13 +131,13 @@ describe('action registry: dispatch', () => {
     let own = false
     const off = actions.registerActions([{ id: 't.t', title: 'T', category: 'App', keys: ['Mod+J'], noRepeat: true, whileModal: () => own, run: () => void n++ }])
     try {
-      const r = press('J', 'KeyJ', { ctrlKey: true, shiftKey: true }, { repeat: true })
+      const r = press('J', 'KeyJ', mod, { repeat: true })
       expect(r.handled).toBe(true)
       expect(n).toBe(0)
       modal = true
-      expect(press('J', 'KeyJ', { ctrlKey: true, shiftKey: true }).handled).toBe(false)
+      expect(press('J', 'KeyJ', mod).handled).toBe(false)
       own = true
-      expect(press('J', 'KeyJ', { ctrlKey: true, shiftKey: true }).handled).toBe(true)
+      expect(press('J', 'KeyJ', mod).handled).toBe(true)
       expect(n).toBe(1)
     } finally {
       off()
@@ -148,7 +149,7 @@ describe('action registry: dispatch', () => {
     const off = actions.registerActions([{ id: 't.r', title: 'R', category: 'App', keys: ['Mod+J'], run: () => void n++ }])
     actions.setRecording(true)
     try {
-      expect(press('J', 'KeyJ', { ctrlKey: true, shiftKey: true }).handled).toBe(false)
+      expect(press('J', 'KeyJ', mod).handled).toBe(false)
       expect(n).toBe(0)
     } finally {
       actions.setRecording(false)
