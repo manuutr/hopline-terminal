@@ -269,7 +269,7 @@ export function probeOf(platform: PlatformId, mode: ModeId, line: string): Probe
     }
     if (!m) {
       if (dashed) {
-        problem(`Hopline doesn't recognise the ${verb} option "${a}"`)
+        problem(`Hopline Terminal doesn't recognise the ${verb} option "${a}"`)
         continue
       }
       // A positional word: the destination, or the ASA interface name before it.
@@ -328,7 +328,7 @@ export function probeOf(platform: PlatformId, mode: ModeId, line: string): Probe
     }
   }
   if (spec.leadingWord && info.targets.length === 2 && isPlainValue(info.targets[0]!) && !isIpLiteral(info.targets[0]!)) info.leading = info.targets.shift()
-  if (info.targets.length > 1) problem(`Hopline doesn't recognise "${info.targets.slice(0, -1).join(' ')}" in this ${verb}`)
+  if (info.targets.length > 1) problem(`Hopline Terminal doesn't recognise "${info.targets.slice(0, -1).join(' ')}" in this ${verb}`)
   if (!info.targets.length) problem(`${verb} has no destination here (the interactive form asks questions)`)
   const has = (k: OptKind) => info.options.some((x) => x.kind === k)
   if (verb === 'ping' && spec.needsCount && !has('count') && !(platform === 'junos' && has('rapid')))

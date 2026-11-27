@@ -44,8 +44,7 @@ const winSigning = azure
 /** @type {import('electron-builder').Configuration} */
 module.exports = {
   appId: 'dev.hopline.app',
-  productName: 'Hopline',
-  executableName: 'hopline',
+  productName: 'Hopline Terminal',
   copyright: 'Copyright © Hopline contributors. Apache-2.0.',
   directories: { output: 'release', buildResources: 'build' },
   files: [
@@ -64,7 +63,7 @@ module.exports = {
     '!**/node_modules/better-sqlite3/{deps,src}/**',
     '!**/node_modules/@serialport/bindings-cpp/prebuilds/android-*/**'
   ],
-  artifactName: '${productName}-${version}-${os}-${arch}.${ext}',
+  artifactName: 'Hopline-Terminal-${version}-${os}-${arch}.${ext}',
   asarUnpack: ['**/*.node'],
   // Electron fuses (RunAsNode, NODE_OPTIONS, --inspect off; app only from app.asar, asar integrity
   // where Electron supports it, cookie encryption): flipped before signing. scripts/fuses.cjs.
@@ -81,6 +80,7 @@ module.exports = {
   generateUpdatesFilesForAllChannels: true,
 
   win: {
+    executableName: 'hopline',
     // x64 only: NsisUpdater serves one installer per feed, so arm64 would need a combined
     // (twice as large) installer or its own feed. Windows on Arm runs the x64 build.
     target: [{ target: 'nsis', arch: ['x64'] }],
@@ -112,7 +112,7 @@ module.exports = {
     // macOS 15+ asks before an app talks to devices on the local network (most of a network
     // engineer's sessions); this is the text of that prompt.
     extendInfo: {
-      NSLocalNetworkUsageDescription: 'Hopline connects to routers, switches and other devices on your network over SSH, Telnet and port forwards.'
+      NSLocalNetworkUsageDescription: 'Hopline Terminal connects to routers, switches and other devices on your network over SSH, Telnet and port forwards.'
     }
   },
   dmg: { sign: false },
@@ -130,7 +130,7 @@ module.exports = {
     syncDesktopName: true,
     desktop: {
       entry: {
-        Name: 'Hopline',
+        Name: 'Hopline Terminal',
         GenericName: 'Network terminal',
         Comment: 'SSH, Telnet and serial client for network engineers',
         Categories: 'Network;RemoteAccess;',

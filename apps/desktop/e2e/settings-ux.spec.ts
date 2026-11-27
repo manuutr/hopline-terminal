@@ -139,7 +139,7 @@ test('desktop notifications: an approval waiting is notified once; the card stil
   await expect(page.locator('[data-proposal="config"]')).toBeVisible()
   await expect
     .poll(async () => (await notes(app)).filter((n) => n.kind === 'approval'))
-    .toEqual([{ kind: 'approval', title: 'Approval waiting · core-sw1', body: 'A change of 2 lines waits for your approval in Hopline.' }])
+    .toEqual([{ kind: 'approval', title: 'Approval waiting · core-sw1', body: 'A change of 2 lines waits for your approval in Hopline Terminal.' }])
 })
 
 test('keymap editor: a clash already in the keymap (say, from an older version) is listed and reset in one click', async ({ hop }) => {

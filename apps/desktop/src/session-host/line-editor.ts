@@ -184,7 +184,7 @@ export class LineEditor {
     }
     this.esc = ''
     if ('=>'.includes(kind)) return
-    this.fail(`the device sent an escape sequence Hopline does not follow (ESC ${kind})`)
+    this.fail(`the device sent an escape sequence Hopline Terminal does not follow (ESC ${kind})`)
   }
 
   private csi(params: string, final: string): void {
@@ -219,7 +219,7 @@ export class LineEditor {
         return
       }
     }
-    this.fail(`the device sent an escape sequence Hopline does not follow (CSI ${params}${final})`)
+    this.fail(`the device sent an escape sequence Hopline Terminal does not follow (CSI ${params}${final})`)
   }
 
   /** The input line as the current frame shows it (gaps as spaces). */

@@ -1,7 +1,7 @@
 {
   "name": "@hopline/parsers",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "TextFSM engine (TypeScript, faithful to Python textfsm) with a curated, bundled subset of ntc-templates mapped to Hopline platform ids",
   "type": "module",
   "main": "./src/index.ts",

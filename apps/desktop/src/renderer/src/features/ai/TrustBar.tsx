@@ -69,7 +69,7 @@ export function TrustBar({ settings, usage, suggest }: { settings: Settings; usa
   const suggestMode = suggest ?? (fresh?.tools === false)
   return (
     <div data-testid="ai-trust" className="@container flex h-7 items-center gap-2 border-b border-line px-3 text-2xs text-fg-muted">
-      <Tooltip label={`Prompts go to ${dest.detail}. ${dest.local ? 'They stay on this machine.' : 'Hopline masks recognized device names, interface descriptions and secrets before sending. Route addresses and free text can still be visible.'}${fresh ? ` ${fresh.message}.` : ''} Click to check again.`}>
+      <Tooltip label={`Prompts go to ${dest.detail}. ${dest.local ? 'They stay on this machine.' : 'Hopline Terminal masks recognized device names, interface descriptions and secrets before sending. Route addresses and free text can still be visible.'}${fresh ? ` ${fresh.message}.` : ''} Click to check again.`}>
         <button data-testid="ai-destination" data-local={dest.local} onClick={() => void checkHealth()} className="flex min-w-0 items-center gap-1.5 whitespace-nowrap rounded px-1 hover:bg-hover hover:text-fg">
           <StatusDot state={state} />
           <span className="shrink-0">{dest.icon}</span>

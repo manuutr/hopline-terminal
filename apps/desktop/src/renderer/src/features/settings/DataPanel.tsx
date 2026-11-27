@@ -181,8 +181,8 @@ function SyncSection({ sync }: { sync: SyncStatus | null }): React.JSX.Element {
     return (
       <>
         <p className="py-2 text-xs text-fg-subtle">
-          Pick a folder that another tool syncs (Dropbox, OneDrive, a Git checkout). Hopline writes an encrypted export there after every change and offers to import a newer one
-          written by another machine. There is no Hopline cloud.
+          Pick a folder that another tool syncs (Dropbox, OneDrive, a Git checkout). Hopline Terminal writes an encrypted export there after every change and offers to import a newer one
+          written by another machine. There is no Hopline Terminal cloud.
         </p>
         <Row k="folderSync" label="Folder">
           <div className="flex items-center gap-2">
@@ -276,7 +276,7 @@ function ImportPassphraseDialog({ file, onClose }: { file: ImportFile | null; on
     <Dialog
       open={!!file}
       onOpenChange={(o) => !o && cancel()}
-      title="Import Hopline data"
+      title="Import Hopline Terminal data"
       description={file ? `${file.file} · exported ${fmtWhen(file.createdAt)}` : ''}
       footer={
         <>
@@ -466,7 +466,7 @@ export function wireSync(): () => void {
   return window.hopline.sync.onStatus((s) => {
     if (!s.incoming || s.incoming.mtime === shown) return
     shown = s.incoming.mtime
-    toast('A newer Hopline sync file is available', {
+    toast('A newer Hopline Terminal sync file is available', {
       description: s.file ?? undefined,
       duration: 30_000,
       action: {

@@ -35,7 +35,7 @@ export type OutputFilter = z.infer<typeof OutputFilter>
 export const FILTER_SCHEMA = {
   type: 'object',
   description:
-    'Optional. Filter the captured output locally in Hopline before you see it, on any vendor. The device receives only the plain command.',
+    'Optional. Filter the captured output locally in Hopline Terminal before you see it, on any vendor. The device receives only the plain command.',
   properties: {
     tail: { type: 'integer', description: 'Keep only the last N lines (after grep). 1 to 10000.' },
     head: { type: 'integer', description: 'Keep only the first N lines (after grep). 1 to 10000.' },

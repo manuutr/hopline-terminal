@@ -81,7 +81,7 @@ export function UnlockDialog(): React.JSX.Element | null {
         e.preventDefault()
         input.current?.focus()
       }}
-      title="Unlock Hopline"
+      title="Unlock Hopline Terminal"
       description={requested ? 'A connection needs a stored password or key.' : 'Your saved passwords and keys are protected by your master password.'}
       footer={
         <>
@@ -166,7 +166,7 @@ export function MasterPasswordForm({ open, onDone, title, intro, change }: { ope
   const sessionOnly = async () => {
     try {
       done(await window.hopline.vault.setMode({ mode: 'session' }))
-      toast('Session-only', { description: 'Passwords you save are kept in memory and forgotten when Hopline quits.' })
+      toast('Session-only', { description: 'Passwords you save are kept in memory and forgotten when Hopline Terminal quits.' })
     } catch (e) {
       notifyError('Could not change the vault', e)
     }
@@ -199,7 +199,7 @@ export function MasterPasswordForm({ open, onDone, title, intro, change }: { ope
           <ShieldAlert className="mt-0.5 size-4 shrink-0 text-warn" aria-hidden />
           <p>
             This system has no secure keychain ({vault?.backend || 'none'}). Set a master password to keep saved passwords and keys encrypted on disk, or choose
-            session only to keep them in memory until Hopline quits.
+            session only to keep them in memory until Hopline Terminal quits.
           </p>
         </div>
       )}

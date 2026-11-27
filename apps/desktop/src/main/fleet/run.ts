@@ -376,7 +376,7 @@ export class FleetRun {
         out.push(framed)
       }
     }
-    if (this.meter.fraction('coordinator') >= WARN_AT) out.push('[Hopline: your token budget is nearly used. Write the final answer now; do not dispatch again.]')
+    if (this.meter.fraction('coordinator') >= WARN_AT) out.push('[Hopline Terminal: your token budget is nearly used. Write the final answer now; do not dispatch again.]')
     return { text: out.join('\n\n'), isError: !jobs.length }
   }
 

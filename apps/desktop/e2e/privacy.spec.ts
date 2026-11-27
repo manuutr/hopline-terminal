@@ -115,7 +115,7 @@ const work = mkdtempSync(join(tmpdir(), 'hopline-update-'))
 // What the app pretends to be running (electron-updater replaces this file on install: it must not change).
 const installed = join(work, 'Hopline-current.AppImage')
 writeFileSync(installed, 'the installed AppImage')
-const payload = Buffer.from('#!/bin/sh\necho fake Hopline 99\n')
+const payload = Buffer.from('#!/bin/sh\necho fake Hopline Terminal 99\n')
 const sha512 = createHash('sha512').update(payload).digest('base64')
 let staging = 0
 let downloads = 0
@@ -154,7 +154,7 @@ test.describe('auto-update against a local server', () => {
       const before = downloads
       const dlg = await settingsTab(page)
       await dlg.getByRole('button', { name: 'Check now' }).click()
-      await expect(dlg.getByTestId('update-status')).toContainText('Hopline 99.0.0 is available')
+      await expect(dlg.getByTestId('update-status')).toContainText('Hopline Terminal 99.0.0 is available')
       expect(rolloutHeaders.length).toBeGreaterThan(0)
       expect(rolloutHeaders.every((value) => value === '')).toBe(true)
       expect(await page.evaluate(() => window.hopline.updates.status())).toMatchObject({ mode: 'notify', state: { kind: 'available', version: '99.0.0' } })
@@ -185,7 +185,7 @@ test.describe('auto-update against a local server', () => {
       staging = 100
       await dlg.getByRole('button', { name: 'Check now' }).click()
       await expect(page.getByTestId('update-ready')).toHaveText('Update ready — restart when you’re done', { timeout: 20_000 })
-      await expect(dlg.getByTestId('update-status')).toContainText('Hopline 99.0.0 is ready')
+      await expect(dlg.getByTestId('update-status')).toContainText('Hopline Terminal 99.0.0 is ready')
       await dlg.getByRole('button', { name: 'Close', exact: true }).last().click()
       await expect(dlg).toHaveCount(0)
 

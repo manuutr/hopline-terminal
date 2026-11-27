@@ -31,7 +31,7 @@ function UpdateItem(): React.JSX.Element | null {
   const u = usePrivacy((s) => s.update?.state)
   if (u?.kind === 'ready')
     return (
-      <Tooltip label={`Hopline ${u.version} installs when you quit. It never restarts while sessions are open.`} side="top">
+      <Tooltip label={`Hopline Terminal ${u.version} installs when you quit. It never restarts while sessions are open.`} side="top">
         <button data-testid="update-ready" className="flex items-center gap-1 hover:text-fg" onClick={() => openSettings('privacy')}>
           <ArrowUpCircle className="size-3" /> {UPDATE_READY_TEXT}
         </button>
@@ -39,9 +39,9 @@ function UpdateItem(): React.JSX.Element | null {
     )
   if (u?.kind === 'available')
     return (
-      <Tooltip label="Install it the way you installed Hopline (package manager or download)." side="top">
+      <Tooltip label="Install it the way you installed Hopline Terminal (package manager or download)." side="top">
         <button data-testid="update-available" className="flex items-center gap-1 hover:text-fg" onClick={() => (u.url ? void window.hopline.links.open(u.url) : openSettings('privacy'))}>
-          <ArrowUpCircle className="size-3" /> Hopline {u.version} available
+          <ArrowUpCircle className="size-3" /> Hopline Terminal {u.version} available
         </button>
       </Tooltip>
     )
@@ -178,7 +178,7 @@ export function StatusBar(): React.JSX.Element {
         </Tooltip>
       )}
       {vault?.mode === 'session' && (
-        <Tooltip label="Session-only vault: saved passwords and keys are forgotten when Hopline quits. Set a master password in Settings → Security." side="top">
+        <Tooltip label="Session-only vault: saved passwords and keys are forgotten when Hopline Terminal quits. Set a master password in Settings → Security." side="top">
           <button className="flex items-center gap-1 text-warn hover:underline" onClick={() => openSettings('vaultMode')}>
             <TriangleAlert className="size-3" /> secrets not saved
           </button>

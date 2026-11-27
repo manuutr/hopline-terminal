@@ -113,7 +113,7 @@ function runMainCommand(id: MainCommand, sender: Electron.WebContents, logDir: (
 
 export function appInfo(): AppInfo {
   return {
-    name: 'Hopline',
+    name: 'Hopline Terminal',
     version: app.getVersion(),
     electron: process.versions.electron ?? '',
     chrome: process.versions.chrome ?? '',

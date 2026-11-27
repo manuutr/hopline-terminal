@@ -109,7 +109,7 @@ test('proposal: verify fails, the user rolls back (configure replace, app-owned)
   expect(rows.find((r) => r.decision === 'rolled-back')).toMatchObject({ source: 'safety-net' })
 })
 
-test('proposal: the device timer expires before a confirm (EOS commit timer); Hopline reports the device rolled back', async ({ hop }) => {
+test('proposal: the device timer expires before a confirm (EOS commit timer); Hopline Terminal reports the device rolled back', async ({ hop }) => {
   const { page } = hop
   hop.llm.ollama.script.push(
     {

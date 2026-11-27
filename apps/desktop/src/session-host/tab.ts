@@ -508,7 +508,7 @@ export class HostTab implements ExecTarget {
   markUnsent(text: string): void {
     this.unsentText = text
     this.notice(
-      `The device's input line may still hold "${text.slice(0, 60)}", typed by Hopline but not sent (Enter was not pressed). Clear it with Ctrl-U or Ctrl-C before pressing Enter; Hopline types nothing on this session until you do.`
+      `The device's input line may still hold "${text.slice(0, 60)}", typed by Hopline Terminal but not sent (Enter was not pressed). Clear it with Ctrl-U or Ctrl-C before pressing Enter; Hopline Terminal types nothing on this session until you do.`
     )
   }
 

@@ -1,6 +1,6 @@
 # Security policy
 
-Hopline connects to network devices with your credentials and lets an AI model run commands on them. Its security model is designed so that neither a model, nor a device's output, nor a compromised window can change a device without your approval of the exact lines. If you find a way around that, we want to hear about it.
+Hopline Terminal connects to network devices with your credentials and lets an AI model run commands on them. Its security model is designed so that neither a model, nor a device's output, nor a compromised window can change a device without your approval of the exact lines. If you find a way around that, we want to hear about it.
 
 ## Reporting a vulnerability
 
@@ -55,12 +55,12 @@ Anything that breaks one of these promises:
 2. **Enforcement is outside the window.** The packaged renderer runs under `app://hopline` with network connections and frames disabled. Main validates the sending frame. The renderer is sandboxed and untrusted. Main classifies every command and owns approvals, the audit log, credentials and host keys. The session host writes a Hopline-generated command only with an HMAC-signed verdict from main bound to that tab, command and device, and checks the deny-list again itself.
 3. **Secrets never reach the model or the window.** Credentials are decrypted only in main. Device output is redacted before it reaches any prompt, the egress log or the window.
 4. **Device text is data.** Device output reaches a model inside an untrusted frame that it cannot close, and no tool can bypass the guard, so injected instructions can at most ask for a command the guard refuses.
-5. **Everything is audited.** Every command Hopline sends or refuses for you is in an append-only audit log. Commands and reasons are redacted before storage. A vault-derived HMAC allows correlation while the vault is unlocked. Every request to a model is in the egress log.
+5. **Everything is audited.** Every command Hopline Terminal sends or refuses for you is in an append-only audit log. Commands and reasons are redacted before storage. A vault-derived HMAC allows correlation while the vault is unlocked. Every request to a model is in the egress log.
 6. **Nothing leaves the machine unasked.** Only update checks (which you can turn off), assistant requests to the provider you chose, and crash reports you opted into.
 
 Examples of what we want to hear about: a command the guard classifies as read-only that changes state on some platform; a way to get a configuration line, a deny-listed command or a net line past main or the session host; a redaction miss for a secret format; prompt injection that leads to anything other than a refused command; IPC payloads that main accepts but should not; path traversal in downloads, logs, imports or sync; an update that installs without its signature being checked on a build that claims to check it.
 
-Out of scope: what you type into the terminal yourself (Hopline never filters it), attacks that need an already compromised OS account or a malicious team policy file written by an administrator, and denial of service by a device you connected to on purpose, unless it freezes the whole app.
+Out of scope: what you type into the terminal yourself (Hopline Terminal never filters it), attacks that need an already compromised OS account or a malicious team policy file written by an administrator, and denial of service by a device you connected to on purpose, unless it freezes the whole app.
 
 ## How it works
 

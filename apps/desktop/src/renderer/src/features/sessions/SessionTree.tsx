@@ -975,7 +975,7 @@ export function SessionTree(): React.JSX.Element {
       >
         {loadError ? (
           <p role="alert" data-testid="tree-load-error" className="px-2 py-1.5 text-xs text-danger">
-            Could not read your sessions: {loadError}. Restart Hopline; if it keeps failing, restore a backup from Settings → Sync &amp; export.
+            Could not read your sessions: {loadError}. Restart Hopline Terminal; if it keeps failing, restore a backup from Settings → Sync &amp; export.
           </p>
         ) : !loaded ? <Loading what="sessions" /> : !sessions.length && !folders.length ? (
           <EmptyState title="No sessions yet" body="Save a device to connect to it again." action={<Button size="sm" onClick={() => edit()}>Add a device</Button>} />

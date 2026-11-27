@@ -346,7 +346,7 @@ export function ProposalCard({ e, tabId, sessionName }: { e: ProposalEntry; tabI
                 {cp && <CopiedFlag from={cp.from} pinned />}
                 {e.unknown?.includes(i) && (
                   <span data-testid="unknown-line" className="shrink-0 text-2xs text-warn">
-                    Hopline doesn't recognise this command
+                    Hopline Terminal doesn't recognise this command
                   </span>
                 )}
               </div>

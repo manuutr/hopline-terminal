@@ -185,7 +185,7 @@ describe('the same safety for every provider', () => {
     expect(sent).not.toMatch(/n3tw0rkRO|pr1vRW|\$9\$|zzSECRETzz/)
     expect(sent).toMatch(/snmp-server community <redacted> RO/)
     expect(sent).toMatch(/BLOCKED: \\"reload\\" is on the deny-list/)
-    expect(sent).toMatch(/\[Hopline filter last 3 lines: showing last 3 of \d+ lines\]/)
+    expect(sent).toMatch(/\[Hopline Terminal filter last 3 lines: showing last 3 of \d+ lines\]/)
 
     expect(audit.list().reverse().map((r) => [r.command, r.decision])).toEqual([
       ['show running-config', 'executed'],

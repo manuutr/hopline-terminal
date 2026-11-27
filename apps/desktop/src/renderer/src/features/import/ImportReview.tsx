@@ -341,7 +341,7 @@ function Warnings({ review }: { review: Review }): React.JSX.Element | null {
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs">
         <TriangleAlert className="size-3.5 text-warn" />
         <span className="font-medium text-fg">{plural(list.length, 'warning')}</span>
-        <span className="truncate text-fg-subtle">Skipped records, settings Hopline can't use, and notes on what changed</span>
+        <span className="truncate text-fg-subtle">Skipped records, settings Hopline Terminal can't use, and notes on what changed</span>
         <ChevronRight className={cn('ml-auto size-3.5 shrink-0 text-fg-subtle transition-transform duration-150', open && 'rotate-90')} />
       </button>
       {open && (

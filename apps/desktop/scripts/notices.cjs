@@ -67,9 +67,9 @@ const LICENCE_FILE = /^(licen[cs]e|copying|notice)(\.(md|txt|markdown))?$/i
 
 function notices() {
   const out = [
-    'Hopline third-party notices',
+    'Hopline Terminal third-party notices',
     '',
-    'Hopline includes the software listed below. Each entry gives the package, its version, its',
+    'Hopline Terminal includes the software listed below. Each entry gives the package, its version, its',
     'declared licence and the licence text it ships with.',
     ''
   ]

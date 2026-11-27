@@ -216,7 +216,7 @@ export function SettingsDialog(): React.JSX.Element {
       footer={
         (Object.keys(edits).length > 0 || key.trim() || (FORM_TABS.includes(tab) && !searching)) ? (
           <>
-            <span className="mr-auto self-center text-2xs text-fg-subtle" data-testid="app-version">Hopline {__APP_VERSION__}</span>
+            <span className="mr-auto self-center text-2xs text-fg-subtle" data-testid="app-version">Hopline Terminal {__APP_VERSION__}</span>
             <Button variant="ghost" onClick={close}>Cancel</Button>
             <Button variant="primary" onClick={() => void save()}>Save</Button>
           </>
@@ -534,10 +534,10 @@ export function SettingsDialog(): React.JSX.Element {
                 <GettingStartedRow />
               </Section>
               <Section id="notifications" title="Notifications">
-                <Row k="notifyApprovals" label="Approvals waiting" hint="A desktop notification when the assistant waits for your approval and Hopline is not the focused window.">
+                <Row k="notifyApprovals" label="Approvals waiting" hint="A desktop notification when the assistant waits for your approval and Hopline Terminal is not the focused window.">
                   <Toggle label="Notify when an approval waits" checked={form.notifyApprovals} onChange={(v) => up('notifyApprovals', v)} />
                 </Row>
-                <Row k="notifyDisconnects" label="Unexpected disconnects" hint="A desktop notification when a session drops without you closing it and Hopline is not the focused window.">
+                <Row k="notifyDisconnects" label="Unexpected disconnects" hint="A desktop notification when a session drops without you closing it and Hopline Terminal is not the focused window.">
                   <Toggle label="Notify on unexpected disconnects" checked={form.notifyDisconnects} onChange={(v) => up('notifyDisconnects', v)} />
                 </Row>
               </Section>

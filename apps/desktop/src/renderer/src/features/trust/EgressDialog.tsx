@@ -17,7 +17,7 @@ const errText = (e: unknown) => (e instanceof Error ? e.message.replace(/^Error 
 
 const STATUS_TONE: Record<EgressRow['status'], 'ok' | 'warn' | 'danger' | 'neutral'> = { ok: 'ok', sending: 'neutral', error: 'danger', cancelled: 'warn', unknown: 'warn' }
 const STATUS_HINT: Partial<Record<EgressRow['status'], string>> = {
-  unknown: 'Hopline stopped while this request was being sent: it may have left.',
+  unknown: 'Hopline Terminal stopped while this request was being sent: it may have left.',
   error: 'The request failed; it may still have reached the server.',
   cancelled: 'Cancelled; it may still have reached the server.'
 }

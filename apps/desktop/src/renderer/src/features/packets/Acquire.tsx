@@ -24,7 +24,7 @@ function DeviceSource({ tabId, iosxe }: { tabId: string; iosxe: boolean }) {
   if (plan) return <div className="space-y-3">
     <p className="text-sm text-fg">Review capture on <strong>{plan.hostname}</strong></p>
     <pre className="overflow-auto rounded-md bg-surface p-3 font-mono text-xs">{plan.commands.join('\n')}</pre>
-    <p className="text-xs text-fg-muted">The device stops after {plan.seconds} seconds or 1,000 packets. Hopline removes the capture point and downloads {plan.remotePath}. The file stays on the device.</p>
+    <p className="text-xs text-fg-muted">The device stops after {plan.seconds} seconds or 1,000 packets. Hopline Terminal removes the capture point and downloads {plan.remotePath}. The file stays on the device.</p>
     <div className="flex flex-wrap items-end gap-2"><label className="grid gap-1 text-xs text-fg-muted">Type {plan.hostname} to approve
       <Input value={ack} onChange={(e) => setAck(e.target.value)} /></label>
       <Button variant="danger-solid" disabled={ack !== plan.hostname} onClick={() => { setPlan(null); void openTrace({ kind: 'iosxe', planId: plan.id, ack }) }}>Capture and transfer</Button>

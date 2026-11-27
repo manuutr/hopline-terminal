@@ -106,7 +106,7 @@ export function AiSetup({ pendingQuestion }: { pendingQuestion: boolean }): Reac
       />
       {locks.allowedProviders && <Managed what={`Allowed: ${locks.allowedProviders.join(', ') || 'none'}`} />}
       <p className="text-2xs leading-snug text-fg-muted">
-        Hopline masks recognized secrets, device names and interface descriptions. Network addresses and free-form notes can still reach the model.
+        Hopline Terminal masks recognized secrets, device names and interface descriptions. Network addresses and free-form notes can still reach the model.
       </p>
 
       {isAccount(provider) ? <AccountSignIn key={provider} provider={provider} onUse={() => void connect()} /> : cloud ? (
@@ -130,9 +130,9 @@ export function AiSetup({ pendingQuestion }: { pendingQuestion: boolean }): Reac
                 <Input value={model} onChange={(e) => setModel(e.target.value)} className="font-mono" />
               </label>}
           <p className="text-2xs leading-snug text-fg-subtle">
-            Hopline sends requests to {cloud.host} using your {cloud.label} API account. The key is encrypted in your vault.
+            Hopline Terminal sends requests to {cloud.host} using your {cloud.label} API account. The key is encrypted in your vault.
           </p>
-          {vault?.mode === 'session' && <p className="text-2xs text-warn">Session-only vault: the key is forgotten when Hopline quits.</p>}
+          {vault?.mode === 'session' && <p className="text-2xs text-warn">Session-only vault: the key is forgotten when Hopline Terminal quits.</p>}
         </div>
       ) : (
         <div className="space-y-2">

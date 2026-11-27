@@ -72,7 +72,7 @@ export class PlatformDetector {
     let said = false
     while (!seen.atPrompt) {
       if (fp.confidence >= DECISIVE) return this.finish(tab, fp, '')
-      if (!said) this.finish(tab, { ...fp, platform: 'unknown' }, 'the device has not shown a prompt Hopline recognises')
+      if (!said) this.finish(tab, { ...fp, platform: 'unknown' }, 'the device has not shown a prompt Hopline Terminal recognises')
       said = true
       const now = this.d.host.get(tab.tabId)
       if (seen.connected === false || !now || now.session.platform !== 'auto') return { ...fp, platform: 'unknown' }

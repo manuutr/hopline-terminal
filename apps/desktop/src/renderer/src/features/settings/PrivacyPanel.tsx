@@ -26,11 +26,11 @@ export function updateLine(u: UpdateStatus): string {
     case 'current':
       return `Up to date (checked ${when(s.checkedAt)}).`
     case 'available':
-      return `Hopline ${s.version} is available. Install it the way you installed Hopline.`
+      return `Hopline Terminal ${s.version} is available. Install it the way you installed Hopline Terminal.`
     case 'downloading':
-      return `Downloading Hopline ${s.version}… ${s.percent}%`
+      return `Downloading Hopline Terminal ${s.version}… ${s.percent}%`
     case 'ready':
-      return `Hopline ${s.version} is ready. It installs when you quit Hopline.`
+      return `Hopline Terminal ${s.version} is ready. It installs when you quit Hopline Terminal.`
     case 'error':
       return `Could not check: ${s.message}`
   }
@@ -73,7 +73,7 @@ export function PrivacyPanel(): React.JSX.Element {
   const restart = () =>
     run('restart', async () => {
       const r = await window.hopline.updates.restart()
-      if (!r.ok && r.reason === 'sessions') toast(`${r.open} session${r.open === 1 ? ' is' : 's are'} open`, { description: 'Hopline never restarts with sessions open. The update installs when you quit.' })
+      if (!r.ok && r.reason === 'sessions') toast(`${r.open} session${r.open === 1 ? ' is' : 's are'} open`, { description: 'Hopline Terminal never restarts with sessions open. The update installs when you quit.' })
     })
   const testCrash = () =>
     run('test', async () => {
@@ -141,7 +141,7 @@ export function PrivacyPanel(): React.JSX.Element {
                 Restart and install
               </Button>
             )}
-            <span className="text-2xs text-fg-subtle">Hopline {update?.current ?? __APP_VERSION__}</span>
+            <span className="text-2xs text-fg-subtle">Hopline Terminal {update?.current ?? __APP_VERSION__}</span>
           </div>
         </Row>
       </Section>
