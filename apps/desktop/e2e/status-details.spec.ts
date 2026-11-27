@@ -1,4 +1,4 @@
-import { expect, showSessions, test } from './fixtures'
+import { treeRow, expect, showSessions, test } from './fixtures'
 
 test('connection details, address copy and clearing an empty search', async ({ hop }) => {
   const { page } = hop
@@ -15,5 +15,5 @@ test('connection details, address copy and clearing an empty search', async ({ h
   await showSessions(page)
   await page.getByPlaceholder('Search', { exact: true }).fill('missing-device')
   await page.getByRole('button', { name: 'Clear filters' }).click()
-  await expect(page.getByRole('treeitem', { name: 'core-sw1', exact: true }).first()).toBeVisible()
+  await expect(treeRow(page, 'core-sw1').first()).toBeVisible()
 })

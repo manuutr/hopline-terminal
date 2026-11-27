@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path'
 import { startSim, type Device, type RunningSim } from '../../../../packages/simulator/src/index.ts'
 import type { Platform } from '../../src/shared/types'
 import { neutralUser } from './operator'
-import { launchHopline, showSessions, sizeWindow, termTextOf } from '../fixtures'
+import { treeRow, launchHopline, showSessions, sizeWindow, termTextOf } from '../fixtures'
 
 interface Endpoint {
   name: string
@@ -42,7 +42,7 @@ export async function withDevices(folder: string, endpoints: Endpoint[], run: (p
       }
     }, { folder, sessions: endpoints.map(({ name, platform }, i) => ({ name, platform, port: servers[i]!.port })) })
     await page.reload()
-    await expect(page.getByRole('treeitem', { name: endpoints[0]!.name, exact: true })).toBeVisible()
+    await expect(treeRow(page, endpoints[0]!.name)).toBeVisible()
     await run(page)
   } finally {
     if (app) await app.close()
@@ -53,7 +53,7 @@ export async function withDevices(folder: string, endpoints: Endpoint[], run: (p
 
 export async function connect(page: Page, name: string, prompt: RegExp) {
   await showSessions(page)
-  await page.getByRole('treeitem', { name, exact: true }).first().dblclick()
+  await treeRow(page, name).first().dblclick()
   await expect.poll(termTextOf(page)).toMatch(prompt)
 }
 

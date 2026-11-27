@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { ElectronApplication, Page } from '@playwright/test'
 import type { Session } from '../src/shared/types'
-import { MOD, expect, launchHopline, stubDialogs, test } from './fixtures'
+import { treeRow, MOD, expect, launchHopline, stubDialogs, test } from './fixtures'
 
 const FIX = join(__dirname, 'fixtures')
 const SHOTS = process.env['HOPLINE_SHOTS']
@@ -18,8 +18,7 @@ const shot = async (page: Page, name: string) => {
 
 type Api = { hopline: { sessions: { list: () => Promise<{ sessions: Session[]; folders: { id: string; name: string; parentId: string | null }[] }> } } }
 const list = (page: Page) => page.evaluate(() => (window as unknown as Api).hopline.sessions.list())
-const tree = (page: Page) => page.getByRole('tree', { name: 'Sessions' })
-const item = (page: Page, name: string) => tree(page).getByRole('treeitem', { name, exact: true }).and(page.locator('[data-row-key^="tree:"]'))
+const item = (page: Page, name: string) => treeRow(page, name).and(page.locator('[data-row-key^="tree:"]'))
 const review = (page: Page) => page.getByRole('dialog', { name: /Review import|Re-sync from NetBox/ })
 const count = (page: Page, group: string) => review(page).locator(`[data-summary="${group}"]`)
 

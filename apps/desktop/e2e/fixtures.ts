@@ -5,6 +5,12 @@ import { join } from 'node:path'
 import { makeEosDevice, makeIosDevice, startSim, startTelnetSim, type RunningSim } from '../../../packages/simulator/src/index.ts'
 import { fakeAnthropic, fakeOllama, type FakeServer, type OllamaChatBody, type OllamaTurn } from '../test/fake-llm'
 
+/** Find the row by its primary label even when its accessible name also includes tags or status. */
+export function treeRow(page: Page, name: string) {
+  const label = page.getByText(name, { exact: true }).and(page.locator('[data-tree-label]'))
+  return page.getByRole('treeitem').filter({ has: label })
+}
+
 export interface Hopline {
   app: ElectronApplication
   page: Page
@@ -173,7 +179,7 @@ export const test = base.extend<{ hop: Hopline; hopEnv: Record<string, string> }
     const termText = termTextOf(page)
     const connect = async (name: string) => {
       await showSessions(page)
-      await page.getByRole('treeitem', { name, exact: true }).first().dblclick()
+      await treeRow(page, name).first().dblclick()
       const ready = new RegExp(`${name}[#>]\\s*$`)
       const pw = page.locator('[role=dialog] input[type=password]')
       // Either the seeded credential works (keychain available) or we are asked for the password.

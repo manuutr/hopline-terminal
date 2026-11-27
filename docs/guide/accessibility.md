@@ -33,7 +33,7 @@ When the OS reports a screen reader (NVDA, JAWS, Narrator, VoiceOver, Orca), Hop
 - **F6 / Shift+F6** move between the toolbar, open connections, saved sessions, the terminal, the files panel and the assistant. The terminal keeps Tab for the device, so F6 is the way out of it.
 - In **Open connections**, Up and Down move between tabs. Enter activates the focused tab and Delete closes it.
 - Dialogs keep focus inside, Esc closes them, and focus returns to where it was.
-- Trees and lists are one Tab stop with arrow keys.
+- Trees and lists are one Tab stop with arrow keys. In the saved session tree, each row announces its name and details such as tags and platform. Split connections include the pane count.
 - **Dividers** (sidebar, assistant, files panel, split panes, the fleet answer column) are focusable: arrows move 16 px, Shift+arrows 96 px, Home/End go to either end, Enter collapses and restores the panel. Settings › Workspace › Appearance › Panel sizes resets them.
 - `Mod+/` shows every shortcut; Settings › Keyboard rebinds them. See [Keyboard shortcuts](keyboard-shortcuts.md).
 

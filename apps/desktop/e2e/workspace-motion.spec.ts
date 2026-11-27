@@ -1,13 +1,14 @@
-import { expect, showSessions, test } from './fixtures'
+import { treeRow, expect, showSessions, test } from './fixtures'
 
 test('fuzzy search, persistent session order and dragging a live tab to split', async ({ hop }) => {
   const { page } = hop
   await page.locator('#session-search').fill('crsw')
-  await expect(page.getByRole('treeitem', { name: 'core-sw1', exact: true }).locator('mark').first()).toBeVisible()
+  await expect(treeRow(page, 'core-sw1').locator('mark').first()).toBeVisible()
   await page.locator('#session-search').fill('')
-  const order = () => page.locator('[data-row-key^="tree:s:"]').evaluateAll((rows) => rows.map((r) => r.getAttribute('aria-label')))
+  const rows = page.locator('[data-row-key^="tree:s:"]')
+  const order = () => rows.evaluateAll((items) => items.map((row) => row.getAttribute('data-row-key')))
   const before = await order()
-  await page.getByRole('treeitem', { name: before[0]!, exact: true }).focus()
+  await rows.first().focus()
   await page.keyboard.press('Alt+Shift+ArrowDown')
   await expect.poll(order).toEqual([before[1], before[0], ...before.slice(2)])
   await page.reload()

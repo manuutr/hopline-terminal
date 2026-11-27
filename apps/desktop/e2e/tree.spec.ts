@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test'
 import type { Session } from '../src/shared/types'
-import { MOD, expect, test, type Hopline } from './fixtures'
+import { treeRow, MOD, expect, test, type Hopline } from './fixtures'
 
 const SHOTS = process.env['HOPLINE_SHOTS']
 const shot = async (page: Page, name: string) => {
@@ -13,7 +13,7 @@ const byName = async (page: Page, name: string) => (await list(page)).sessions.f
 
 const tree = (page: Page) => page.getByRole('tree', { name: 'Sessions' })
 /** The row in the folder tree (a session can also show in Favorites and Recent). */
-const item = (page: Page, name: string) => tree(page).getByRole('treeitem', { name, exact: true }).and(page.locator('[data-row-key^="tree:"], [data-row-key^="sec:"]'))
+const item = (page: Page, name: string) => treeRow(page, name).and(page.locator('[data-row-key^="tree:"], [data-row-key^="sec:"]'))
 
 /** Answer the password prompt (or not, when the seeded credential works) until the prompt is ready. */
 async function login(hop: Hopline, ready = /core-sw1#\s*$/) {
@@ -133,6 +133,7 @@ test('tags: set from the context menu, colored chips, filter by tag', async ({ h
   await page.evaluate((id) => (window as unknown as Api).hopline.sessions.bulkUpdate([id], { addTags: ['prod'] }), eos.id)
   await page.reload()
 
+  await expect(item(page, 'core-sw1')).toHaveAccessibleName(/^core-sw1 .*XE$/)
   const filter = page.getByRole('group', { name: 'Filter by tag' })
   await expect(filter.getByRole('button', { name: 'prod' })).toBeVisible()
   await filter.getByRole('button', { name: 'core' }).click()
@@ -165,7 +166,7 @@ test('favorites pin to the top and survive a reload; color shows on the tab', as
   await expect(fav).toBeVisible()
   await expect(fav).toHaveAttribute('aria-level', '1')
   // The first session row in the tree is the pinned one.
-  await expect(tree(page).getByRole('treeitem').nth(1)).toHaveAccessibleName('dist-eos1')
+  await expect(tree(page).getByRole('treeitem').nth(1)).toHaveAccessibleName(/^dist-eos1\b/)
   await expect(tree(page).getByRole('treeitem').nth(1)).toHaveAttribute('data-row-key', /^fav:/)
   await item(page, 'dist-eos1').click({ button: 'right' })
   await page.getByRole('menuitem', { name: 'Color' }).hover()
@@ -302,7 +303,7 @@ test('keys in a context menu stay in the menu: Enter picks the item, nothing con
   await expect.poll(async () => (await byName(page, 'dist-eos1')).favorite).toBe(true)
   await expect(page.getByRole('tab')).toHaveCount(0)
   await expect(tree(page).locator('[aria-selected=true]')).toHaveCount(2) // the tree row and its Favorites row
-  await expect(tree(page).locator('[aria-selected=true][data-row-key^="tree:"]')).toHaveAccessibleName('dist-eos1')
+  await expect(tree(page).locator('[aria-selected=true][data-row-key^="tree:"]')).toHaveAccessibleName(/^dist-eos1\b/)
 
   // Arrow keys move within the menu, not the tree.
   await item(page, 'core-sw1').click({ button: 'right' })
@@ -310,7 +311,7 @@ test('keys in a context menu stay in the menu: Enter picks the item, nothing con
   await page.keyboard.press('ArrowDown')
   await expect(page.getByRole('menu')).toBeVisible()
   // (The open menu hides the tree from the accessibility tree: query it by CSS.)
-  await expect(page.locator('#session-tree [aria-selected=true][data-row-key^="tree:"]')).toHaveAttribute('aria-label', 'core-sw1')
+  await expect(page.locator('#session-tree [aria-selected=true][data-row-key^="tree:"]')).toHaveAccessibleName(/^core-sw1 .*XE$/)
   await page.keyboard.press('Escape')
   await expect(page.getByRole('tab')).toHaveCount(0)
 })

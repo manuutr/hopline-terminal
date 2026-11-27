@@ -3,7 +3,7 @@ import { existsSync, mkdtempSync, readdirSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { makeIosDevice, startSim } from '../../../packages/simulator/src/index.ts'
-import { expect, launchHopline, showSessions, termTextOf, test } from './fixtures'
+import { treeRow, expect, launchHopline, showSessions, termTextOf, test } from './fixtures'
 
 /**
  * Phase 6–8 review: process-level fixes that need a real Electron.
@@ -65,7 +65,7 @@ test('L8: quitting saves the scrollback of a tab that has not hit its 30 s perio
     const { app, page } = await launchHopline({ dir, seedPorts: `${ios.port},1,1` })
     const termText = termTextOf(page)
     await showSessions(page)
-    await page.getByRole('treeitem', { name: 'core-sw1', exact: true }).or(page.getByText('core-sw1', { exact: true })).first().dblclick()
+    await treeRow(page, 'core-sw1').or(page.getByText('core-sw1', { exact: true })).first().dblclick()
     const pw = page.locator('[role=dialog] input[type=password]')
     await expect.poll(async () => (await pw.isVisible()) || /core-sw1#\s*$/.test(await termText())).toBe(true)
     if (await pw.isVisible()) (await pw.fill('admin'), await pw.press('Enter'))

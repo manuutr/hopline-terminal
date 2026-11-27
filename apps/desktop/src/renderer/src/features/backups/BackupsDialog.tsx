@@ -348,7 +348,6 @@ function HistoryView(): React.JSX.Element {
             size="sm"
             variant="ghost"
             aria-pressed={changesOpen ?? undefined}
-            aria-label="Change list"
             disabled={!both}
             onClick={() => setChangesOpen((o) => !(o ?? false))}
             className={cn(changesOpen && 'bg-active text-fg')}

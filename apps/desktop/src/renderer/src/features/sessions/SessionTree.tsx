@@ -117,7 +117,7 @@ interface DropView {
 
 /**
  * The session sidebar: Favorites, Recent and the folder tree as one ARIA tree. Flat rows (not
- * nested groups) so every treeitem's accessible name is just its own label, with aria-level /
+ * nested groups) so each treeitem is named by its own content, with aria-level /
  * posinset / setsize describing the hierarchy.
  */
 export function SessionTree(): React.JSX.Element {
@@ -731,7 +731,7 @@ export function SessionTree(): React.JSX.Element {
       'aria-setsize': r.setsize,
       'aria-selected': r.kind === 'section' ? undefined : isSel,
       'aria-expanded': r.kind === 'session' ? undefined : r.expanded,
-      'aria-label': r.label,
+      'aria-label': renaming === r.key ? r.label : undefined,
       'data-row-key': r.key,
       'data-active-session': r.section === 'tree' && r.session?.id === activeId && r.kind === 'session' || undefined,
       tabIndex: r.key === tabbable ? 0 : -1,
@@ -774,7 +774,7 @@ export function SessionTree(): React.JSX.Element {
           style={{ paddingLeft: pad - 2 }}
         >
           <ChevronRight className={cn('size-3 transition-transform duration-[var(--dur-fast)]', r.expanded && 'rotate-90')} />
-          <span className="flex-1 truncate">{r.label}</span>
+          <span data-tree-label className="flex-1 truncate">{r.label}</span>
           <span className="tabular-nums">{r.count}</span>
         </div>
       )
@@ -823,7 +823,7 @@ export function SessionTree(): React.JSX.Element {
             >
               {line}
               <ChevronRight className={cn('size-3.5 shrink-0 text-fg-subtle transition-transform duration-[var(--dur-fast)]', r.expanded && 'rotate-90')} />
-              {label ?? <span className="flex-1 truncate">{f.name}</span>}
+              {label ?? <span data-tree-label className="flex-1 truncate">{f.name}</span>}
               {!label && <span className="text-2xs tabular-nums text-fg-subtle">{r.count || ''}</span>}
             </div>
           </CM.Trigger>
@@ -853,7 +853,14 @@ export function SessionTree(): React.JSX.Element {
             {s.color && <span aria-hidden className={cn('absolute bottom-1.5 top-1.5 w-0.5 rounded-full', COLOR_CLASS[s.color].bar)} style={{ left: pad + 2 }} />}
             {label ?? (
               <span className="flex min-w-0 flex-1 items-baseline gap-1.5 overflow-hidden">
-                {words.length ? <Marked className="truncate" parts={highlight(s.name, words)} /> : <span title={s.name} className="inline-flex min-w-0"><span className="truncate">{s.name.slice(0, -3)}</span><span className="shrink-0">{s.name.slice(-3)}</span></span>}
+                <span aria-hidden className="contents">
+                  {words.length ? <Marked className="truncate" parts={highlight(s.name, words)} /> : (
+                    <span title={s.name} className="inline-flex min-w-0">
+                      <span className="truncate">{s.name.slice(0, -3)}</span><span className="shrink-0">{s.name.slice(-3)}</span>
+                    </span>
+                  )}
+                </span>
+                <span data-tree-label className="sr-only">{s.name}</span>
                 {why && <Marked className={cn('truncate text-2xs text-fg-subtle', why.mono && 'font-mono')} parts={why.parts} />}
               </span>
             )}
