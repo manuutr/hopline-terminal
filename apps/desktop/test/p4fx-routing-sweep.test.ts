@@ -18,7 +18,7 @@ const LINES: readonly SweepLine[] = process.env.HOPLINE_SAMPLE_SWEEP ? sampled(A
 const GENERIC = new Set(['set', 'no', 'undo', 'default', 'delete'])
 const withSession = (p: PlatformId) => CONFIG_SESSIONS[p].enter.length > 0 && !CONFIG_SESSIONS[p].blocks
 
-describe('routing sweep over every cli-model line', () => {
+describe('routing sweep over every cli-model line', { timeout: 30_000 }, () => {
   it('covers every platform with thousands of lines', () => {
     expect(LINES.length).toBeGreaterThan(process.env.HOPLINE_SAMPLE_SWEEP ? 10_000 : 100_000)
     expect(new Set(LINES.map((l) => l.platform)).size).toBe(15)

@@ -11,6 +11,7 @@
     "build": "npm run build -w @hopline/desktop",
     "sim": "npm run start -w @hopline/simulator",
     "test": "vitest run",
+    "test:ci": "vitest run --exclude apps/desktop/test/highlight.test.ts && vitest run apps/desktop/test/highlight.test.ts",
     "typecheck": "tsc -p apps/desktop/tsconfig.json --noEmit && tsc -p packages/cli-model/tsconfig.json --noEmit && tsc -p packages/guard/tsconfig.json --noEmit && tsc -p packages/simulator/tsconfig.json --noEmit && tsc -p packages/transports/tsconfig.json --noEmit && tsc -p packages/importers/tsconfig.json --noEmit && tsc -p packages/parsers/tsconfig.json --noEmit && tsc -p bench/tsconfig.json",
     "e2e": "npm run build && npm run e2e -w @hopline/desktop",
     "eval": "vitest run --config vitest.eval.config.mts",
